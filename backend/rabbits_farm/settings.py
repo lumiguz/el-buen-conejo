@@ -132,6 +132,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# For specific the new user model
+AUTH_USER_MODEL = "users.User"
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
