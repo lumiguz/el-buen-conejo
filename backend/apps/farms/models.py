@@ -56,10 +56,15 @@ class Rabbit(models.Model):
 
     """
 
+    GENDER_CHOICE = (
+        ("M", "Male"),
+        ("F", "Female"),
+    )
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     cage_id = models.ForeignKey(Cage, on_delete=models.CASCADE)
     breed = models.CharField(max_length=20, null=False)
-    genre = models.CharField(max_length=6)
+    genre = models.CharField(max_length=1, choices=GENDER_CHOICE, null=False)
     price = models.DecimalField(max_digits=5, decimal_places=2)
     tag = models.CharField(max_length=15, unique=True, null=False)
     weight = models.DecimalField(max_digits=2, decimal_places=1)
