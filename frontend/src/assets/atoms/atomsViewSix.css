@@ -10,7 +10,7 @@ a {
   
   /* Estilo para el enlace cuando se pasa el mouse por encima */
   a:hover {
-    text-decoration: underline; /* Puedes volver a agregar subrayado en hover si lo deseas */
+    /* text-decoration: underline; Puedes volver a agregar subrayado en hover si lo deseas */
     color: #007bff; /* Cambia el color en hover (puedes personalizarlo) */
   }
 

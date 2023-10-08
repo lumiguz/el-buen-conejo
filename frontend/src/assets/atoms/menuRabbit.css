@@ -1,0 +1,14 @@
+
+a {
+    text-decoration: none;
+    color: #333
+}
+
+.page-link{
+    color: black;
+}
+
+page-link:hover {
+    /* text-decoration: underline; Puedes volver a agregar subrayado en hover si lo deseas */
+    color: #68763D; /* Cambia el color en hover (puedes personalizarlo) */
+  }

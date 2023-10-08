@@ -1,13 +1,16 @@
 #parents {
     color: gainsboro;
-    white-space: nowrap
+    white-space: nowrap;
+    font-size: 0.7rem
 }
 
 #cardinfo {
-    width: 5rem;
-    height: 5rem;
+    width: 4rem;
+    height: 4rem;
+    text-align: center
 }
 
 #name {
-    white-space: nowrap
+    white-space: nowrap;
+    font-size: 0.8rem;
 }

@@ -5,7 +5,7 @@ const Infocard = () =>{
     return <> 
         <div>
 <div className="card rounded-4 shadow p-1" id="cardinfo">
-  <div className="card-body" id="name">
+  <div className="card-body p-2" id="name">
         [Name]
     <h6 id="parents">
         Padre

@@ -3,6 +3,7 @@ import "../atoms/atomsViewSix.css"
 import Infocard from "../atoms/Infocard.jsx"
 import CardRabbit from "../atoms/CardRabbit.jsx";
 import Carousel from "../atoms/Carousel"
+import MenuRabbit from "./MenuRabbit";
 
 const Atom = () => {
     return <>
@@ -21,6 +22,7 @@ const Atom = () => {
     <li className="breadcrumb-item active" aria-current="page">Biblioteca</li>
   </ol>
 </nav>
+<div className="container">
     <div className="d-flex flex-row">
       <div className="col-md-9 m-2">
           <CardRabbit/>
@@ -35,7 +37,13 @@ const Atom = () => {
         <Infocard/>
       </div>
     </div>
+</div>
+<div className="container mt-2">
   <Carousel/>
+</div>
+<div className="container mt-4">
+  <MenuRabbit/>
+</div>
 </div>
     
         </div>
