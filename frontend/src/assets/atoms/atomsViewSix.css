@@ -1,5 +1,6 @@
 #breadcrumb{
     --bs-breadcrumb-divider: '>';
+    font-weight: bold;
 }
 
 a {
@@ -12,3 +13,4 @@ a {
     text-decoration: underline; /* Puedes volver a agregar subrayado en hover si lo deseas */
     color: #007bff; /* Cambia el color en hover (puedes personalizarlo) */
   }
+

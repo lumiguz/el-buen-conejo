@@ -1,5 +1,8 @@
 import React from "react";
 import "../atoms/atomsViewSix.css"
+import Infocard from "../atoms/Infocard.jsx"
+import CardRabbit from "../atoms/CardRabbit.jsx";
+import Carousel from "../atoms/Carousel"
 
 const Atom = () => {
     return <>
@@ -10,7 +13,7 @@ const Atom = () => {
   </div>
 </nav>
 
-<div container>
+<div className="container">
     <nav id="breadcrumb">
   <ol className="breadcrumb">
     <li className="breadcrumb-item"><a href="#">Perfil</a></li>
@@ -18,7 +21,22 @@ const Atom = () => {
     <li className="breadcrumb-item active" aria-current="page">Biblioteca</li>
   </ol>
 </nav>
+    <div className="d-flex flex-row">
+      <div className="col-md-9 m-2">
+          <CardRabbit/>
+      </div>
+      <div className="col-md-1 m-2">
+          <Infocard/>
+      </div>
+      <div className="col-md-1 m-2">
+        <Infocard/>
+      </div>
+      <div className="col-md-1 m-2">
+        <Infocard/>
+      </div>
     </div>
+  <Carousel/>
+</div>
     
         </div>
     </>

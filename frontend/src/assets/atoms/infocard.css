@@ -1,0 +1,13 @@
+#parents {
+    color: gainsboro;
+    white-space: nowrap
+}
+
+#cardinfo {
+    width: 5rem;
+    height: 5rem;
+}
+
+#name {
+    white-space: nowrap
+}
