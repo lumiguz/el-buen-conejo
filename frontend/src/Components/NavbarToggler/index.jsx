@@ -1,6 +1,15 @@
 import PropTypes from "prop-types";
 import Span from "../../UI/Span";
 
+/**
+ * Generates a Navbar Toggler button component for screen small as mobile.
+ *
+ * @param {string} target - The target element to collapse or expand.
+ * @param {string} ariaControls - The ID of the element that controls the expanded/collapsed state.
+ * @param {boolean} ariaExpanded - Determines if the element is expanded or collapsed.
+ * @param {string} ariaLabel - The label for the button that toggles the navigation.
+ * @return {JSX.Element} The Navbar Toggler component.
+ */
 const NavbarToggler = ({
   target = "#navbarSupportedContent",
   ariaControls = "navbarSupportedContent",

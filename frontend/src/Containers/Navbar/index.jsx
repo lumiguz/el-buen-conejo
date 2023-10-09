@@ -5,6 +5,11 @@ import UnorderedList from "../../Components/UnorderedList";
 import NavItem from "../../Components/NavItem";
 import logo from "../../assets/logoText.svg";
 
+/**
+ * Renders the navigation bar component.
+ *
+ * @return {JSX.Element} The JSX element representing the navigation bar.
+ */
 const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg bg-white">
