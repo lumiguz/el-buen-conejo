@@ -1,0 +1,10 @@
+.btn-secondary {
+    background-color: #42507B;
+    font-family: 'Manrope', Helvetica;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.btn-secondary svg {
+    margin-right: 8px;
+}
