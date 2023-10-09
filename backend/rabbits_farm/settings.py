@@ -53,6 +53,9 @@ BASE_APPS = [
 LOCAL_APPS = [
     "apps.users",
     "apps.farms",
+    "apps.rabbits",
+    "apps.cages",
+    "apps.profiles",
     "apps.markets",
 ]
 
