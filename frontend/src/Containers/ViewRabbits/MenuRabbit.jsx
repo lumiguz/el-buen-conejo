@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import MenuRabbitPerfil from "./MenuRabbitPerfil";
-import "../atoms/menuRabbit.css"
+import "../ViewRabbits/menuRabbit.css"
 
 function PaginatedView({ currentPage, onPageChange}){
   const pages = [

@@ -1,5 +1,5 @@
 import React from "react"
-import "../atoms/infocard.css"
+import "../ViewRabbits/infocard.css"
 
 const Infocard = () =>{
     return <> 

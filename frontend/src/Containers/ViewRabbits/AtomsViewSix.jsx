@@ -1,8 +1,8 @@
 import React from "react";
-import "../atoms/atomsViewSix.css"
-import Infocard from "../atoms/Infocard.jsx"
-import CardRabbit from "../atoms/CardRabbit.jsx";
-import Carousel from "../atoms/Carousel"
+import "../ViewRabbits/atomsViewSix.css"
+import Infocard from "./Infocard.jsx"
+import CardRabbit from "./CardRabbit.jsx";
+import Carousel from "./Carousel"
 import MenuRabbit from "./MenuRabbit";
 
 const Atom = () => {
