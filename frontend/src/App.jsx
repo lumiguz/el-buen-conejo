@@ -1,11 +1,5 @@
-import React from "react";
-import Atom from "./assets/atoms/AtomsViewSix";
-
 const App = () => {
-  return <div>
-    App
-    <Atom/>
-  </div>;
+  return <div className="container">App</div>;
 };
 
 export default App;
