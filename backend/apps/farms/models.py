@@ -1,6 +1,5 @@
 from django.db import models
 import uuid
-from apps.cages.models import Cage
 
 # Create your models here.
 
