@@ -24,6 +24,11 @@ const MenuRabbitCamada = () =>{
           <li><a className="dropdown-item" href="#">Inactivas</a></li>
         </ul>
       </div>
+      <div className="row">
+        <div className="col-md-12 d-flex justify-content-end">
+      <button type="button" class="btn btn-success m-1">Agregar camada</button>
+        </div>
+      </div>
       <div className="container mt-2">
         <div className="row">
             <div className="col-md-4 mt-2">

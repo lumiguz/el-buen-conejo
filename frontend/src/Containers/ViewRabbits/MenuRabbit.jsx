@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import MenuRabbitPerfil from "./MenuRabbitPerfil";
 import "../ViewRabbits/menuRabbit.css"
 import MenuRabbitCamada from "./MenuRabbitCamada"
+import MenuRabbitNotes from "./MenuRabbitNotes";
 
 function PaginatedView({ currentPage, onPageChange}){
   const pages = [
@@ -47,7 +48,7 @@ const MenuRabbit = () =>{
   } else if (currentPage === "camadas") {
     content = <div><MenuRabbitCamada/></div>;
   } else if (currentPage === "notas") {
-    content = <div>Contenido de la página 3</div>;
+    content = <div><MenuRabbitNotes/></div>;
   }
 
     return <>
