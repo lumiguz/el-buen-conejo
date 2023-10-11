@@ -1,6 +1,6 @@
 import React from 'react'
 
-const index = ({type, id, placeholder, label}) => {
+const index = ({type, id, placeholder, label, onChange}) => {
   return (
     <div className="mb-3">
         <label htmlFor={id} className="form-label">{label}</label>
@@ -9,6 +9,7 @@ const index = ({type, id, placeholder, label}) => {
           className="form-control" 
           id={id} 
           placeholder={placeholder}
+          onChange={onChange}
         />
     </div>
   )

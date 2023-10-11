@@ -15,17 +15,19 @@ const index = () => {
                 type="email"
                 id="exampleInputEmail1"
                 placeholder="name@example.com"
+                onChange={() => {}}
             />
             <FormSection  
                 label="Password"
                 type="password"
                 id="examplePassword1"
                 placeholder="**********"
+                onChange={() => {}}
             />
             <Button type="submit" className="btn btn-primary w-100 my-3">
                 Submit
             </Button>
-            <AppLink href="/forgot" className="form-check-label" for="exampleCheck1">
+            <AppLink href="/forgot" className="form-check-label" htmlFor="exampleCheck1">
                 ¿Olvidaste la contraseña?
             </AppLink>
         </form>

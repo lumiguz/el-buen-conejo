@@ -4,9 +4,9 @@
 
 import React from 'react'
 import FormSection from '../../UI/FormSection'
-
 import Button from '../../UI/Button'
 import FormSelect from '../../UI/FormSelect'
+import { countries } from '../../utils/countries'
 
 const index = () => {
     return (
@@ -19,6 +19,7 @@ const index = () => {
                         placeholder="Ingresa tu nombre"
                         label="Nombre"
                         className="w-100 me-2"
+                        onChange={() => {}}
                         />
                 </div>
                 <div className="w-100 me-2">
@@ -28,12 +29,28 @@ const index = () => {
                         placeholder="Ingresa tu apellido"
                         label="Apellido"
                         className="w-100 me-2"
+                        onChange={() => {}}
                     />
                 </div>
             </div>
-            <FormSection type="email" id="exampleEmail1" placeholder="name@example.com" label="Email" />
-            <FormSection type="password" id="examplePassword1" placeholder="********" label="Password" />
-            <FormSelect />
+            <FormSection 
+                type="email" 
+                id="exampleEmail1" 
+                placeholder="name@example.com" 
+                label="Email" 
+                onChange={() => {}}
+                />
+            <FormSection 
+                type="password" 
+                id="examplePassword1" 
+                placeholder="********" 
+                label="Password" 
+                onChange={() => {}}
+                />
+            <FormSelect 
+                list={countries} 
+                onChange={() => {}}
+            />
             <Button type="submit" className="btn btn-primary w-100">Crear cuenta</Button>
         </form>
     )

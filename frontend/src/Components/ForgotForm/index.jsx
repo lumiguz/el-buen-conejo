@@ -13,6 +13,7 @@ const index = () => {
                 id="exampleEmail1" 
                 placeholder="name@example.com" 
                 label="Email" 
+                onChange={() => {}}
             />
             <Button type="submit" className="btn btn-primary w-100">Enviar email</Button>
         </form>

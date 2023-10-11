@@ -14,12 +14,14 @@ const index = () => {
         id="examplePassword1" 
         placeholder="Escribe tu contraseña" 
         label="Contraseña" 
-      />
+        onChange={() => {}}
+        />
       <FormSection 
         type="password" 
         id="repeatPassword1" 
         placeholder="Repite tu contraseña" 
         label="Confirmar contraseña" 
+        onChange={() => {}}
       />
       <Button type="submit" className="btn-primary w-100" children="Submit" />
     </form>
