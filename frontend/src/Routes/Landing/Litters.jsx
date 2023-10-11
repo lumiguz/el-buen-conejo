@@ -1,12 +1,13 @@
-// import LittersCards from '../../Components/LittersCards/LittersCards';
+// import LittersCard from '../../Components/LittersCards/LittersCard';
 // import LittersProfileButton from '../../UI/LittersProfileButton/LittersProfileButton';
 import LittersForm from '../../Components/LittersForm/LittersForm';
+import LittersRabbitsCard from '../../Components/LittersRabbitsCard/LittersRabbitsCard';
 
 const Litters = () => {
   return (
     <div className='m-4'>
       {/* Litters
-      <LittersCards
+      <LittersCard
         littersName='{nombre example}'
         littersAge='2'
         littersImage=''
@@ -16,6 +17,8 @@ const Litters = () => {
       <LittersProfileButton>Ver Perfil</LittersProfileButton> */}
 
       <LittersForm />
+
+      <LittersRabbitsCard  rabbitName='Mario' rabbitPhoto='' rabbitBreed='California' rabbitWeight='10' rabbitAge='2' sold={true}/>
     </div>
   );
 };

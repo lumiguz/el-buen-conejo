@@ -175,7 +175,7 @@ const LittersForm = () => {
           Agregar y guardar
         </button>
         {/* cancel button */}
-        <button className='btn btn-danger'>Cancelar</button>.
+        <button className='btn btn-danger' type='button'>Cancelar</button>.
       </div>
     </form>
   );

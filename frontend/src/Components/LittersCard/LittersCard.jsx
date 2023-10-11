@@ -2,9 +2,11 @@ import PropTypes from 'prop-types';
 import './styles.css';
 
 //Se utiliza de la siguiente manera:
-{/* <LittersCards littersName="Alex y Mary" littersAge="2" littersImage="" littersWeight="10" littersKit="2"/> */}
+{
+  /* <LittersCards littersName="Alex y Mary" littersAge="2" littersImage="" littersWeight="10" littersKit="2"/> */
+}
 
-const LittersCards = ({
+const LittersCard = ({
   littersName,
   littersImage,
   littersKit,
@@ -51,9 +53,9 @@ const LittersCards = ({
   );
 };
 
-export default LittersCards;
+export default LittersCard;
 
-LittersCards.propTypes = {
+LittersCard.propTypes = {
   littersName: PropTypes.string.isRequired,
   littersImage: PropTypes.string.isRequired,
   littersKit: PropTypes.string.isRequired,
