@@ -6,8 +6,8 @@ from apps.farms.models import Farm
 # Create your models here.
 class Cage(models.Model):
     """
-     The Cage is used to keep the rabbits.
-     One cage has one or many rabbits.
+    The Cage is used to keep the rabbits.
+    One cage has one or many rabbits.
 
     Args:
         farm_id ( str ): related with farm model
