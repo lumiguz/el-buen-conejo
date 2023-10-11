@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+import environ
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -21,8 +22,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -35,6 +34,52 @@ AWS_EXTERNAL_HOSTNAME = os.environ.get("AWS_EXTERNAL_HOSTNAME")
 if AWS_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(AWS_EXTERNAL_HOSTNAME)
     DEBUG = False
+
+    # SECURITY WARNING: keep the secret key used in production secret!
+    SECRET_KEY = os.environ["SECRET_KEY"]
+
+    # Database
+    # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
+
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql_psycopg2",
+            "NAME": os.environ.get("POSTGRES_NAME"),
+            "USER": os.environ.get("POSTGRES_USER"),
+            "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
+            "HOST": os.environ.get("POSTGRES_HOST"),
+            "PORT": os.environ.get("POSTGRES_PORT"),
+        }
+    }
+else:
+    env = environ.Env(
+        # set casting, default value
+        DEBUG=(bool, True)
+    )
+    # Set the project base directory
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+    # Take environment variables from .env file
+    environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
+
+    # False if not in os.environ because of casting above
+    DEBUG = env("DEBUG")
+
+    # Raises Django's ImproperlyConfigured
+    # exception if SECRET_KEY not in os.environ
+    SECRET_KEY = env("SECRET_KEY")
+
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql_psycopg2",
+            "NAME": env("POSTGRES_NAME"),
+            "USER": env("POSTGRES_USER"),
+            "PASSWORD": env("POSTGRES_PASSWORD"),
+            "HOST": env("POSTGRES_HOST"),
+            "PORT": env("POSTGRES_PORT"),
+        }
+    }
+
 
 # Application definition
 
@@ -100,21 +145,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "rabbits_farm.wsgi.application"
-
-
-# Database
-# https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": os.environ.get("POSTGRES_NAME"),
-        "USER": os.environ.get("POSTGRES_USER"),
-        "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
-        "HOST": os.environ.get("POSTGRES_HOST"),
-        "PORT": os.environ.get("POSTGRES_PORT"),
-    }
-}
 
 
 # Password validation
