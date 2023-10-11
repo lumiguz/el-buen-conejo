@@ -15,6 +15,6 @@ class Farm(models.Model):
     """
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name = models.CharField(max_length=150, null=False)
-    address = models.CharField(max_length=150, null=False)
+    name = models.CharField(max_length=150, blank=False)
+    address = models.CharField(max_length=150, blank=False)
     is_active = models.BooleanField(default=True)
