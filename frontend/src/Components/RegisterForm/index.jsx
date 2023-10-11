@@ -1,57 +1,40 @@
+// This register form is using to sign up to our application, you can complete the register putting the inputs
+// Name, Lastname, Email and password, the button type submit sends the information to validate to backend
+// if everything is ok, you can login at the route /login using these credentials.
+
 import React from 'react'
+import FormSection from '../../UI/FormSection'
+
+import Button from '../../UI/Button'
+import FormSelect from '../../UI/FormSelect'
 
 const index = () => {
     return (
         <form onSubmit={() => console.log("Envío del formulario de register")}>
             <div className="mb-3 d-flex justify-content-between">
                 <div className="w-100 me-2">
-                    <label for="exampleInputName1" className="form-label">Nombre</label>
-                    <input 
-                    type="text" 
-                    className="form-control" 
-                    id="exampleInputName1" 
-                    aria-describedby="nameHelp" 
-                    placeholder="Ingresa tu nombbre"
-                    />
+                    <FormSection 
+                        type="text"
+                        id="inputName1"
+                        placeholder="Ingresa tu nombre"
+                        label="Nombre"
+                        className="w-100 me-2"
+                        />
                 </div>
-                <div className="w-100 ms-2">
-                    <label for="exampleInputApellido1" className="form-label">Apellido</label>
-                    <input 
-                    type="text" 
-                    className="form-control" 
-                    id="exampleInputAppellido1" 
-                    aria-describedby="apellidoHelp" 
-                    placeholder="Ingresa tu apellido"
+                <div className="w-100 me-2">
+                    <FormSection 
+                        type="text"
+                        id="inputLastname1"
+                        placeholder="Ingresa tu apellido"
+                        label="Apellido"
+                        className="w-100 me-2"
                     />
                 </div>
             </div>
-            <div>
-                    <label for="exampleInputEmail1" className="form-label">Email</label>
-                    <input 
-                    type="email" 
-                    className="form-control mb-3" 
-                    id="exampleInputEmail1" 
-                    aria-describedby="emailHelp" 
-                    placeholder="name@example.com"
-                    />
-                <label for="exampleInputPassword1" className="form-label">Password</label>
-                <input 
-                type="password" 
-                className="form-control mb-3" 
-                id="exampleInputPassword1" 
-                placeholder="Introduce tu contraseña"
-                />
-            </div>
-                <label for="exampleInputPassword1" className="form-label">Selecciona tu país</label>
-            <select className="mb-3 form-select" aria-label="Default select example">
-                {/* <option selected>Selecciona un pais</option> */}
-                <option value="1">Colombia</option>
-                <option value="2">Mexico</option>
-                <option value="3">Argentina</option>
-                <option value="4">Peru</option>
-                <option value="5">Venezuela</option>
-            </select>
-            <button type="submit" className="btn btn-primary w-100">Crear cuenta</button>
+            <FormSection type="email" id="exampleEmail1" placeholder="name@example.com" label="Email" />
+            <FormSection type="password" id="examplePassword1" placeholder="********" label="Password" />
+            <FormSelect />
+            <Button type="submit" className="btn btn-primary w-100">Crear cuenta</Button>
         </form>
     )
 }

@@ -1,3 +1,6 @@
+// This component includes the form to recovery your password and at header was added to guide the use and this 
+// component acts like a route of our website, more specific the route /forgot
+
 import React from 'react'
 import ForgotForm from "../../Components/ForgotForm"
 import Heading from '../../UI/Heading'

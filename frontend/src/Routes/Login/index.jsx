@@ -1,3 +1,6 @@
+// This component includes the form to login for our website and at header was added to guide the use and this 
+// component acts like a route of our website, more specific the route /login
+
 import React from 'react'
 import LoginForm from "../../Components/LoginForm"
 import Heading from '../../UI/Heading'

@@ -1,3 +1,6 @@
+// This component includes the form to change password and at header was added to guide the use and this 
+// component acts like a route of our website, more specific the route /changepass
+
 import React from 'react'
 import ChangePassForm from '../../Components/ChangePassForm'
 import Heading from '../../UI/Heading'

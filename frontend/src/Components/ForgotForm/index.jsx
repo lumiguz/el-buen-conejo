@@ -1,19 +1,20 @@
+// This form is using to recovery your password if you forgot that before, you can type own adress and click on 
+// 'Enviar email', an email will send you with the instructions to recovery your account
+
 import React from 'react'
+import FormSection from "../../UI/FormSection"
+import Button from "../../UI/Button"
 
 const index = () => {
     return (
-        <form onSubmit={() => console.log("Envío del formulario de login")}>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" className="form-label">Email</label>
-                <input 
+        <form onSubmit={() => console.log("Envío del formulario de forgot password")}>
+            <FormSection 
                 type="email" 
-                className="form-control" 
-                id="exampleInputEmail1" 
-                aria-describedby="emailHelp" 
-                placeholder="name@example.com"
-                />
-            </div>
-            <button type="submit" className="btn btn-primary w-100">Enviar email</button>
+                id="exampleEmail1" 
+                placeholder="name@example.com" 
+                label="Email" 
+            />
+            <Button type="submit" className="btn btn-primary w-100">Enviar email</Button>
         </form>
     )
 }
