@@ -4,15 +4,14 @@ import Infocard from "./Infocard.jsx"
 import CardRabbit from "./CardRabbit.jsx";
 import Carousel from "./Carousel"
 import MenuRabbit from "./MenuRabbit";
+import Navbar from "../Navbar";
 
 const Atom = () => {
     return <>
         <div> 
-<nav className="navbar bg-light">
   <div className="container-fluid">
-    <span className="navbar-brand mb-0 h1">Navbar example</span>
+    <span className="navbar-brand mb-0 h1"><Navbar/></span>
   </div>
-</nav>
 
 <div className="container">
     <nav id="breadcrumb">

@@ -2,7 +2,7 @@ import React from "react";
 
 const Carousel = () =>{
     return <>
-        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
   <div className="carousel-inner">
     <div className="carousel-item active">
       <img src="https://www.acws.cl/wp-content/uploads/2021/04/nota_conejo_abril.jpeg" className="d-block w-100" alt="..."/>
