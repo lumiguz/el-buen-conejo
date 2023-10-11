@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
  * @param {string} className - The optional class name to be applied to the paragraph element.
  * @return {ReactNode} The rendered paragraph element.
  */
-const Paragraph = ({ children, className = "h2" }) => {
+const Paragraph = ({ children, className = "" }) => {
   return <p className={className}>{children}</p>;
 };
 
