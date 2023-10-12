@@ -9,12 +9,18 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App.jsx";
 import ErrorPage from "./error-page.jsx";
 import Landing from "./Routes/Landing";
+import Market from "./Routes/Market";
 
 //implement routes with react-router-dom
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Landing />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/market",
+    element: <Market />,
     errorElement: <ErrorPage />,
   },
   {
