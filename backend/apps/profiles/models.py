@@ -4,10 +4,11 @@ from apps.users.models import User
 from apps.farms.models import Farm
 from apps.cages.models import Cage
 from apps.rabbits.models import Rabbit
+from apps.abstracts.models import AbstractManager, AbstractModel
 
 
 # Create your models here.
-class Profile(models.Model):
+class Profile(AbstractModel):
     """
      The Profile is used to keep the rabbits.
      One cage has one or many rabbits.
@@ -20,7 +21,6 @@ class Profile(models.Model):
         is_active ( boolean ): logic delete.
     """
 
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user_id = models.OneToOneField(User, on_delete=models.CASCADE)
     is_producer = models.BooleanField(default=False)
     first_name = models.CharField(max_length=50, null=True, blank=True)
