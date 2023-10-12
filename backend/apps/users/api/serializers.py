@@ -64,7 +64,7 @@ class UserListSerializer(serializers.ModelSerializer):
 class UserUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ("username", "email")
+        fields = ("email",)
 
 
 class PasswordSerializer(serializers.Serializer):

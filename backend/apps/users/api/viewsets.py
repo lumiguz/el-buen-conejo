@@ -15,6 +15,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from apps.profiles.models import Profile
 from .permisssions import CreateUserPermission
+from django.contrib.auth.hashers import make_password
 
 
 class UserViewSet(viewsets.GenericViewSet):
@@ -84,7 +85,7 @@ class UserViewSet(viewsets.GenericViewSet):
         user_data = {
             "username": data.get("username"),
             "email": data.get("email"),
-            "password": data.get("password"),
+            "password": make_password(data.get("password")),
         }
 
         user_serializer = self.serializer_class(data=user_data)
