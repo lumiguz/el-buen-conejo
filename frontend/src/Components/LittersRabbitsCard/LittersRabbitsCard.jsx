@@ -48,11 +48,6 @@ const LittersRabbitsCard = ({
             </div>
         )
         }
-
-          {/* <div className='card-info-right mx-2'>
-            <h6 className='m-0 fw-bold text-center'>{littersAge}</h6>
-            <span>Vendido</span>
-          </div> */}
         </div>
       </div>
     </div>
