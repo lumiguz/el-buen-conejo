@@ -8,7 +8,7 @@ from apps.abstracts.models import AbstractManager, AbstractModel
 
 
 # Create your models here.
-class Profile(AbstractModel):
+class Profile(models.Model):
     """
      The Profile is used to keep the rabbits.
      One cage has one or many rabbits.
@@ -21,6 +21,7 @@ class Profile(AbstractModel):
         is_active ( boolean ): logic delete.
     """
 
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user_id = models.OneToOneField(User, on_delete=models.CASCADE)
     is_producer = models.BooleanField(default=False)
     first_name = models.CharField(max_length=50, null=True, blank=True)
