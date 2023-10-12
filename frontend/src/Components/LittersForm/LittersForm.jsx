@@ -57,7 +57,7 @@ const LittersForm = () => {
   return (
     //on submit, save the data of the new litter
     <form
-      className='form-camada border rounded px-3 py-4'
+      className='form-litters border rounded px-3 py-4'
       onSubmit={saveLitter}
     >
       <h4>Agregar nueva camada</h4>
