@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import MenuRabbitPerfil from "./MenuRabbitPerfil";
-import "../ViewRabbits/menuRabbit.css"
+import "../MenuRabbit/menuRabbit.css"
 import MenuRabbitCamada from "./MenuRabbitCamada"
 import MenuRabbitNotes from "./MenuRabbitNotes";
 

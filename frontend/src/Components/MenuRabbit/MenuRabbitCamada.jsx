@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import CardRabbit from "./CardRabbit";
+import CardRabbit from "../CardRabbit/CardRabbit";
 
 const MenuRabbitCamada = () =>{
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);

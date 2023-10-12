@@ -1,12 +1,12 @@
 import React from "react";
-import "../ViewRabbits/atomsViewSix.css"
-import Infocard from "./Infocard.jsx"
-import CardRabbit from "./CardRabbit.jsx";
-import Carousel from "./Carousel"
-import MenuRabbit from "./MenuRabbit";
-import Navbar from "../Navbar";
+import "../Rabbits/ViewRabbits.css"
+import Infocard from "../../Components/InfocardRabbit/Infocard.jsx"
+import CardRabbit from "../../Components/CardRabbit/CardRabbit.jsx";
+import Carousel from "../../Components/Carousel/Carousel"
+import MenuRabbit from "../../Components/MenuRabbit/MenuRabbit";
+import Navbar from "../../Containers/Navbar"
 
-const Atom = () => {
+const ViewRabbits = () => {
     return <>
         <div> 
   <div className="container-fluid">
@@ -49,4 +49,4 @@ const Atom = () => {
     </>
 };
 
-export default Atom;
+export default ViewRabbits;
