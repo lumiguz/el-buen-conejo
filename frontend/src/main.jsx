@@ -9,6 +9,11 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App.jsx";
 import ErrorPage from "./error-page.jsx";
 import Landing from "./Routes/Landing";
+import Login from "./Routes/Login";
+import Register from "./Routes/Register";
+import Forgot from "./Routes/Forgot";
+import ChangePass from "./Routes/ChangePass";
+import Litters from "./Routes/Litters";
 import Market from "./Routes/Market";
 
 //implement routes with react-router-dom
@@ -26,6 +31,26 @@ const router = createBrowserRouter([
   {
     path: "/app",
     element: <App />,
+  },
+  {
+    path: "/litters",
+    element: <Litters />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
+  },
+  {
+    path: "/forgot",
+    element: <Forgot />,
+  },
+  {
+    path: "/changepass",
+    element: <ChangePass />,
   },
 ]);
 
