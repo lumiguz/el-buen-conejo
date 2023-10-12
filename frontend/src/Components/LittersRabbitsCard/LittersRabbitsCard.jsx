@@ -21,7 +21,7 @@ const LittersRabbitsCard = ({
         <div className='card-top ms-2'>
           <h4>{rabbitName}</h4>
           <span className='text-secondary'>{rabbitBreed}</span>
-          <hr className='my-2' />
+          <hr className='mt-2' />
         </div>
 
         <div className='card-info d-flex ms-2 justify-content-around'>
