@@ -1,6 +1,13 @@
 import PropTypes from "prop-types";
 
-const Paragraph = ({ children, className = "h2" }) => {
+/**
+ * Renders a paragraph element with the provided children and optional class name.
+ *
+ * @param {ReactNode} children - The content to be rendered inside the paragraph element.
+ * @param {string} className - The optional class name to be applied to the paragraph element.
+ * @return {ReactNode} The rendered paragraph element.
+ */
+const Paragraph = ({ children, className = "" }) => {
   return <p className={className}>{children}</p>;
 };
 

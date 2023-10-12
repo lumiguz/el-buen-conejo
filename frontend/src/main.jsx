@@ -10,6 +10,10 @@ import App from "./App.jsx";
 import ErrorPage from "./error-page.jsx";
 import Landing from "./Routes/Landing";
 import Litters from "./Routes/Landing/Litters";
+import Login from "./Routes/Login";
+import Register from "./Routes/Register";
+import Forgot from "./Routes/Forgot";
+import ChangePass from "./Routes/ChangePass";
 
 //implement routes with react-router-dom
 const router = createBrowserRouter([
@@ -25,6 +29,22 @@ const router = createBrowserRouter([
   {
     path: "/litters",
     element: <Litters />
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
+  },
+  {
+    path: "/forgot",
+    element: <Forgot />,
+  },
+  {
+    path: "/changepass",
+    element: <ChangePass />,
   },
 ]);
 
