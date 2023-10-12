@@ -16,10 +16,14 @@ Including another URLconf
 from apps.users.views import Login, Logout
 from django.contrib import admin
 from django.urls import include, path, re_path
+from apps.cages.api.routers import router as cages_router
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("login/", Login.as_view(), name="login"),
     path("logout/", Logout.as_view(), name="logout"),
     re_path(r"^api/", include("apps.users.api.routers")),
+    re_path(r"^api/cages/", include(cages_router.urls))
+
 ]
