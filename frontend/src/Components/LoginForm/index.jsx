@@ -2,32 +2,54 @@
 // a valid email with their respective password, this information will send to backend and validate, if allright
 // you will be in the main view of the website
 
-import React from 'react'
+import React, { useState } from 'react'
 import AppLink from '../../UI/AppLink'
 import FormSection from '../../UI/FormSection'
 import Button from '../../UI/Button'
 
 const index = () => {
+
+    const [formData, setFormData] = useState({
+        email: '',
+        password: '',
+    });
+    
+    const handleInputChange = (e) => {
+        const { id, value } = e.target;
+        setFormData({
+        ...formData,
+        [id]: value,
+        });
+    };
+    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log('Datos a enviar:', formData);
+    };
+    
+
     return (
-        <form onSubmit={() => console.log("Envío del formulario de login")}>
+        <form onSubmit={handleSubmit}>
             <FormSection  
                 label="Email"
                 type="email"
-                id="exampleInputEmail1"
+                id="email"
                 placeholder="name@example.com"
-                onChange={() => {}}
+                onChange={handleInputChange}
+                value={formData.email}
             />
             <FormSection  
                 label="Password"
                 type="password"
-                id="examplePassword1"
+                id="password"
                 placeholder="**********"
-                onChange={() => {}}
+                onChange={handleInputChange}
+                value={formData.password}
             />
             <Button type="submit" className="btn btn-primary w-100 my-3">
                 Submit
             </Button>
-            <AppLink href="/forgot" className="form-check-label" htmlFor="exampleCheck1">
+            <AppLink href="/forgot" className="form-check-label" htmlFor="forgotPass">
                 ¿Olvidaste la contraseña?
             </AppLink>
         </form>

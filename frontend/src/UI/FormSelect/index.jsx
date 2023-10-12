@@ -1,12 +1,13 @@
 import React from 'react'
 
-const index = ({ list, onChange }) => {
+const index = ({ list, onChange, id, value }) => {
 
     return (
         <div className="select-form">
-            <label for="exampleInputPassword1" className="form-label">Selecciona tu país</label>
-            <select className="mb-3 form-select" aria-label="Default select example" onChange={onChange}>
-                {list?.map((country, index) => <option value={index}> {country} </option>)}
+            <label htmlFor={id} className="form-label">Selecciona tu país</label>
+            <select id={id} className="mb-3 form-select" aria-label="Default select example" onChange={onChange} value={value}>
+                <option value="">Selecciona un país</option>
+                {list?.map((country) => <option key={country.id} value={country.name}> {country.name} </option>)}
             </select>
         </div>
     )
