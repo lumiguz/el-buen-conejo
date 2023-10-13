@@ -16,7 +16,6 @@ Including another URLconf
 from apps.users.views import Login, Logout
 from django.contrib import admin
 from django.urls import include, path, re_path
-from apps.cages.api.routers import router as cages_router
 
 
 urlpatterns = [
@@ -24,11 +23,6 @@ urlpatterns = [
     path("login/", Login.as_view(), name="login"),
     path("logout/", Logout.as_view(), name="logout"),
     re_path(r"^api/", include("apps.users.api.routers")),
-<<<<<<< HEAD
-    re_path(r"^api/cages/", include(cages_router.urls))
-
-=======
     re_path(r"^api-farm/", include("apps.farms.api.routers")),
->>>>>>> 18b3bf929292fdbc98caae2b1111a84d54eaab21
-]
-
+    re_path(r"^api/", include("apps.cages.api.routers")),
+    ]
