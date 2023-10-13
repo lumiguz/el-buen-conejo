@@ -2,6 +2,7 @@ from apps.users.models import User
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.tokens import RefreshToken, TokenError
+from apps.profiles.models import Profile
 
 
 class LogoutSerializer(serializers.Serializer):
@@ -63,7 +64,7 @@ class UserListSerializer(serializers.ModelSerializer):
 class UserUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ("username", "email")
+        fields = ("email",)
 
 
 class PasswordSerializer(serializers.Serializer):
@@ -82,3 +83,9 @@ class PasswordSerializer(serializers.Serializer):
                 {"password_confirm": "Ambas contraseñas deben ser iguales"}
             )
         return data
+
+
+class ProfileSerializerFromUser(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = "__all__"
