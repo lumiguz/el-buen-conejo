@@ -18,8 +18,9 @@ const index = () => {
             </Paragraph>
             <RegisterForm />
             <Paragraph className="text-center my-3 text-success text-sm">
-                Al continuar, usted reconoce que ha leído, entendido y está de acuerdo con las Condiciones 
-                del servicio y la Política de privacidad de El buen conejo.
+                Al continuar, usted reconoce que ha leído, entendido y está de acuerdo con las &nbsp;
+                <AppLink href="/" className="text-decoration-none">Condiciones del servicio</AppLink>
+                &nbsp; y la Política de privacidad de El buen conejo.
             </Paragraph>
         </div>
     )
