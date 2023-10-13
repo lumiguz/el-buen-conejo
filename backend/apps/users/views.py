@@ -1,7 +1,6 @@
 from apps.users.api.serializers import (
     CustomTokenObtainPairSerializer,
     CustomUserSerializer,
-    LogoutSerializer,
 )
 from django.contrib.auth import authenticate
 from rest_framework import status
@@ -9,6 +8,12 @@ from rest_framework.generics import GenericAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework.views import APIView
+from rest_framework_simplejwt.token_blacklist.models import (
+    OutstandingToken,
+    BlacklistedToken,
+)
+from rest_framework_simplejwt.tokens import RefreshToken
 
 
 class Login(TokenObtainPairView):
@@ -41,14 +46,23 @@ class Login(TokenObtainPairView):
         )
 
 
-class Logout(GenericAPIView):
-    serializer_class = LogoutSerializer
-    permission_classes = [IsAuthenticated]
+class Logout(APIView):
+    permission_classes = (IsAuthenticated,)
 
-    def post(self, request):
-        serializer = self.serializer_class(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
+    def post(self, request, *args, **kwargs):
+        if self.request.data.get("all"):
+            token: OutstandingToken
+            for token in OutstandingToken.objects.filter(user=request.user):
+                _, _ = BlacklistedToken.objects.get_or_create(token=token)
+
+            return Response(
+                {"message": "OK, adios, todos los refresh token estan en lista negra"},
+                status=status.HTTP_204_NO_CONTENT,
+            )
+
+        refresh_token = self.request.data.get("refresh_token")
+        token = RefreshToken(token=refresh_token)
+        token.blacklist()
         return Response(
             {"message": "Sesión cerrada exitosamente"},
             status=status.HTTP_204_NO_CONTENT,

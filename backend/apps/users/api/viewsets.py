@@ -5,6 +5,7 @@ from apps.users.api.serializers import (
     UserListSerializer,
     UserSerializer,
     UserUpdateSerializer,
+    ProfileSerializerFromUser,
 )
 from django.shortcuts import get_object_or_404
 from django_filters import rest_framework
@@ -12,6 +13,9 @@ from django_filters import rest_framework
 from rest_framework import filters, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from apps.profiles.models import Profile
+from .permisssions import CreateUserPermission
+from django.contrib.auth.hashers import make_password
 
 
 class UserViewSet(viewsets.GenericViewSet):
@@ -26,6 +30,7 @@ class UserViewSet(viewsets.GenericViewSet):
     search_fields = ("email", "username")
     ordering_fields = ("email", "username")
     pagination_class = ExtendedPagination
+    permission_classes = [CreateUserPermission]
 
     def get_queryset(self):
         if self.queryset is None:
@@ -74,9 +79,20 @@ class UserViewSet(viewsets.GenericViewSet):
         """
         Create an user
         """
-        user_serializer = self.serializer_class(data=request.data)
+
+        data = request.data
+        is_producer = data.get("is_producer", False)
+        user_data = {
+            "username": data.get("username"),
+            "email": data.get("email"),
+            "password": make_password(data.get("password")),
+        }
+
+        user_serializer = self.serializer_class(data=user_data)
         if user_serializer.is_valid():
-            user_serializer.save()
+            user = user_serializer.save()
+            # Create the profile
+            Profile.objects.create(user_id=user, is_producer=is_producer)
             return Response(
                 {"message": "El usuario se creo correctamente!"},
                 status=status.HTTP_201_CREATED,
@@ -132,3 +148,8 @@ class UserViewSet(viewsets.GenericViewSet):
         return Response(
             {"message": "El usuario no existe!"}, status=status.HTTP_404_NOT_FOUND
         )
+
+
+class ProfileViewSet(viewsets.GenericViewSet):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializerFromUser
