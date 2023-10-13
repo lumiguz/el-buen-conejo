@@ -1,10 +1,10 @@
 from django.db import models
 from apps.cages.models import Cage
-import uuid
+from apps.abstracts.models import AbstractModel
 
 
 # Create your models here.
-class Rabbit(models.Model):
+class Rabbit(AbstractModel):
     """
     The animal of the farm for trade.
 
@@ -19,17 +19,26 @@ class Rabbit(models.Model):
 
     """
 
+    BREED_CHOICE = (
+        ("Nueva Zelanda", "Nueva Zelanda"),
+        ("Chinchilla", "Chinchilla"),
+        ("Rex", "Rex"),
+        ("Mariposa", "Mariposa"),
+        ("Azteca", "Azteca"),
+        ("Gigante de Flandes", "Gigante de Flandes"),
+        ("California", "California"),
+        ("Cabeza de León", "Cabeza de León"),
+        ("Otro", "Otro"),
+    )
     GENDER_CHOICE = (
         ("Macho", "Macho"),
         ("Hembra", "Hembra"),
     )
 
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     cage_id = models.ForeignKey(Cage, on_delete=models.CASCADE)
-    breed = models.CharField(max_length=20, blank=False)
+    breed = models.CharField(max_length=20, choices=BREED_CHOICE, blank=False)
     genre = models.CharField(max_length=6, choices=GENDER_CHOICE, blank=False)
     price = models.DecimalField(max_digits=5, decimal_places=2)
     tag = models.CharField(max_length=15, unique=True, blank=False)
     weight = models.DecimalField(max_digits=2, decimal_places=1, default=1)
-    is_active = models.BooleanField(default=True)
     photo = models.CharField(max_length=255, blank=True)
