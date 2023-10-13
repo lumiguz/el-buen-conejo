@@ -1,5 +1,5 @@
 import React from "react";
-import "../Rabbits/ViewRabbits.css"
+import styles from "../Rabbits/ViewRabbits.module.css"
 import Infocard from "../../Components/InfocardRabbit/Infocard.jsx"
 import CardRabbit from "../../Components/CardRabbit/CardRabbit.jsx";
 import Carousel from "../../Components/Carousel/Carousel"
@@ -14,9 +14,9 @@ const ViewRabbits = () => {
   </div>
 
 <div className="container">
-    <nav id="breadcrumb">
+    <nav id={styles.breadcrumbRabbit}>
   <ol className="breadcrumb">
-    <li className="breadcrumb-item"><a href="#">Perfil</a></li>
+    <li className="breadcrumb-item"><a href="#" id={styles.linkBreadcrumbRabbit}>Perfil</a></li>
     <li className="breadcrumb-item active" aria-current="page">Biblioteca</li>
     <li className="breadcrumb-item active" aria-current="page">Biblioteca</li>
   </ol>

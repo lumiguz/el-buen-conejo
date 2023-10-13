@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import MenuRabbitPerfil from "./MenuRabbitPerfil";
-import "../MenuRabbit/menuRabbit.css"
+import styles from "../MenuRabbit/menuRabbit.module.css"
 import MenuRabbitCamada from "./MenuRabbitCamada"
 import MenuRabbitNotes from "./MenuRabbitNotes";
 
@@ -21,7 +21,7 @@ function PaginatedView({ currentPage, onPageChange}){
             className={`page-item ${page.id === currentPage ? "active" : ""}`}
             onClick={() => onPageChange(page.id)}
           >
-            <a className="page-link" href="#">
+            <a className="page-link" href="#" id={styles.linkPaginationRabbit}>
               {page.label}
             </a>
           </li>

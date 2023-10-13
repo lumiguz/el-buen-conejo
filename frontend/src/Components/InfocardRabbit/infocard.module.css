@@ -1,16 +1,16 @@
-#parents {
+#parentsRabbits {
     color: gainsboro;
     white-space: nowrap;
     font-size: 0.7rem
 }
 
-#cardinfo {
+#cardinfoRabbits {
     width: 4rem;
     height: 4rem;
     text-align: center
 }
 
-#name {
+#nameRabbits {
     white-space: nowrap;
     font-size: 0.8rem;
 }
