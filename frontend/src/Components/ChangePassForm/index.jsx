@@ -32,7 +32,7 @@ const index = () => {
       <FormSection 
         type="password" 
         id="password" 
-        placeholder="Escribe tu contraseña" 
+        placeholder="************" 
         label="Contraseña" 
         onChange={handleInputChange}
         value={formData.password}
@@ -40,12 +40,12 @@ const index = () => {
       <FormSection 
         type="password" 
         id="repeatPass" 
-        placeholder="Repite tu contraseña" 
+        placeholder="************" 
         label="Confirmar contraseña" 
         onChange={handleInputChange}
         value={formData.repeatPass}
       />
-      <Button type="submit" className="btn-primary w-100" children="Submit" />
+      <Button type="submit" className="btn-success w-100" children="Submit" />
     </form>
   )
 }

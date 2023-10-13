@@ -46,7 +46,7 @@ const index = () => {
                 onChange={handleInputChange}
                 value={formData.password}
             />
-            <Button type="submit" className="btn btn-primary w-100 my-3">
+            <Button type="submit" className="btn-success w-100 my-3">
                 Submit
             </Button>
             <AppLink href="/forgot" className="form-check-label" htmlFor="forgotPass">

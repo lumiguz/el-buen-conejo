@@ -45,13 +45,13 @@ const index = () => {
                         value={formData.name}
                     />
                 </div>
-                <div className="w-100 me-2">
+                <div className="w-100">
                     <FormSection 
                         type="text"
                         id="lastname"
                         placeholder="Ingresa tu apellido"
                         label="Apellido"
-                        className="w-100 me-2"
+                        className="w-100"
                         onChange={handleInputChange}
                         value={formData.lastname}
                     />
@@ -79,7 +79,7 @@ const index = () => {
                 list={countries} 
                 onChange={handleInputChange}
             />
-            <Button type="submit" className="btn btn-primary w-100">Crear cuenta</Button>
+            <Button type="submit" className="btn-success w-100">Crear cuenta</Button>
         </form>
     )
 }

@@ -35,7 +35,7 @@ const index = () => {
                 onChange={handleInputChange}
                 value={formData.email}
             />
-            <Button type="submit" className="btn btn-primary w-100">Enviar email</Button>
+            <Button type="submit" className="btn-success w-100">Enviar email</Button>
         </form>
     )
 }
