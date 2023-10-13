@@ -5,17 +5,6 @@ from apps.rabbits.models import Rabbit
 class RabbitSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rabbit
-        fields = (
-            "id",
-            "photo",
-            "tag",
-            "breed",
-            "genre",
-            "weight",
-            "price",
-            "cage_id",
-            "created",
-            "updated",
-        )
+        fields = "__all__"
         # Cant update or eliminate
         read_only_fields = ("created", "id")
