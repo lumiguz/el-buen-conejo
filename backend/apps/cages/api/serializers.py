@@ -20,17 +20,17 @@ class CageSerializer(serializers.ModelSerializer):
 class CageListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cage
-        fields = ("id", "farm_id", "count_rabbits", "price", "is_public", "is_active")
+        fields = ("id", "farm_id", "count_rabbits", "price", "is_public", "is_active", "photo")
 
 class CageUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cage
-        fields = ("count_rabbits", "price", "is_public")
+        fields = ("count_rabbits", "price", "is_public", "photo")
 
 class CageCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cage
-        fields = ("farm_id", "count_rabbits", "price", "is_public")
+        fields = ("farm_id", "count_rabbits", "price", "photo")
 
     def validate_count_rabbits(self, value):
         if value < 0:
