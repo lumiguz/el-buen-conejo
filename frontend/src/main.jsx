@@ -14,12 +14,18 @@ import Register from "./Routes/Register";
 import Forgot from "./Routes/Forgot";
 import ChangePass from "./Routes/ChangePass";
 import Litters from "./Routes/Litters";
+import Market from "./Routes/Market";
 
 //implement routes with react-router-dom
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Landing />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/market",
+    element: <Market />,
     errorElement: <ErrorPage />,
   },
   {
