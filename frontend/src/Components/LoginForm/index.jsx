@@ -7,9 +7,11 @@ import AppLink from '../../UI/AppLink'
 import FormSection from '../../UI/FormSection'
 import Button from '../../UI/Button'
 import { usuarios } from '../../utils/database'
+import { useNavigate } from 'react-router-dom'
 
 const index = () => {
 
+    const navigate = useNavigate()
     const [alert, setAlert] = useState(false)
 
     const [formData, setFormData] = useState({
@@ -36,12 +38,13 @@ const index = () => {
 
         if (usuarios[index].contraseña === formData.password) {
             console.log('Datos a enviar:', formData);
+            localStorage.setItem('logedAccount', JSON.stringify(formData))
+            navigate('/')
         } else {
             setAlert(true)
         }
     };
     
-
     return (
         <form onSubmit={handleSubmit}>
             <FormSection  

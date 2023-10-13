@@ -14,7 +14,7 @@ const index = () => {
     const [formData, setFormData] = useState({
         email: '',
     });
-    
+
     const handleInputChange = (e) => {
         const { id, value } = e.target;
         setFormData({
@@ -33,7 +33,6 @@ const index = () => {
             console.log('Datos a enviar:', formData);
         }
     };
-    
 
     return (
         <form onSubmit={handleSubmit}>

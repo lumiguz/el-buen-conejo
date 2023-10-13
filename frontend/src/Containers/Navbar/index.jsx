@@ -3,6 +3,7 @@ import NavbarToggler from "../../Components/NavbarToggler";
 import AppLink from "../../UI/AppLink";
 import NavItem from "../../Components/NavItem";
 import logo from "../../assets/logoText.svg";
+import { links } from "../../utils/links";
 
 /**
  * Renders the navigation bar component.
@@ -10,13 +11,6 @@ import logo from "../../assets/logoText.svg";
  * @return {JSX.Element} The JSX element representing the navigation bar.
  */
 const Navbar = () => {
-  const links = [
-    { name: "Comunidad", href: "/community" },
-    { name: "Mercado", href: "/market" },
-    { name: "Eventos y Recursos", href: "/events" },
-    { name: "Camadas", href: "/litters" },
-    { name: "Iniciar sesión", href: "/login", className: "text-primary" },
-  ];
 
   return (
     <nav className="navbar navbar-expand-lg bg-white">
@@ -33,7 +27,6 @@ const Navbar = () => {
                 {link.name}
               </NavItem>
             ))}
-
             <AppLink href="/register" className="btn btn-primary">
               Crear cuenta
             </AppLink>
