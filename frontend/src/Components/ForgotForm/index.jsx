@@ -4,8 +4,12 @@
 import React, { useState } from 'react'
 import FormSection from "../../UI/FormSection"
 import Button from "../../UI/Button"
+import { usuarios } from '../../utils/database'
 
 const index = () => {
+
+    const correos = usuarios.map(usuario => usuario.email)
+    const [alert, setAlert] = useState(false)
 
     const [formData, setFormData] = useState({
         email: '',
@@ -21,7 +25,13 @@ const index = () => {
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('Datos a enviar:', formData);
+        setAlert(false)
+
+        if (!correos.includes(formData.email)) {
+            setAlert(true)
+        } else {
+            console.log('Datos a enviar:', formData);
+        }
     };
     
 
@@ -35,6 +45,7 @@ const index = () => {
                 onChange={handleInputChange}
                 value={formData.email}
             />
+            {alert && <p className="text-danger">El correo no está registrado</p>}
             <Button type="submit" className="btn-success w-100">Enviar email</Button>
         </form>
     )

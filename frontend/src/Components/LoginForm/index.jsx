@@ -6,8 +6,11 @@ import React, { useState } from 'react'
 import AppLink from '../../UI/AppLink'
 import FormSection from '../../UI/FormSection'
 import Button from '../../UI/Button'
+import { usuarios } from '../../utils/database'
 
 const index = () => {
+
+    const [alert, setAlert] = useState(false)
 
     const [formData, setFormData] = useState({
         email: '',
@@ -23,8 +26,19 @@ const index = () => {
     };
     
     const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log('Datos a enviar:', formData);
+
+        e.preventDefault()
+        setAlert(false)
+
+        let index = usuarios.map(usuario => usuario.email).indexOf(formData.email)
+
+        index == -1 ? index = 0 : index = index
+
+        if (usuarios[index].contraseña === formData.password) {
+            console.log('Datos a enviar:', formData);
+        } else {
+            setAlert(true)
+        }
     };
     
 
@@ -46,6 +60,7 @@ const index = () => {
                 onChange={handleInputChange}
                 value={formData.password}
             />
+            {alert && <p className="text-danger"> Correo electrónico o contraseña incorrectos </p>}
             <Button type="submit" className="btn-success w-100 my-3">
                 Submit
             </Button>
