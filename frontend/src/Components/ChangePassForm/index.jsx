@@ -12,18 +12,18 @@ const index = () => {
       <FormSection 
         type="password" 
         id="examplePassword1" 
-        placeholder="Escribe tu contraseña" 
+        placeholder="***********" 
         label="Contraseña" 
         onChange={() => {}}
         />
       <FormSection 
         type="password" 
         id="repeatPassword1" 
-        placeholder="Repite tu contraseña" 
+        placeholder="***********" 
         label="Confirmar contraseña" 
         onChange={() => {}}
       />
-      <Button type="submit" className="btn-primary w-100" children="Submit" />
+      <Button type="submit" className="btn-success w-100" children="Submit" />
     </form>
   )
 }

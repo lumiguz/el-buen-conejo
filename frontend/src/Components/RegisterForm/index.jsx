@@ -22,13 +22,13 @@ const index = () => {
                         onChange={() => {}}
                         />
                 </div>
-                <div className="w-100 me-2">
+                <div className="w-100">
                     <FormSection 
                         type="text"
                         id="inputLastname1"
                         placeholder="Ingresa tu apellido"
                         label="Apellido"
-                        className="w-100 me-2"
+                        className="w-100"
                         onChange={() => {}}
                     />
                 </div>
@@ -51,7 +51,7 @@ const index = () => {
                 list={countries} 
                 onChange={() => {}}
             />
-            <Button type="submit" className="btn btn-primary w-100">Crear cuenta</Button>
+            <Button type="submit" className="btn-success w-100">Crear cuenta</Button>
         </form>
     )
 }

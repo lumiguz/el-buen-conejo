@@ -17,7 +17,7 @@ const index = () => {
                 <AppLink href="/login">Inicia sesión</AppLink>
             </Paragraph>
             <RegisterForm />
-            <Paragraph className="text-center my-3">
+            <Paragraph className="text-center my-3 text-success text-sm">
                 Al continuar, usted reconoce que ha leído, entendido y está de acuerdo con las Condiciones 
                 del servicio y la Política de privacidad de El buen conejo.
             </Paragraph>

@@ -4,7 +4,7 @@ const Button = ({
   children,
   onClick = () => {},
   type = "button",
-  className = "btn-success",
+  className = "btn-danger",
 }) => {
   return (
     <button type={type} onClick={onClick} className={`btn ${className}`}>
