@@ -1,10 +1,10 @@
 from django.db import models
-import uuid
 from apps.farms.models import Farm
+from apps.abstracts.models import AbstractModel
 
 
 # Create your models here.
-class Cage(models.Model):
+class Cage(AbstractModel):
     """
     The Cage is used to keep the rabbits.
     One cage has one or many rabbits.
@@ -17,10 +17,9 @@ class Cage(models.Model):
         is_active ( boolean ): logic delete.
     """
 
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    
     farm_id = models.ForeignKey(Farm, on_delete=models.CASCADE)
     count_rabbits = models.IntegerField(default=0)
     price = models.DecimalField(max_digits=5, decimal_places=2, default=0)
     is_public = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
     photo = models.CharField(max_length=255, blank=True)
