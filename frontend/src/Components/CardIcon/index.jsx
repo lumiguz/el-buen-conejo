@@ -2,30 +2,42 @@ import PropTypes from "prop-types";
 import AppLink from "../../UI/AppLink";
 
 /**
- * Creates a card with an icon, title, text, and optional link.
+ * Generates a card icon component.
  *
- * @param {string} className - The class name for the card.
- * @param {string} icon - The class name for the icon bootstrap.
- * @param {string} title - The title of the card.
- * @param {string} text - The text content of the card.
- * @param {object} link - The link object with url and text properties.
- * @return {JSX.Element} - The card component.
+ * @param {string} className - The CSS class name for the card icon.
+ * @param {string} icon - The icon class for the card icon bootstrap.
+ * @param {boolean} iconAbove - Determines whether the icon is placed above the title.
+ * @param {string} title - The title of the card icon.
+ * @param {string} text - The text content of the card icon.
+ * @param {object} link - The link object containing the URL and text for the card icon.
+ * @return {JSX.Element} The card icon component.
  */
-const CardIcon = ({ className, icon, title, text, link }) => {
+const CardIcon = ({ className, icon, iconAbove, title, text, link }) => {
+  const iconClass = !iconAbove ? "d-flex align-items-center" : "";
   return (
-    <div class={`card ${className}`}>
-      <div class="card-body">
-        <div className="mb-2">
-          <span>
-            <i class={icon} style={{ fontSize: "2em" }}></i>
-          </span>
+    <div className={`card ${className}`}>
+      <div className="card-body">
+        <div className={iconClass}>
+          <div className="mb-2">
+            <span>
+              <i className={icon} style={{ fontSize: "2em" }}></i>
+            </span>
+          </div>
+          {title && (
+            <h6 className={`card-title m-0 ${!iconAbove ? "ms-2" : ""}`}>
+              {title}
+            </h6>
+          )}
         </div>
-        {title && <h5 className="card-title m-0">{title}</h5>}
+
         {text && <p className="card-text m-0">{text}</p>}
         {link && (
           <AppLink href={link.url} className="small">
             {link.text}{" "}
-            <i class="bi bi-chevron-right" style={{ fontSize: "0.7em" }}></i>
+            <i
+              className="bi bi-chevron-right"
+              style={{ fontSize: "0.7em" }}
+            ></i>
           </AppLink>
         )}
       </div>
@@ -34,11 +46,12 @@ const CardIcon = ({ className, icon, title, text, link }) => {
 };
 
 CardIcon.propTypes = {
-  icon: PropTypes.string.isRequired,
+  className: PropTypes.string,
+  icon: PropTypes.string,
+  iconAbove: PropTypes.bool,
   title: PropTypes.string,
   text: PropTypes.string,
   link: PropTypes.object,
-  className: PropTypes.string,
 };
 
 export default CardIcon;
