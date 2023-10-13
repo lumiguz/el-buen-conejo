@@ -13,7 +13,7 @@ import Login from "./Routes/Login";
 import Register from "./Routes/Register";
 import Forgot from "./Routes/Forgot";
 import ChangePass from "./Routes/ChangePass";
-
+import Litters from "./Routes/Litters";
 
 //implement routes with react-router-dom
 const router = createBrowserRouter([
@@ -25,6 +25,10 @@ const router = createBrowserRouter([
   {
     path: "/app",
     element: <App />,
+  },
+  {
+    path: "/litters",
+    element: <Litters />,
   },
   {
     path: "/login",
