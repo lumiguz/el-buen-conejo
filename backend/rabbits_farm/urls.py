@@ -22,6 +22,6 @@ urlpatterns = [
     path("login/", Login.as_view(), name="login"),
     path("logout/", Logout.as_view(), name="logout"),
     re_path(r"^api/", include("apps.users.api.routers")),
-    re_path(r"^api-rabbit/", include("apps.rabbits.api.routers")),
+    re_path(r"^api/", include("apps.rabbits.api.routers")),
     re_path(r"^api-farm/", include("apps.farms.api.routers")),
 ]
