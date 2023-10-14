@@ -20,14 +20,14 @@ class Rabbit(AbstractModel):
     """
 
     BREED_CHOICE = (
-        ("Nueva Zelanda", "Nueva Zelanda"),
-        ("Chinchilla", "Chinchilla"),
-        ("Rex", "Rex"),
-        ("Mariposa", "Mariposa"),
         ("Azteca", "Azteca"),
-        ("Gigante de Flandes", "Gigante de Flandes"),
-        ("California", "California"),
         ("Cabeza de León", "Cabeza de León"),
+        ("California", "California"),
+        ("Chinchilla", "Chinchilla"),
+        ("Gigante de Flandes", "Gigante de Flandes"),
+        ("Mariposa", "Mariposa"),
+        ("Nueva Zelanda", "Nueva Zelanda"),
+        ("Rex", "Rex"),
         ("Otro", "Otro"),
     )
     GENDER_CHOICE = (
@@ -36,9 +36,9 @@ class Rabbit(AbstractModel):
     )
 
     cage_id = models.ForeignKey(Cage, on_delete=models.CASCADE)
-    breed = models.CharField(max_length=20, choices=BREED_CHOICE, blank=False)
-    genre = models.CharField(max_length=6, choices=GENDER_CHOICE, blank=False)
-    price = models.DecimalField(max_digits=5, decimal_places=2)
+    breed = models.CharField(choices=BREED_CHOICE, blank=False, default="Especie")
+    genre = models.CharField(choices=GENDER_CHOICE, blank=False, default="Genero")
+    price = models.DecimalField(max_digits=5, decimal_places=2, default=0)
     tag = models.CharField(max_length=15, unique=True, blank=False)
     weight = models.DecimalField(max_digits=2, decimal_places=1, default=1)
     photo = models.CharField(max_length=255, blank=True)
