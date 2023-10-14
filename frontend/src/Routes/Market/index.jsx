@@ -5,6 +5,7 @@ import FilterMarket from "../../UI/FilterMarket";
 import Navbar from "../../Containers/Navbar";
 import CardMarket from "../../Components/CardMarket"
 import Footer from '../../Components/Footer';
+import CardCategory from '../../Components/CardCategory/CardCategory';
 
 const index = () => {
   const AllCategories = ["MiniLop", "Blanc de Hotot", "Conejo Rex", "Gigantes de flandes"]

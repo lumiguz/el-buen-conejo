@@ -16,6 +16,7 @@ import Forgot from "./Routes/Forgot";
 import ChangePass from "./Routes/ChangePass";
 import Litters from "./Routes/Litters";
 import Market from "./Routes/Market";
+import AppContextProvider from "./context/AppContextProvider.jsx";
 
 //implement routes with react-router-dom
 const router = createBrowserRouter([
@@ -27,7 +28,6 @@ const router = createBrowserRouter([
   {
     path: "/market",
     element: <Market />,
-    errorElement: <ErrorPage />,
   },
   {
     path: "/app",
@@ -57,6 +57,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AppContextProvider>
+      <RouterProvider router={router} />
+    </AppContextProvider>
   </React.StrictMode>
 );
