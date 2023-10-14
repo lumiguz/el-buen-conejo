@@ -3,5 +3,7 @@ from django.apps import AppConfig
 
 class UsersConfig(AppConfig):
     name = "apps.users"
-    verbose_name = "Usuarios"
-    label = "apps_users"
+    # label = "apps_users"
+
+    class Meta:
+        verbose_name = "Usuarios"
