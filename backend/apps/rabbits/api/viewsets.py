@@ -1,10 +1,10 @@
 from rest_framework import viewsets, permissions
 from apps.rabbits.models import Rabbit
-from apps.rabbits.api.serializers import RabbitSerializer
+from .serializers import RabbitSerializer
 
 
 class RabbitViewSet(viewsets.ModelViewSet):
-    queryset: Rabbit.objects.all()
+    queryset = Rabbit.objects.all()
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = RabbitSerializer
 
