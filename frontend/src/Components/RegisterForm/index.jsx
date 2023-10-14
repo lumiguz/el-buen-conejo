@@ -2,13 +2,18 @@
 // Name, Lastname, Email and password, the button type submit sends the information to validate to backend
 // if everything is ok, you can login at the route /login using these credentials.
 
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import FormSection from '../../UI/FormSection'
 import Button from '../../UI/Button'
 import FormSelect from '../../UI/FormSelect'
 import { countries } from '../../utils/countries'
+import { usuarios } from '../../utils/database'
 
 const index = () => {
+
+    const correos = usuarios.map(usuario => usuario.email)
+    const [alert, setAlert] = useState(false)
+    const [error, setError] = useState(false)
 
     const [formData, setFormData] = useState({
         name: '',
@@ -27,8 +32,19 @@ const index = () => {
     };
     
     const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log('Datos a enviar:', formData);
+        e.preventDefault()
+        setError(false)
+        setAlert(false)
+        
+        if (correos.includes(formData.email)) {
+            setAlert(true)
+        } else if (formData.password.length < 8) {
+            setError(true)
+        } else {
+            console.log('Datos a enviar:', formData)
+            setError(false)
+            setAlert(false)
+        }
     };
     
     return (
@@ -45,13 +61,13 @@ const index = () => {
                         value={formData.name}
                     />
                 </div>
-                <div className="w-100 me-2">
+                <div className="w-100">
                     <FormSection 
                         type="text"
                         id="lastname"
                         placeholder="Ingresa tu apellido"
                         label="Apellido"
-                        className="w-100 me-2"
+                        className="w-100"
                         onChange={handleInputChange}
                         value={formData.lastname}
                     />
@@ -79,7 +95,9 @@ const index = () => {
                 list={countries} 
                 onChange={handleInputChange}
             />
-            <Button type="submit" className="btn btn-primary w-100">Crear cuenta</Button>
+            {alert && <p className="text-danger"> El correo ingresado ya tiene una cuenta asociada </p>}
+            {error && <p className="text-danger"> La contraseña debe tener más de 8 caracteres </p>}
+            <Button type="submit" className="btn-success w-100">Crear cuenta</Button>
         </form>
     )
 }

@@ -2,7 +2,7 @@ import React from 'react'
 
 const index = ({type, id, placeholder, label, onChange}) => {
   return (
-    <div className="mb-3">
+    <div className="mb-2">
         <label htmlFor={id} className="form-label">{label}</label>
         <input 
           type={type} 
