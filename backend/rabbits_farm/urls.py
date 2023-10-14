@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import include, path, re_path
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 
+
 urlpatterns = [
     
     path("admin/", admin.site.urls),
@@ -25,6 +26,7 @@ urlpatterns = [
     path("logout/", Logout.as_view(), name="logout"),
     re_path(r"^api/", include("apps.users.api.routers")),
     re_path(r"^api-farm/", include("apps.farms.api.routers")),
+    re_path(r"^api/", include("apps.cages.api.routers")),
     re_path(r"api-profile/", include("apps.profiles.api.routers")),
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     # Optional UI:

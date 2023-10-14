@@ -25,6 +25,9 @@ class Rabbit(models.Model):
     )
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    cage_id = models.ForeignKey(to="Cage", on_delete=models.CASCADE)
+    breed = models.CharField(max_length=20, null=False)
+    genre = models.CharField(max_length=1, choices=GENDER_CHOICE, null=False)
     cage_id = models.ForeignKey(Cage, on_delete=models.CASCADE)
     breed = models.CharField(max_length=20, blank=False)
     genre = models.CharField(max_length=6, choices=GENDER_CHOICE, blank=False)
