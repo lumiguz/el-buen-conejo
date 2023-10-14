@@ -4,9 +4,13 @@ import Paragraph from "../../UI/Paragraph";
 import Navbar from "../../Containers/Navbar";
 import Footer from "../../Components/Footer";
 import CardIcon from "../../Components/CardIcon";
-import styles from "./Landing.module.css";
 import mobile from "../../assets/mobile.svg";
 import AppLink from "../../UI/AppLink";
+import {
+  cardsWithLink,
+  cardsTools,
+  cardsSteps,
+} from "../../utils/landing/cardData";
 
 /**
  * Renders the index page.
@@ -14,96 +18,15 @@ import AppLink from "../../UI/AppLink";
  * @return {JSX.Element} The rendered index page.
  */
 const Landing = () => {
-  const cardsWithLink = [
-    {
-      className: "text-start mb-2",
-      icon: "bi bi-camera-video",
-      iconAbove: true,
-      title: "Comunidad",
-      text: "Conecta con otros productores, comparte tus expectativas y aprende de los demás.",
-      link: {
-        url: "/community",
-        text: "Ver comunidad",
-      },
-    },
-    {
-      className: "text-start mb-2",
-      icon: "bi bi-handbag",
-      iconAbove: true,
-      title: "Mercado",
-      text: "Da a conocer tus conejos y comienza a venderlos en el mercado.",
-      link: {
-        url: "/market",
-        text: "Ver mercado",
-      },
-    },
-    {
-      className: "text-start mb-2",
-      icon: "bi bi-calendar2-event",
-      iconAbove: true,
-      title: "Eventos",
-      text: "Mantente al tanto de los eventos importantes: ferias, conferencias y más.",
-      link: {
-        url: "/events",
-        text: "Ver eventos",
-      },
-    },
-  ];
-
-  const cardsTools = [
-    {
-      className: "text-start border-0 bg-transparent",
-      icon: `bi bi-calendar2-month-fill ${styles.text_orange}`,
-      iconAbove: true,
-      title: "Ahorrar tiempo",
-      text: "Solo tienes que concentrarte en lo que mejor sabes hacer y El buen conejo hace el resto.",
-    },
-    {
-      className: "text-start border-0 bg-transparent",
-      icon: `bi bi-person-fill-gear ${styles.text_purple}`,
-      iconAbove: true,
-      title: "Maximizar su eficiencia",
-      text: "Con todas las funcionalidades de El buen conejo tendrás tu granja bien organizada y optimizada.",
-    },
-    {
-      className: "text-start border-0 bg-transparent",
-      icon: `bi bi-clipboard-data-fill ${styles.text_yellow}`,
-      iconAbove: true,
-      title: "Tomar desiciones basadas en datos",
-      text: "Recibe reportes y obtén información relevante para estar al día con la granja.",
-    },
-  ];
-
-  const cardsSteps = [
-    {
-      className: "text-start mb-3",
-      icon: `bi bi-1-circle-fill text-secondary`,
-      title: "Crea tu cuenta",
-      text: "Necesitas registrarte como productor para automatizar la gestión de tu granja.",
-    },
-    {
-      className: "text-start mb-3",
-      icon: `bi bi-2-circle-fill text-secondary`,
-      title: "Agrega tus conejos",
-      text: "Agrega tus conejos a jaulas y dales una descripción detallada, como su raza, edad, entre otros datos.",
-    },
-    {
-      className: "text-start mb-3",
-      icon: `bi bi-3-circle-fill text-secondary`,
-      title: "Recibe informes",
-      text: "Por último mantén la información de tus conejos actualizada para recibir informes y estar al día con tu granja.",
-    },
-  ];
-
   return (
     <div className="container">
       <Navbar />
       <section className="bg-info bg-opacity-10 pt-3">
-        <header className="text-center">
+        <header className="text-center px-3">
           <Heading>La Herramienta para controlar su granja</Heading>
           <Paragraph>
-            Leva un registro completo de tus conejos y gestiona tu granja de
-            manera eficiente
+            Lleva un registro completo de tus conejos y gestiona tu granja de
+            manera eficiente.
           </Paragraph>
           <Button className="btn-success">Únete al El buen conejo</Button>
         </header>
@@ -130,7 +53,7 @@ const Landing = () => {
           </Heading>
           <Paragraph>
             El buen conejo es una solución práctica para agricultores, granjeros
-            y familias
+            y familias.
           </Paragraph>
         </header>
         <article className="row mt-3 ps-4">
@@ -152,7 +75,7 @@ const Landing = () => {
             <header>
               <Heading className="h4 mb-4">Comienza a ser productor</Heading>
             </header>
-            <article>
+            <article className="px-3">
               {cardsSteps.map((card, index) => (
                 <div key={index} className="">
                   <CardIcon
@@ -164,7 +87,10 @@ const Landing = () => {
                   />
                 </div>
               ))}
-              <AppLink href="/register" className="btn btn-success w-100 mt-2 mb-4">
+              <AppLink
+                href="/register"
+                className="btn btn-success w-100 mt-2 mb-4"
+              >
                 Abre tu cuenta ahora
               </AppLink>
             </article>
