@@ -1,9 +1,9 @@
 run:
-		python manage.py runserver
+        python manage.py runserver
 
-rene:
-		python manage.py makemigrations
-		python manage.py migrate
+mig:
+        python manage.py makemigrations
+        python manage.py migrate
 
 delmig:
 		rm -rf ./apps/cages/migrations/00*.py
