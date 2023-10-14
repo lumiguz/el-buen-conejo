@@ -16,21 +16,32 @@ Including another URLconf
 from apps.users.views import Login, Logout
 from django.contrib import admin
 from django.urls import include, path, re_path
-from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
+from drf_spectacular.views import (
+    SpectacularAPIView,
+    SpectacularRedocView,
+    SpectacularSwaggerView,
+)
 
 
 urlpatterns = [
-    
     path("admin/", admin.site.urls),
     path("login/", Login.as_view(), name="login"),
     path("logout/", Logout.as_view(), name="logout"),
     re_path(r"^api/", include("apps.users.api.routers")),
     re_path(r"^api/", include("apps.rabbits.api.routers")),
-    re_path(r"^api-farm/", include("apps.farms.api.routers")),
+    re_path(r"^api/", include("apps.farms.api.routers")),
     re_path(r"^api/", include("apps.cages.api.routers")),
-    re_path(r"api-profile/", include("apps.profiles.api.routers")),
-    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    re_path(r"^api/", include("apps.profiles.api.routers")),
+    path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     # Optional UI:
-    path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
-    path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
+    path(
+        "api/schema/swagger-ui/",
+        SpectacularSwaggerView.as_view(url_name="schema"),
+        name="swagger-ui",
+    ),
+    path(
+        "api/schema/redoc/",
+        SpectacularRedocView.as_view(url_name="schema"),
+        name="redoc",
+    ),
 ]
