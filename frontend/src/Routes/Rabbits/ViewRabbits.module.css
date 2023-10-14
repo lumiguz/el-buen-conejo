@@ -1,0 +1,16 @@
+#breadcrumbRabbit{
+    --bs-breadcrumb-divider: '>';
+    font-weight: bold;
+}
+
+#linkBreadcrumbRabbit {
+    text-decoration: none; /* Elimina el subrayado */
+    color: #333; /* Cambia el color del enlace (puedes usar cualquier color que desees) */
+  }
+  
+  /* Estilo para el enlace cuando se pasa el mouse por encima */
+#linkBreadcrumbRabbit :hover {
+    /* text-decoration: underline; Puedes volver a agregar subrayado en hover si lo deseas */
+    color: #007bff; /* Cambia el color en hover (puedes personalizarlo) */
+  }
+
