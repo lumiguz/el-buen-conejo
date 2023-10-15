@@ -27,7 +27,7 @@ const Footer = () => {
     },
   ];
   return (
-    <div className="container bg-light bg-gradient mt-1">
+    <div className="container bg-light mt-1">
       <div className="col">
         <AppLink
           href="/"

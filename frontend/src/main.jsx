@@ -7,16 +7,18 @@ import "bootstrap/dist/js/bootstrap.min.js";
 //import react-router-dom v6
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 //import components routes
-import App from "./App.jsx";
-import ErrorPage from "./error-page.jsx";
+import App from "./App";
+import ErrorPage from "./error-page";
 import Landing from "./Routes/Landing";
 import Login from "./Routes/Login";
 import Register from "./Routes/Register";
 import Forgot from "./Routes/Forgot";
 import ChangePass from "./Routes/ChangePass";
 import Litters from "./Routes/Litters";
+import ViewRabbits from "./Routes/Rabbits/ViewRabbits";
 import Market from "./Routes/Market";
-import AppContextProvider from "./context/AppContextProvider.jsx";
+import AppContextProvider from "./context/AppContextProvider";
+
 
 //implement routes with react-router-dom
 const router = createBrowserRouter([
@@ -53,12 +55,16 @@ const router = createBrowserRouter([
     path: "/changepass",
     element: <ChangePass />,
   },
+  {
+    path: "/rabbits",
+    element: <ViewRabbits />
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <AppContextProvider>
+    {/* <AppContextProvider> */}
       <RouterProvider router={router} />
-    </AppContextProvider>
+    {/* </AppContextProvider> */}
   </React.StrictMode>
 );
