@@ -18,3 +18,15 @@ class Farm(models.Model):
     name = models.CharField(max_length=150, blank=False)
     address = models.CharField(max_length=150, blank=False)
     is_active = models.BooleanField(default=True)
+    
+        # Modifica como se visualiza el nombre de la clase en el admin
+    # Como ordenar los datos en el admin
+    class Meta:
+        db_table = 'farm'
+        verbose_name = 'farm'
+        verbose_name_plural = 'farm'
+        ordering = ['name']
+
+    def __str__(self):
+        return f'{self.id} {self.name} {self.address} {self.is_active}'
+
