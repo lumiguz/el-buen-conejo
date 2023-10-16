@@ -5,6 +5,7 @@ import CardRabbit from "../../Components/CardRabbit/CardRabbit.jsx";
 import Carousel from "../../Components/Carousel/Carousel"
 import MenuRabbit from "../../Components/MenuRabbit/MenuRabbit";
 import Navbar from "../../Containers/Navbar"
+import Footer from '../../Components/Footer';
 
 const ViewRabbits = () => {
     return <>
@@ -15,10 +16,10 @@ const ViewRabbits = () => {
 
 <div className="container">
     <nav id={styles.breadcrumbRabbit}>
-  <ol className="breadcrumb">
+  <ol className="breadcrumb mt-4">
     <li className="breadcrumb-item"><a href="#" id={styles.linkBreadcrumbRabbit}>Perfil</a></li>
-    <li className="breadcrumb-item active" aria-current="page">Biblioteca</li>
-    <li className="breadcrumb-item active" aria-current="page">Biblioteca</li>
+    <li className="breadcrumb-item active" aria-current="page">Jaula</li>
+    <li className="breadcrumb-item active" aria-current="page">Conejo</li>
   </ol>
 </nav>
 <div className="container">
@@ -26,6 +27,7 @@ const ViewRabbits = () => {
       <div className="col-md-9 m-2">
           <CardRabbit/>
       </div>
+    <div className="d-flex justify-content-between align-items-center">
       <div className="col-md-1 m-2">
           <Infocard/>
       </div>
@@ -36,16 +38,17 @@ const ViewRabbits = () => {
         <Infocard/>
       </div>
     </div>
-</div>
-<div className="container mt-2">
-  <Carousel/>
+    </div>
 </div>
 <div className="container mt-4">
+  <Carousel/>
+</div>
+<div className="container mt-4 bg-white">
   <MenuRabbit/>
 </div>
 </div>
-    
         </div>
+        <Footer/>  
     </>
 };
 

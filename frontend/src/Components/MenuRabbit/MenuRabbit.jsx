@@ -19,7 +19,10 @@ function PaginatedView({ currentPage, onPageChange}){
           <li
             key={page.id}
             className={`page-item ${page.id === currentPage ? "active" : ""}`}
-            onClick={() => onPageChange(page.id)}
+            onClick={(e) => {
+              e.preventDefault(); // Previene el comportamiento predeterminado del enlace
+              onPageChange(page.id);
+            }}
           >
             <a className="page-link" href="#" id={styles.linkPaginationRabbit}>
               {page.label}
