@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 //import bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
-import 'bootstrap-icons/font/bootstrap-icons.css';
+// import 'bootstrap-icons/font/bootstrap-icons.css';
 //import react-router-dom v6
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 //import components routes
@@ -63,8 +63,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    {/* <AppContextProvider> */}
+    <AppContextProvider>
       <RouterProvider router={router} />
-    {/* </AppContextProvider> */}
+    </AppContextProvider>
   </React.StrictMode>
 );
