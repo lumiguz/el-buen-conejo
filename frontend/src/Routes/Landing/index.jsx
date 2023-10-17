@@ -1,8 +1,6 @@
 import Heading from "../../UI/Heading";
 import Button from "../../UI/Button";
 import Paragraph from "../../UI/Paragraph";
-import Navbar from "../../Containers/Navbar";
-import Footer from "../../Components/Footer";
 import CardIcon from "../../Components/CardIcon";
 import mobile from "../../assets/mobile.svg";
 import AppLink from "../../UI/AppLink";
@@ -19,8 +17,7 @@ import {
  */
 const Landing = () => {
   return (
-    <div className="container">
-      <Navbar />
+    <>
       <section className="bg-info bg-opacity-10 pt-3">
         <header className="text-center px-3">
           <Heading>La Herramienta para controlar su granja</Heading>
@@ -101,9 +98,7 @@ const Landing = () => {
           </figure>
         </div>
       </section>
-
-      <Footer />
-    </div>
+    </>
   );
 };
 
