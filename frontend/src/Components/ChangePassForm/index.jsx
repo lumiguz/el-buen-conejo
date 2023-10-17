@@ -1,9 +1,9 @@
 // This components includes a form that change the password of your 'El buen conejo' account, here we are using
-// UI components like FormSection and Button, their information was passed through props, finally the button type
+// UI components like PasswordSection and Button, their information was passed through props, finally the button type
 // submit sends the information to backend
 
 import React, { useState } from 'react'
-import FormSection from "../../UI/FormSection"
+import PasswordSection from "../../UI/PasswordSection"
 import Button from '../../UI/Button'
 
 const index = () => {
@@ -42,7 +42,7 @@ const index = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <FormSection 
+      <PasswordSection 
         type="password" 
         id="password" 
         placeholder="************" 
@@ -50,7 +50,7 @@ const index = () => {
         onChange={handleInputChange}
         value={formData.password}
       />
-      <FormSection 
+      <PasswordSection 
         type="password" 
         id="repeatPass" 
         placeholder="************" 
