@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import './styles.css';
+import LittersCardStyles from './LittersCardStyles.module.css';
 
 //Se utiliza de la siguiente manera:
 {
@@ -12,12 +12,14 @@ const LittersCard = ({
   littersKit,
   littersAge,
   littersWeight,
+  litterBreed,
+  litterId,
   onClick = () => {},
 }) => {
   return (
     <div
       onClick={() => onClick}
-      className='litters-cards d-flex align-items-center border border-secondary-subtle rounded'
+      className={`${LittersCardStyles.littersCards} d-flex justify-content-evenly align-items-center border border-secondary-subtle rounded m-2 p-0`}
     >
       <div>
         <img
@@ -25,10 +27,14 @@ const LittersCard = ({
           alt='littersImage'
         />
       </div>
+
       <div className='p-2'>
         <div className='card-top ms-2'>
-          <h4>Camada de {littersName}</h4>
-          <span className='text-secondary'>California</span>
+          <h6>Camada de {littersName}</h6>
+          <div className='d-flex justify-content-between'>
+            <span className='text-secondary'>{litterBreed}</span>
+            <span className='text-secondary'>Id: {litterId}</span>
+          </div>
           <hr className='my-2' />
         </div>
 
@@ -61,6 +67,8 @@ LittersCard.propTypes = {
   littersKit: PropTypes.string.isRequired,
   littersAge: PropTypes.string.isRequired,
   littersWeight: PropTypes.string.isRequired,
+  litterBreed: PropTypes.string.isRequired,
+  litterId: PropTypes.number.isRequired,
   onClick: PropTypes.func,
   size: PropTypes.oneOf(['md', 'xs', 'lg', 'sm']),
 };
