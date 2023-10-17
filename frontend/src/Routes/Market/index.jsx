@@ -2,9 +2,7 @@ import { useState } from 'react';
 import Heading from "../../UI/Heading";
 import ButtonRecientes from "../../UI/ButtonRecientes";
 import FilterMarket from "../../UI/FilterMarket";
-import Navbar from "../../Containers/Navbar";
 import CardMarket from "../../Components/CardMarket"
-import Footer from '../../Components/Footer';
 import CardCategory from '../../Components/CardCategory/CardCategory';
 
 const index = () => {
@@ -14,7 +12,6 @@ const index = () => {
 
   return (
     <div className="container m-5">
-      <Navbar />
       <Heading>Buscar por razas</Heading>
       <div className="row grid-1">
         <CardCategory categories={categories} />
@@ -29,7 +26,6 @@ const index = () => {
         <CardMarket />
         <CardMarket />
       </div>
-      <Footer/>
     </div>
   );
 };
