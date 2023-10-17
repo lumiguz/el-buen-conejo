@@ -14,7 +14,7 @@ const index = ({type, id, placeholder, label, onChange}) => {
         required
       />
       <div class="invalid-feedback">
-        Please choose a username.
+        Por favor escribe un {label}
       </div>
     </div>
   )

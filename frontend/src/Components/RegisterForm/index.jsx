@@ -4,6 +4,7 @@
 
 import React, { useState } from 'react'
 import FormSection from '../../UI/FormSection'
+import PasswordSection from '../../UI/PasswordSection'
 import Button from '../../UI/Button'
 import FormSelect from '../../UI/FormSelect'
 import { countries } from '../../utils/countries'
@@ -81,8 +82,7 @@ const index = () => {
                 onChange={handleInputChange}
                 value={formData.email}
             />
-            <FormSection 
-                type="password" 
+            <PasswordSection 
                 id="password" 
                 placeholder="********" 
                 label="Password" 
