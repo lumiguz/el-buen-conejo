@@ -5,6 +5,7 @@
 import React, { useState } from 'react'
 import AppLink from '../../UI/AppLink'
 import FormSection from '../../UI/FormSection'
+import PasswordSection from '../../UI/PasswordSection'
 import Button from '../../UI/Button'
 import { usuarios } from '../../utils/database'
 import { useNavigate } from 'react-router-dom'
@@ -55,9 +56,8 @@ const index = () => {
                 onChange={handleInputChange}
                 value={formData.email}
             />
-            <FormSection  
+            <PasswordSection  
                 label="Password"
-                type="password"
                 id="password"
                 placeholder="**********"
                 onChange={handleInputChange}

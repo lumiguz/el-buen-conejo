@@ -6,6 +6,8 @@ import ForgotForm from "../../Components/ForgotForm"
 import Heading from '../../UI/Heading'
 import Paragraph from '../../UI/Paragraph'
 import ReviewEmail from '../../Components/ReviewEmail'
+import Navbar from '../../Containers/Navbar'
+import Footer from '../../Components/Footer'
 
 const index = () => {
 
@@ -17,9 +19,10 @@ const index = () => {
 
 
   return (
-    <>
+    <div className="container">
+      <Navbar />
         {alert && <ReviewEmail />}
-        <div className="w-50 justify-content-center mx-auto border p-3">
+        <div className="w-50 justify-content-center mx-auto border p-3 my-4">
             <Heading className="text-center"> ¿Olvidaste la contraseña? </Heading>
             <Paragraph className="text-center"> 
                 Introduce el email que utilizaste al registrarte y te enviaremos
@@ -27,7 +30,8 @@ const index = () => {
             </Paragraph>
             <ForgotForm />
         </div>
-    </>
+      <Footer />
+    </div>
   )
 }
 

@@ -7,6 +7,8 @@ import Heading from '../../UI/Heading'
 import Paragraph from '../../UI/Paragraph'
 import AppLink from '../../UI/AppLink'
 import SuccessfullSection from '../../UI/SuccessfullSection'
+import Navbar from '../../Containers/Navbar'
+import Footer from '../../Components/Footer'
 
 const index = () => {
 
@@ -17,17 +19,19 @@ const index = () => {
   }, 3000);
 
   return (
-    <>
-      {alert && <SuccessfullSection spanText = "Contraseña actualizada" />}
-      <div className="w-50 justify-content-center mx-auto border p-3">
-        <Heading className="text-center"> Inicia sesión en El buen conejo </Heading>
-        <Paragraph className="text-center"> 
-          ¿Aun no tienes cuenta? &nbsp;
-          <AppLink href="/register">Registrate ahora</AppLink>
-        </Paragraph>
-        <LoginForm />
-      </div>
-    </>
+    <div className="container">
+      <Navbar />
+        {alert && <SuccessfullSection spanText = "Contraseña actualizada" />}
+        <div className="w-50 justify-content-center mx-auto border p-3 my-4">
+          <Heading className="text-center"> Inicia sesión en El buen conejo </Heading>
+          <Paragraph className="text-center"> 
+            ¿Aun no tienes cuenta? &nbsp;
+            <AppLink href="/register">Registrate ahora</AppLink>
+          </Paragraph>
+          <LoginForm />
+        </div>
+      <Footer />
+    </div>
   )
 }
 

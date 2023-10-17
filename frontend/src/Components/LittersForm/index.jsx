@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import './styles.css';
+import LittersFormStyles from './LittersFormStyles.module.css';
 
 const LittersForm = () => {
   const [check, setCheck] = useState(false);
@@ -80,7 +80,7 @@ const LittersForm = () => {
           type='file'
           name='image'
           id='formFile'
-          className='ms-1'
+          className={`ms-1 ${LittersFormStyles.inputFileC}`}
           onChange={(event) => {
             setLittersImage(URL.createObjectURL(event.target.files[0]));
           }}
@@ -175,7 +175,10 @@ const LittersForm = () => {
           Agregar y guardar
         </button>
         {/* cancel button */}
-        <button className='btn btn-danger' type='button'>Cancelar</button>.
+        <button className='btn btn-danger' type='button'>
+          Cancelar
+        </button>
+        .
       </div>
     </form>
   );
