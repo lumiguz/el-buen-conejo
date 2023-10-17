@@ -18,6 +18,7 @@ import Litters from "./Routes/Litters";
 import ViewRabbits from "./Routes/Rabbits/ViewRabbits";
 import Market from "./Routes/Market";
 import AppContextProvider from "./context/AppContextProvider";
+import ViewCage from "./Routes/Cage/ViewCage";
 
 
 //implement routes with react-router-dom
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
   {
     path: "/rabbits",
     element: <ViewRabbits />
+  },
+  {
+    path: "/cage",
+    element: <ViewCage />
   }
 ]);
 
