@@ -6,7 +6,7 @@ import FormSection from "../../UI/FormSection"
 import Button from "../../UI/Button"
 import { usuarios } from '../../utils/database'
 
-const index = () => {
+const index = ({setImbox}) => {
 
     const correos = usuarios.map(usuario => usuario.email)
     const [alert, setAlert] = useState(false)
@@ -31,6 +31,10 @@ const index = () => {
             setAlert(true)
         } else {
             console.log('Datos a enviar:', formData);
+            setImbox(true)
+            setTimeout(() => {
+                setImbox(false)
+            }, 3000);
         }
     };
 
