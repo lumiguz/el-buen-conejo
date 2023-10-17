@@ -14,7 +14,7 @@ const index = () => {
   return (
     <div className="container">
       {success && <SuccessfullSection spanText="Contraseña actualizada" />}
-      <div className="change-pass w-50 justify-content-center mx-auto border p-3 my-4">
+      <div className="change-pass col-md-6 justify-content-center mx-auto border p-3 my-4">
         <Heading className="text-center"> Cambia tu contraseña </Heading>
         <Paragraph className="text-center">
           {" "}

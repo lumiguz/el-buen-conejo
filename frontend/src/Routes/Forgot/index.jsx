@@ -14,7 +14,7 @@ const index = () => {
   return (
     <div className="container">
         {imbox && <ReviewEmail />}
-        <div className="w-50 justify-content-center mx-auto border p-3 my-4">
+        <div className="col-md-6 justify-content-center mx-auto border p-3 my-4 mb-5">
             <Heading className="text-center"> ¿Olvidaste la contraseña? </Heading>
             <Paragraph className="text-center"> 
                 Introduce el email que utilizaste al registrarte y te enviaremos

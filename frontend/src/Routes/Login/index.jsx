@@ -10,7 +10,7 @@ const index = () => {
 
   return (
     <div className="container">
-      <div className="w-50 justify-content-center mx-auto border p-3 my-4">
+      <div className="col-md-6 justify-content-center mx-auto border p-3 my-4">
         <Heading className="text-center">
           {" "}
           Inicia sesión en El buen conejo{" "}

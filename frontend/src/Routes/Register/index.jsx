@@ -9,7 +9,7 @@ import AppLink from "../../UI/AppLink";
 const index = () => {
   return (
     <div className="container">
-      <div className="w-50 justify-content-center mx-auto border p-3 my-4">
+      <div className="col-md-6 justify-content-center mx-auto border p-3 my-4">
         <Heading className="text-center"> Comienza a ser productor </Heading>
         <Paragraph className="text-center">
           {" "}
