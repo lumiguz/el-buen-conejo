@@ -4,6 +4,7 @@ export const links = [
   // { name: "Eventos y Recursos", href: "/events" },
   // { name: "Camadas", href: "/litters", className: "text-danger" },
   { name: "Conejos", href: "/rabbits", className: "text-danger" },
+  { name: "Jaulas", href: "/cage", className: "text-danger" },
   { name: "Iniciar sesión", href: "/login", className: "text-primary" },
 ];
 

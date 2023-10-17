@@ -80,6 +80,15 @@ const router = createBrowserRouter([
     ),
   },
   {
+    path: "/cage",
+    element: (
+      <Layout>
+        <ViewCage />
+      </Layout>
+    ),
+  },
+  {
+    //stop implementing
     path: "/litters",
     element: <Litters />,
   },
