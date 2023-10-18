@@ -9,23 +9,18 @@ import ReviewEmail from '../../Components/ReviewEmail'
 
 const index = () => {
 
-  const [alert, setAlert] = useState(true)
-
-  setTimeout(() => {
-    setAlert(false)
-  }, 3000);
-
+  const [imbox, setImbox] = useState(false)
 
   return (
     <div className="container">
-        {alert && <ReviewEmail />}
-        <div className="w-50 justify-content-center mx-auto border p-3 my-4">
+        {imbox && <ReviewEmail />}
+        <div className="col-md-6 justify-content-center mx-auto border p-3 my-4 mb-5">
             <Heading className="text-center"> ¿Olvidaste la contraseña? </Heading>
             <Paragraph className="text-center"> 
                 Introduce el email que utilizaste al registrarte y te enviaremos
                 instrucciones para reestablecer tu contraseña
             </Paragraph>
-            <ForgotForm />
+            <ForgotForm setImbox={setImbox} />
         </div>
     </div>
   )

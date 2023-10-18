@@ -3,11 +3,13 @@
 // submit sends the information to backend
 
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import PasswordSection from "../../UI/PasswordSection"
 import Button from '../../UI/Button'
 
-const index = () => {
+const index = ({setSuccess}) => {
 
+  const navigate = useNavigate()
   const [error, setError] = useState(false)
   const [warning, setWarning] = useState(false)
 
@@ -36,6 +38,11 @@ const index = () => {
     } else {
       setError(false)
       setWarning(false)
+      setSuccess(true)
+      setTimeout(() => {
+        setSuccess(false)
+        navigate('/login')
+      }, 3000);
       console.log('Datos a enviar:', formData)
     } 
   };
