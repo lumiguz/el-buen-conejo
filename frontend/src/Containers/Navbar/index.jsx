@@ -14,7 +14,9 @@ import logo from "../../assets/logoText.svg";
 const Navbar = () => {
   const isAuthPath = useIsAuthPath(authPaths);
   const isLoggedIn = useIsLoggedIn();
-  console.log(isLoggedIn);
+
+  const cuenta = JSON.parse(localStorage.getItem('logedAccount'))
+
   return (
     <nav className="navbar navbar-expand-lg bg-white">
       <div className="container-fluid">
@@ -39,7 +41,7 @@ const Navbar = () => {
                     {link.name}
                   </NavItem>
                 ))}
-                {!isLoggedIn && (
+                {!cuenta && (
                   <>
                     <NavItem href="/login" className="text-primary">
                       Iniciar sesión
@@ -51,7 +53,7 @@ const Navbar = () => {
                 )}
               </ul>
             </div>
-            {isLoggedIn && <Avatar />}
+            {cuenta && <Avatar />}
           </>
         )}
       </div>
