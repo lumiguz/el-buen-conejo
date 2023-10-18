@@ -16,7 +16,7 @@ const Avatar = ({ imageUrl }) => {
     localStorage.removeItem('logedAccount')
     setTimeout(() => {
       navigate('/login')
-    }, 2000);
+    }, 500);
   }
 
   return (
@@ -45,6 +45,8 @@ const Avatar = ({ imageUrl }) => {
   );
 };
 
-Avatar.propTypes = {};
+Avatar.propTypes = {
+  imageUrl: PropTypes.string,
+};
 
 export default Avatar;
