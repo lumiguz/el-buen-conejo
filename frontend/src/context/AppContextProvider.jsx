@@ -9,14 +9,20 @@ export const useMyContext = () => {
 
 const AppContextProvider = ({ children }) => {
 
-    const user = JSON.parse(localStorage.getItem('logedAccount'))
-    const { email } = user
-    const allInformation = usuarios.filter(usuario => usuario.email === email)
+  const [allInformation, setAllInformation] = React.useState([])
   
-    console.log(allInformation[0])
+  let user = []
+
+  React.useEffect(() => {
+    if (JSON.parse(localStorage.getItem('logedAccount')) !== undefined) {
+      user = JSON.parse(localStorage.getItem('logedAccount'))
+    }
+    setAllInformation(user)
+  }, [])
+
 
   return (
-    <AppContext.Provider value={allInformation[0]}>
+    <AppContext.Provider value={allInformation}>
       {children}
     </AppContext.Provider>
   )
