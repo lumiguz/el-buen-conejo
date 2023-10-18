@@ -1,5 +1,4 @@
 import Heading from "../../UI/Heading";
-import Button from "../../UI/Button";
 import Paragraph from "../../UI/Paragraph";
 import CardIcon from "../../Components/CardIcon";
 import mobile from "../../assets/mobile.svg";
@@ -25,7 +24,9 @@ const Landing = () => {
             Lleva un registro completo de tus conejos y gestiona tu granja de
             manera eficiente.
           </Paragraph>
-          <Button className="btn-success">Únete al El buen conejo</Button>
+          <AppLink href="/register" className="btn btn-success">
+            Únete al El buen conejo
+          </AppLink>
         </header>
         <article className="row mt-3 p-4">
           {cardsWithLink.map((card, index) => (

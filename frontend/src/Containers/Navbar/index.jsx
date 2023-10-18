@@ -1,10 +1,10 @@
-import React from "react";
+import { useIsAuthPath, useIsLoggedIn } from "../../hooks/useAuth";
 import NavbarToggler from "../../Components/NavbarToggler";
-import AppLink from "../../UI/AppLink";
 import NavItem from "../../Components/NavItem";
-import logo from "../../assets/logoText.svg";
+import Avatar from "../../Components/Avatar";
+import AppLink from "../../UI/AppLink";
 import { authPaths, links } from "../../utils/links";
-import { useIsAuthPath } from "../../hooks/useAuth";
+import logo from "../../assets/logoText.svg";
 
 /**
  * Renders the navigation bar component.
@@ -13,16 +13,18 @@ import { useIsAuthPath } from "../../hooks/useAuth";
  */
 const Navbar = () => {
   const isAuthPath = useIsAuthPath(authPaths);
+  const isLoggedIn = useIsLoggedIn();
+  console.log(isLoggedIn);
   return (
     <nav className="navbar navbar-expand-lg bg-white">
       <div className="container-fluid">
+        {!isAuthPath && <NavbarToggler />}
         <AppLink className="navbar-brand" href="/">
           <img src={logo} alt="Logo" />
         </AppLink>
 
         {!isAuthPath && (
           <>
-            <NavbarToggler />
             <div
               className="collapse navbar-collapse"
               id="navbarSupportedContent"
@@ -37,11 +39,19 @@ const Navbar = () => {
                     {link.name}
                   </NavItem>
                 ))}
-                <AppLink href="/register" className="btn btn-primary">
-                  Crear cuenta
-                </AppLink>
+                {!isLoggedIn && (
+                  <>
+                    <NavItem href="/login" className="text-primary">
+                      Iniciar sesión
+                    </NavItem>
+                    <AppLink href="/register" className="btn btn-primary">
+                      Crear cuenta
+                    </AppLink>
+                  </>
+                )}
               </ul>
             </div>
+            {isLoggedIn && <Avatar />}
           </>
         )}
       </div>
