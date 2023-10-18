@@ -16,7 +16,7 @@ phases:
       - echo Prebuild ops
       - DATABASE_URL=$(aws ssm get-parameter --name $POSTGRES_PARAM_NAME --with-decryption --query Parameter.Value --output text)
       - export DATABASE_URL
-      - pip3 install -r requirements.txt
+      - pip3 install -r backend/requirements.txt
 
   build:
     commands:
