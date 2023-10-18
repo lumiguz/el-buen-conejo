@@ -7,8 +7,8 @@ import FormSection from '../../UI/FormSection'
 import PasswordSection from '../../UI/PasswordSection'
 import Button from '../../UI/Button'
 import FormSelect from '../../UI/FormSelect'
-import { countries } from '../../utils/countries'
 import { usuarios } from '../../utils/database'
+import { roles } from '../../utils/roles'
 
 const index = () => {
 
@@ -21,7 +21,7 @@ const index = () => {
         lastname: '',
         email: '',
         password: '',
-        country: '',
+        rol: '',
     });
     
     const handleInputChange = (e) => {
@@ -90,9 +90,9 @@ const index = () => {
                 value={formData.password}
             />
             <FormSelect 
-                id="country"
-                value={formData.country}
-                list={countries} 
+                id="rol"
+                value={formData.rol}
+                list={roles} 
                 onChange={handleInputChange}
             />
             {alert && <p className="text-danger"> El correo ingresado ya tiene una cuenta asociada </p>}
