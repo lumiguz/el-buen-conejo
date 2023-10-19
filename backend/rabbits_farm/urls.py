@@ -27,11 +27,11 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("login/", Login.as_view(), name="login"),
     path("logout/", Logout.as_view(), name="logout"),
-    re_path(r"^api/", include("apps.users.api.routers")),
-    re_path(r"^api/", include("apps.rabbits.api.routers")),
-    re_path(r"^api/", include("apps.farms.api.routers")),
-    re_path(r"^api/", include("apps.cages.api.routers")),
-    re_path(r"^api/", include("apps.profiles.api.routers")),
+    re_path(r"^api/", include("apps.users.api.routers"), name="users"),
+    re_path(r"^api/", include("apps.rabbits.api.routers"), name="rabbits"),
+    re_path(r"^api/", include("apps.farms.api.routers"), name="farms"),
+    re_path(r"^api/", include("apps.cages.api.routers"), name="cages"),
+    re_path(r"^api/", include("apps.profiles.api.routers"), name="profiles"),
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     # Optional UI:
     path(
