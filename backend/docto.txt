@@ -1,0 +1,3 @@
+Django Websockets
+
+https://dev.to/circumeo/django-websockets-3db4
