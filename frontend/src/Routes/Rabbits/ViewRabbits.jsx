@@ -3,7 +3,7 @@ import Infocard from "../../Components/InfocardRabbit/Infocard.jsx";
 import CardRabbit from "../../Components/CardRabbit/CardRabbit.jsx";
 import Carousel from "../../Components/Carousel/Carousel";
 import MenuRabbit from "../../Components/MenuRabbit/MenuRabbit";
-
+// import RabbitForm from "../../Components/RabbitForm/RabbitForm";
 const ViewRabbits = () => {
   return (
     <>

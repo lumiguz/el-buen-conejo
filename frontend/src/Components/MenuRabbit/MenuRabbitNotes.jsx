@@ -1,4 +1,5 @@
 import React from "react";
+import RabbitForm from "../RabbitForm/RabbitForm";
 
 const MenuRabbitNotes =() =>{
     return<>
@@ -16,6 +17,7 @@ const MenuRabbitNotes =() =>{
   <label for="exampleFormControlTextarea1" class="form-label">Todas tus notas</label>
   <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
 </div>
+<RabbitForm/>
     </div>
     </>
 }

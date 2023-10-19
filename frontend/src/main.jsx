@@ -19,6 +19,7 @@ import Market from "./Routes/Market";
 import AppContextProvider from "./context/AppContextProvider";
 import ViewCage from "./Routes/Cage/ViewCage";
 import Layout from "./Layout";
+import Farms from "./Routes/Farms";
 
 //implement routes with react-router-dom
 const router = createBrowserRouter([
@@ -92,6 +93,14 @@ const router = createBrowserRouter([
     path: "/litters",
     element: <Litters />,
   },
+  {
+    path: "/farms",
+    element: (
+      <Layout>
+        <Farms />
+      </Layout>
+    ),
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
