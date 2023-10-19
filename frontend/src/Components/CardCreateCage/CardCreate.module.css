@@ -13,7 +13,7 @@
     height: 48px;
 }
 
-.instructions-title {
+.instructionsTitle {
     font-family: Manrope;
     font-size: 21px;
     font-style: normal;
@@ -22,7 +22,7 @@
     color: var(--neutral-neutral-700, #333);
 }
 
-.instructions-text {
+.instructionsText {
     font-family: Manrope;
     font-size: 16px;
     font-style: normal;
@@ -32,7 +32,7 @@
      
 }
 
-.instructions-text2 {
+.instructionsText2 {
     font-family: Manrope;
     font-size: 16px;
     font-style: normal;
@@ -42,7 +42,7 @@
     padding-bottom: 24px;
 }
 
-.instructions-line {
+.instructionsLine {
     height: 1px;
     background-color: #C2C2C2;
 }

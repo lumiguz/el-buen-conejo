@@ -18,6 +18,7 @@ import ViewRabbits from "./Routes/Rabbits/ViewRabbits";
 import Market from "./Routes/Market";
 import AppContextProvider from "./context/AppContextProvider";
 import ViewCage from "./Routes/Cage/ViewCage";
+import ViewStepOne from "./Routes/Cage/CageStepOne/ViewStepOne";
 import Layout from "./Layout";
 import Farms from "./Routes/Farms";
 
@@ -85,6 +86,14 @@ const router = createBrowserRouter([
     element: (
       <Layout>
         <ViewCage />
+      </Layout>
+    ),
+  },
+  {
+    path: "/cage/step1",
+    element: (
+      <Layout>
+        <ViewStepOne />
       </Layout>
     ),
   },
