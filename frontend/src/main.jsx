@@ -20,6 +20,7 @@ import AppContextProvider from "./context/AppContextProvider";
 import ViewCage from "./Routes/Cage/ViewCage";
 import Layout from "./Layout";
 import Farms from "./Routes/Farms";
+import Profile from "./Routes/Profile"
 
 //implement routes with react-router-dom
 const router = createBrowserRouter([
@@ -100,6 +101,15 @@ const router = createBrowserRouter([
         <Farms />
       </Layout>
     ),
+    },
+{
+    path:"/profile",
+    element:(
+      <Layout>
+        <Profile/>
+      </Layout>
+
+    )
   }
 ]);
 
