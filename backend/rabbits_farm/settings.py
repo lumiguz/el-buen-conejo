@@ -103,6 +103,7 @@ LOCAL_APPS = [
     "apps.cages",
     "apps.profiles",
     "apps.markets",
+    "apps.catalogs",
 ]
 
 # Third persons applications
@@ -112,6 +113,7 @@ THIRD_APPS = [
     "rest_framework_simplejwt.token_blacklist",
     "django_filters",
     "drf_spectacular",
+    "django_extensions",
 ]
 
 INSTALLED_APPS = BASE_APPS + LOCAL_APPS + THIRD_APPS
