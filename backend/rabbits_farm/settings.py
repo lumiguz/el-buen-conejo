@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # This code is for production
 # If exists environemnt variable AWS_EXTERNAL_HOSTNAME then append element in ALLOWED_HOSTS list and DEBUG is False
 AWS_EXTERNAL_HOSTNAME = os.environ.get("AWS_EXTERNAL_HOSTNAME")
-if AWS_EXTERNAL_HOSTNAME:
+if "RDS_HOSTNAME" in os.environ:
     ALLOWED_HOSTS.append(AWS_EXTERNAL_HOSTNAME)
     DEBUG = False
 
@@ -44,11 +44,11 @@ if AWS_EXTERNAL_HOSTNAME:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql_psycopg2",
-            "NAME": os.environ.get("POSTGRES_NAME"),
-            "USER": os.environ.get("POSTGRES_USER"),
-            "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
-            "HOST": os.environ.get("POSTGRES_HOST"),
-            "PORT": os.environ.get("POSTGRES_PORT"),
+            "NAME": os.environ.get("RDS_DB_NAME"),
+            "USER": os.environ.get("RDS_USERNAME"),
+            "PASSWORD": os.environ.get("RDS_PASSWORD"),
+            "HOST": os.environ.get("RDS_HOSTNAME"),
+            "PORT": os.environ.get("RDS_PORT"),
         }
     }
 else:
@@ -187,6 +187,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -212,8 +214,8 @@ SIMPLE_JWT = {
 }
 
 SPECTACULAR_SETTINGS = {
-    "TITLE": "Playlist's streaming videos API",
-    "DESCRIPTION": "Management the playlists made in local mode",
+    "TITLE": "El Buen Conejo API",
+    "DESCRIPTION": "API para la plataforma del Buen Conejo",
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": True,
     "COMPONENT_SPLIT_REQUEST": True,
