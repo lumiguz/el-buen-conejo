@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const RabbitForm = () => {
 
@@ -6,10 +6,45 @@ const RabbitForm = () => {
     '/static/images/littersPlaceHolder.svg'
   );
 
+  const [formData, setFormData] = useState({
+    image: '',
+    name: '',
+    id: '',
+    color: '',
+    weight: '',
+    sex: '',
+    cage: '',
+    father: '',
+    mother: '',
+    birthDate: '',
+    breed: '',
+    genotype: '',
+  });
+
+  const saveRabbit = (event) => {
+    event.preventDefault();
+    // get the data of the new rabbit
+    setFormData({
+      image: event.target.image.value,
+      name: event.target.name.value,
+      id: event.target.id.value,
+      color: event.target.color.value,
+      weight: event.target.weight.value,
+      gender: event.target.gender.value,
+      cage: event.target.cage.value,
+      father: event.target.father.value,
+      mother: event.target.mother.value,
+      birthDate: event.target.birthDate.value,
+      breed: event.target.breed.value,
+      genotype: event.target.genotype.value,
+    });
+    console.log(formData);
+  };
+
   return <>
     <form
       className='form-litters border rounded px-3 py-4'
-    //   onSubmit={saveLitter}
+      onSubmit={saveRabbit}
     >
       <h3>Editar datos del conejo</h3>
       <h6 className='fw-normal'>Modifica los datos de su conejo</h6>
@@ -33,9 +68,9 @@ const RabbitForm = () => {
           name='image'
           id='formFile'
           className='ms-1'
-        //   onChange={(event) => {
-        //     setLittersImage(URL.createObjectURL(event.target.files[0]));
-        //   }}
+          onChange={(event) => {
+            setLittersImage(URL.createObjectURL(event.target.files[0]));
+          }}
         />
         {/* <input type='file' name='image' id='formFile' className='ms-1' /> */}
       </div>
@@ -44,14 +79,14 @@ const RabbitForm = () => {
         <div className='d-flex'>
           <div className='form-group'>
             <label className='form-label'>Nombre</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+            <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="name"/>
             {/* choose father from options input */}
           </div>
 
           <div className='form-group ms-2'>
             <label className='form-label'>ID</label>
             {/* choose mother from options input */}
-            <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+            <input type="number" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="id" />
           </div>
         </div>
       </div>
@@ -60,46 +95,46 @@ const RabbitForm = () => {
         <div className='d-flex'>
           <div className='form-group'>
             <label className='form-label'>Color</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+            <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="color"/>
             {/* choose father from options input */}
           </div>
 
           <div className='form-group ms-2'>
             <label className='form-label'>Peso (en kg)</label>
             {/* choose mother from options input */}
-            <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+            <input type="number" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="weight" />
           </div>
         </div>
       </div>
 
       <div className='mt-2'>
         <div className='d-flex'>
-          <div className="form-check">
-            <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-            <label className="form-check-label" for="flexRadioDefault1">
-              Macho
-            </label>
-          </div>
-          <div className="form-check ms-5">
-            <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked />
-            <label className="form-check-label" for="flexRadioDefault2">
-              Hembra
-            </label>
+          <div className="form-check d-flex flex-column">
+            {/* select if the rabbit is male or female with checkbox*/}
+            <label htmlFor="" className="form-radio">Sexo</label>
+            <div>
+              <div className="">
+                <input type="radio" value='male' name="gender"/><span className="ps-1">Male</span>
+              </div>
+              <div>
+                <input type="radio" value='female' name="gender"/><span className="ps-1">Female</span>
+              </div>
+            </div>
           </div>
 
-          <div className='form-group ms-3 w-100'>
-          <label className='form-label'>Jaula</label>
-      {/* choose breed from options input */}
-      <select className='form-select' name='breed'>
-        <option value='1'>001</option>
-        <option value='2'>002</option>
-        <option value='3'>003</option>
-      </select>
+          <div className='form-group ms-5 w-50'>
+            <label className='form-label'>Jaula</label>
+            {/* choose breed from options input */}
+            <select className='form-select' name='cage'>
+              <option value='1'>001</option>
+              <option value='2'>002</option>
+              <option value='3'>003</option>
+            </select>
           </div>
         </div>
       </div>
 
-      <div class="border-top my-3"></div>
+      <div className="border-top my-3"></div>
       
       <label htmlFor='formFile' className="mt-3">
         <h6>Historia y linaje</h6>
@@ -112,7 +147,7 @@ const RabbitForm = () => {
           <div className='form-group w-100'>
           <label className='form-label mt-2'>Padre</label>
       {/* choose breed from options input */}
-      <select className='form-select' name='breed'>
+      <select className='form-select' name='father'>
         <option value='1'>Elegir</option>
         <option value='2'>Elegir</option>
         <option value='3'>Elegir</option>
@@ -122,7 +157,7 @@ const RabbitForm = () => {
       <div className='form-group ms-2 w-100'>
       <label className='form-label mt-2'>Madre</label>
       {/* choose breed from options input */}
-      <select className='form-select' name='breed'>
+      <select className='form-select' name='mother'>
         <option value='1'>Elegir</option>
         <option value='2'>Elegir</option>
         <option value='3'>Elegir</option>
@@ -132,7 +167,7 @@ const RabbitForm = () => {
       </div>
 
       <label className='form-label mt-2'>Fecha de nacimiento</label>
-      <input type='date' className='form-control' name='gestationStartDate' />
+      <input type='date' className='form-control' name='birthDate' />
 
       <div className='form-group ms-2 w-100'>
       <label className='form-label mt-2'>Raza</label>
@@ -147,7 +182,7 @@ const RabbitForm = () => {
           <div className='form-group ms-2 w-100'>
       <label className='form-label mt-2'>Genotipo</label>
       {/* choose breed from options input */}
-      <select className='form-select' name='breed'>
+      <select className='form-select' name='genotype'>
         <option value='1'>Elegir</option>
         <option value='2'>Elegir</option>
         <option value='3'>Elegir</option>
