@@ -24,8 +24,9 @@ class RabbitFilterSet(rest_framework.FilterSet):
             "weight",
             "cage_id",
         )
-        
-class CageFilterSet:
+
+
+class CageFilterSet(rest_framework.FilterSet):
     class Meta:
         model = Cage
         fields = (
@@ -36,4 +37,3 @@ class CageFilterSet:
             "is_active",
             "total_weight",
         )
-        
