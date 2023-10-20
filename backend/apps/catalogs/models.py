@@ -1,5 +1,17 @@
 from django.db import models
 from apps.abstracts.models import AbstractModel
+from django.http import Http404
+
+
+class StateManager(models.Manager):
+    def get_object_by_state_name(self, state):
+        try:
+            instance = State.objects.get(state=state)
+            return instance
+
+        except State.DoesNotExist:
+            message = "State with the giving name does not exist"
+            raise Http404(message)
 
 
 # Create your models here.
@@ -21,6 +33,8 @@ class State(AbstractModel):
     """
 
     state = models.CharField(max_length=25)
+
+    object_state = StateManager()
 
     class Meta:
         db_table = "states_catalog"

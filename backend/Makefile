@@ -13,6 +13,7 @@ delmig:
 				rm -rf ./apps/profiles/migrations/00*.py
 				rm -rf ./apps/rabbits/migrations/00*.py
 				rm -rf ./apps/users/migrations/00*.py
+				rm -rf ./apps/catalogs/migrations/00*.py
 
 u:
 		python manage.py createsuperuser
