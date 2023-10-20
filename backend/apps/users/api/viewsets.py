@@ -96,7 +96,7 @@ class UserViewSet(viewsets.GenericViewSet):
         if user_serializer.is_valid():
             user = user_serializer.save()
             # Create the profile
-            Profile.objects.create(user_id=user.id, is_producer=is_producer)
+            Profile.objects.create(user_id=user, is_producer=is_producer)
             return Response(
                 {"message": "El usuario se creo correctamente!"},
                 status=status.HTTP_201_CREATED,
