@@ -164,8 +164,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 
 # Configuration of environment variables for setup static files in a S3 bucket
-AWS_ACCESS_KEY_ID = get_parameter("/good-rabbit/AWS_ACCESS_KEY_ID")
-AWS_SECRET_ACCESS_KEY = get_parameter("/good-rabbit/AWS_SECRET_ACCESS_KEY")
+
 AWS_STORAGE_BUCKET_NAME = get_parameter("/good-rabbit/AWS_STORAGE_BUCKET_NAME")
 AWS_S3_SIGNATURE_NAME = get_parameter("/good-rabbit/AWS_S3_SIGNATURE_NAME")
 AWS_S3_REGION_NAME = get_parameter("/good-rabbit/AWS_S3_REGION_NAME")

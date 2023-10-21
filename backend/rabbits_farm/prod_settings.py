@@ -1,4 +1,4 @@
-from common_settings import *
+from .common_settings import *
 
 # This code is for production
 # If exists environemnt variable AWS_EXTERNAL_HOSTNAME then append element in ALLOWED_HOSTS list and DEBUG is False

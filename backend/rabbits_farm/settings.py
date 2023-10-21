@@ -1,4 +1,4 @@
-from common_settings import *
+from .common_settings import *
 
 from utils.get_parameters_store.parameter_store import get_parameter
 
