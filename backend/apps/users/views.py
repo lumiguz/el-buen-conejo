@@ -14,6 +14,7 @@ from rest_framework_simplejwt.token_blacklist.models import (
     BlacklistedToken,
 )
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework import generics, serializers
 
 
 class Login(TokenObtainPairView):
@@ -46,8 +47,13 @@ class Login(TokenObtainPairView):
         )
 
 
-class Logout(APIView):
+class EmptySerializer(serializers.Serializer):
+    pass
+
+
+class Logout(generics.GenericAPIView):
     permission_classes = (IsAuthenticated,)
+    serializer_class = EmptySerializer  # We use the empty serializer
 
     def post(self, request, *args, **kwargs):
         if self.request.data.get("all"):
