@@ -118,6 +118,7 @@ THIRD_APPS = [
     "drf_spectacular",
     "django_extensions",
     "corsheaders",
+    "storages",
 ]
 
 INSTALLED_APPS = BASE_APPS + LOCAL_APPS + THIRD_APPS
@@ -238,12 +239,13 @@ AWS_SECRET_ACCESS_KEY = get_parameter("/good-rabbit/AWS_SECRET_ACCESS_KEY")
 AWS_STORAGE_BUCKET_NAME = get_parameter("/good-rabbit/AWS_STORAGE_BUCKET_NAME")
 AWS_S3_SIGNATURE_NAME = get_parameter("/good-rabbit/AWS_S3_SIGNATURE_NAME")
 AWS_S3_REGION_NAME = get_parameter("/good-rabbit/AWS_S3_REGION_NAME")
+AWS_QUERYSTRING_AUTH = False
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
 AWS_S3_VERITY = True
 STORAGES = {
     "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
     },
     "staticfiles": {
         "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
