@@ -15,6 +15,8 @@ from datetime import timedelta
 import environ
 import os
 
+from utils.get_parameters_store.parameter_store import get_parameter
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -26,12 +28,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # This code is for production
 # If exists environemnt variable AWS_EXTERNAL_HOSTNAME then append element in ALLOWED_HOSTS list and DEBUG is False
 AWS_EXTERNAL_HOSTNAME = os.environ.get("AWS_EXTERNAL_HOSTNAME")
-if AWS_EXTERNAL_HOSTNAME:
+if "RDS_HOSTNAME" in os.environ:
     ALLOWED_HOSTS.append(AWS_EXTERNAL_HOSTNAME)
     DEBUG = False
 
@@ -44,13 +46,14 @@ if AWS_EXTERNAL_HOSTNAME:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql_psycopg2",
-            "NAME": os.environ.get("POSTGRES_NAME"),
-            "USER": os.environ.get("POSTGRES_USER"),
-            "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
-            "HOST": os.environ.get("POSTGRES_HOST"),
-            "PORT": os.environ.get("POSTGRES_PORT"),
+            "NAME": os.environ.get("RDS_DB_NAME"),
+            "USER": os.environ.get("RDS_USERNAME"),
+            "PASSWORD": os.environ.get("RDS_PASSWORD"),
+            "HOST": os.environ.get("RDS_HOSTNAME"),
+            "PORT": os.environ.get("RDS_PORT"),
         }
     }
+
 else:
     env = environ.Env(
         # set casting, default value
@@ -114,6 +117,7 @@ THIRD_APPS = [
     "django_filters",
     "drf_spectacular",
     "django_extensions",
+    "corsheaders",
 ]
 
 INSTALLED_APPS = BASE_APPS + LOCAL_APPS + THIRD_APPS
@@ -126,7 +130,12 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
 ]
+
+# Configuration of django-cors-headers
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
 
 
 ROOT_URLCONF = "rabbits_farm.urls"
@@ -187,6 +196,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+MEDIA_URLS = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -212,10 +224,28 @@ SIMPLE_JWT = {
 }
 
 SPECTACULAR_SETTINGS = {
-    "TITLE": "Playlist's streaming videos API",
-    "DESCRIPTION": "Management the playlists made in local mode",
+    "TITLE": "El Buen Conejo API",
+    "DESCRIPTION": "API para la plataforma del Buen Conejo",
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": True,
     "COMPONENT_SPLIT_REQUEST": True,
     # OTHER SETTINGS
+}
+
+# Configuration of environment variables for setup static files in a S3 bucket
+AWS_ACCESS_KEY_ID = get_parameter("/good-rabbit/AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = get_parameter("/good-rabbit/AWS_SECRET_ACCESS_KEY")
+AWS_STORAGE_BUCKET_NAME = get_parameter("/good-rabbit/AWS_STORAGE_BUCKET_NAME")
+AWS_S3_SIGNATURE_NAME = get_parameter("/good-rabbit/AWS_S3_SIGNATURE_NAME")
+AWS_S3_REGION_NAME = get_parameter("/good-rabbit/AWS_S3_REGION_NAME")
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+AWS_S3_VERITY = True
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+    },
 }
