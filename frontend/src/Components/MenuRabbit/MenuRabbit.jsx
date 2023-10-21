@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import MenuRabbitPerfil from "./MenuRabbitPerfil";
 import styles from "../MenuRabbit/menuRabbit.module.css"
 import MenuRabbitCamada from "./MenuRabbitCamada"
@@ -35,31 +35,45 @@ function PaginatedView({ currentPage, onPageChange}){
 }
 
 const MenuRabbit = () =>{
+  const [perfilActive, setPerfilActive] = useState(true);
+  const [notasActive, setNotasActive] = useState(false);
+  
+  useEffect(() => {
+    // Cargar el estado desde el LocalStorage
+    const storedPaginationState = JSON.parse(localStorage.getItem('paginationState'));
+    if (storedPaginationState) {
+      setPerfilActive(storedPaginationState.perfilActive);
+      setNotasActive(storedPaginationState.notasActive);
+    }
+  }, []);
 
-  const [currentPage, setCurrentPage] = useState("perfil");
+  useEffect(() => {
+    // Guardar el estado en el LocalStorage
+    localStorage.setItem('paginationState', JSON.stringify({ perfilActive, notasActive }));
+  }, [perfilActive, notasActive]);
 
   const handlePageChange = (pageId) => {
-    // Actualiza la página actual cuando se hace clic en la paginación personalizada
-    setCurrentPage(pageId);
+    if (pageId === "perfil") {
+      setPerfilActive(true);
+      setNotasActive(false);
+    } else if (pageId === "notas") {
+      setPerfilActive(false);
+      setNotasActive(true);
+    }
   };
-
-  let content;
-  if (currentPage === "perfil") {
-    content = <div>
-      <MenuRabbitPerfil/>
-    </div>;
-  // } else if (currentPage === "camadas") {
-  //   content = <div><MenuRabbitCamada/></div>;
-  } else if (currentPage === "notas") {
-    content = <div><MenuRabbitNotes/></div>;
-  }
 
     return <>
     <div>
       <div>
-        <PaginatedView currentPage={currentPage} onPageChange={handlePageChange} />
+        <PaginatedView 
+        
+        currentPage={perfilActive ? "perfil" : "notas"}
+          onPageChange={handlePageChange} 
+          
+          />
        </div>
-       {content}
+       {perfilActive && <MenuRabbitPerfil />}
+      {notasActive && <MenuRabbitNotes />}
     </div>
     </>
 }

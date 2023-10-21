@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import RabbitForm from "../RabbitForm/RabbitForm";
 import CardNotesRabbit from "./CardNotesRabbit";
 
@@ -7,14 +7,22 @@ const MenuRabbitNotes =() =>{
   const [inputValue, setInputValue] = useState('');
   const [cards, setCards] = useState([]);
 
+  useEffect(() => {
+    const storedCards = JSON.parse(localStorage.getItem('notes') || '[]');
+    setCards(storedCards);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('notes', JSON.stringify(cards));
+  }, [cards]);
+
   const handleInputChange = (e) => {
-    const value = e.target.value;
-    setInputValue(value);
+    setInputValue(e.target.value);
   };
 
   const handleSaveButtonClick = () => {
     if (inputValue.trim() !== '') {
-      const newCard = { title: 'Card Title', content: inputValue };
+      const newCard = { title: 'Observacion:', content: inputValue };
       setCards([...cards, newCard]);
       setInputValue('');
     }
@@ -27,21 +35,21 @@ const MenuRabbitNotes =() =>{
         type="text"
         value={inputValue}
         onChange={handleInputChange}
-        placeholder="Escribe algo..."
+        placeholder="Escribe las observaciones o informacion importante sobre esta camada"
       />
     </div>
 <div className="row">
         <div className="col-md-12 d-flex justify-content-end">
-      <button type="button" class="btn btn-success m-1" onClick={handleSaveButtonClick}>Agregar</button>
+      <button type="button" className="btn btn-success m-1" onClick={handleSaveButtonClick}>Agregar</button>
         </div>
-</div>
-<div class="mb-3">
-  <label for="exampleFormControlTextarea1" class="form-label">Todas tus notas</label>
-  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3">
-  {cards.map((card, index) => (
-        <CardNotesRabbit key={index} title={card.title} content={card.content} />
-      ))}
-  </textarea>
+        Todas tus notas:
+        {cards.length === 0 ? (
+        <p>Aún no hay notas.</p>
+      ) : (
+        cards.map((card, index) => (
+          <CardNotesRabbit key={index} title={card.title} content={card.content} />
+        ))
+      )}
 </div>
 <RabbitForm/>
     </div>
