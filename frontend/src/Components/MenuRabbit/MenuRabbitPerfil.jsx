@@ -32,14 +32,6 @@ const MenuRabbitPerfil = () =>{
       <th scope="row" className="table-light">Genotipo</th>
       <td>-</td>
     </tr>
-    <tr>
-      <th scope="row" className="table-secondary">Crias vivas</th>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th scope="row" className="table-light">Total de Crias</th>
-      <td>14</td>
-    </tr>
   </tbody>
 </table>
     </div>

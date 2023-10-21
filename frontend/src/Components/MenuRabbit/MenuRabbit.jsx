@@ -7,7 +7,7 @@ import MenuRabbitNotes from "./MenuRabbitNotes";
 function PaginatedView({ currentPage, onPageChange}){
   const pages = [
     { id: "perfil", label: "Perfil" },
-    { id: "camadas", label: "Camadas" },
+    // { id: "camadas", label: "Camadas" },
     { id: "notas", label: "Notas" },
   ];
 
@@ -48,8 +48,8 @@ const MenuRabbit = () =>{
     content = <div>
       <MenuRabbitPerfil/>
     </div>;
-  } else if (currentPage === "camadas") {
-    content = <div><MenuRabbitCamada/></div>;
+  // } else if (currentPage === "camadas") {
+  //   content = <div><MenuRabbitCamada/></div>;
   } else if (currentPage === "notas") {
     content = <div><MenuRabbitNotes/></div>;
   }
