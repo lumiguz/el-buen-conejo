@@ -11,6 +11,17 @@ function PaginatedView({ currentPage, onPageChange}){
     { id: "notes", label: "Notas" },
   ];
 
+  const rabbitData = {
+    estado: "Vivo",
+    peso: "8 kg",
+    raza: "California",
+    edad: "8 meses",
+    color: "Blanco",
+    genotipo: "-",
+    criasVivas: "4",
+    totalDeCrias: "14",
+  };
+
   return (
     <div>
       {/* Paginación personalizada */}
@@ -72,7 +83,7 @@ const MenuRabbit = () =>{
           
           />
        </div>
-       {perfilActive && <MenuRabbitPerfil />}
+       {perfilActive && <MenuRabbitPerfil rabbitData={rabbitData} />}
       {notasActive && <MenuRabbitNotes />}
     </div>
     </>
