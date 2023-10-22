@@ -21,6 +21,16 @@ const MenuRabbitNotes =() =>{
     }
   };
 
+  const handleDeleteCard = (index) => {
+    const updatedCards = [...cards];
+    updatedCards.splice(index, 1);
+
+    setCards(updatedCards); // Actualiza el estado
+
+    // Actualiza el LocalStorage
+    localStorage.setItem("menuRabbitNotesData", JSON.stringify(updatedCards));
+  };
+
     return<>
     <div>
     <div>
@@ -40,7 +50,7 @@ const MenuRabbitNotes =() =>{
         <p>Aún no hay notas.</p>
       ) : (
         cards.map((card, index) => (
-          <CardNotesRabbit key={index} title={card.title} content={card.content} />
+          <CardNotesRabbit key={index} title={card.title} content={card.content} onDelete={() => handleDeleteCard(index)} />
         ))
       )}
 </div>

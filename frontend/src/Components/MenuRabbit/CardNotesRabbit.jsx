@@ -1,10 +1,16 @@
 import React from "react";
 
-const CardNotesRabbit = (props) =>{
+const CardNotesRabbit = ({ title, content, onDelete }) =>{
+
+  const handleDelete = () => {
+    onDelete();
+  }; 
+
     return <>
         <div className="card">
-      <h2>{props.title}</h2>
-      <p>{props.content}</p>
+      <h2>{title}</h2>
+      <p>{content}</p>
+      <button onClick={handleDelete} className="btn btn-danger">Eliminar</button>
     </div>
     </>
 }
