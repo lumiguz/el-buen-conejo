@@ -21,17 +21,18 @@ from drf_spectacular.views import (
     SpectacularRedocView,
     SpectacularSwaggerView,
 )
-
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("login/", Login.as_view(), name="login"),
     path("logout/", Logout.as_view(), name="logout"),
-    re_path(r"^api/", include("apps.users.api.routers")),
-    re_path(r"^api/", include("apps.rabbits.api.routers")),
-    re_path(r"^api/", include("apps.farms.api.routers")),
-    re_path(r"^api/", include("apps.cages.api.routers")),
-    re_path(r"^api/", include("apps.profiles.api.routers")),
+    re_path(r"^api/", include("apps.users.api.routers"), name="users"),
+    re_path(r"^api/", include("apps.rabbits.api.routers"), name="rabbits"),
+    re_path(r"^api/", include("apps.farms.api.routers"), name="farms"),
+    re_path(r"^api/", include("apps.cages.api.routers"), name="cages"),
+    re_path(r"^api/", include("apps.profiles.api.routers"), name="profiles"),
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     # Optional UI:
     path(
@@ -45,3 +46,6 @@ urlpatterns = [
         name="redoc",
     ),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_URL)

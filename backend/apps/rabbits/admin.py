@@ -7,19 +7,23 @@ class RabbitAdmin(admin.ModelAdmin):
         "id",
         "cage_id",
         "breed",
-        "genre",
-        "price",
         "tag",
+        "genre",
+        "birthday",
+        "price",
         "weight",
+        "is_active",
     )
     search_fields = (
         "id",
         "cage_id",
         "breed",
-        "genre",
-        "price",
         "tag",
+        "genre",
+        "birthday",
+        "price",
         "weight",
+        "is_active",
     )
     ordering = ("breed",)
     pass
