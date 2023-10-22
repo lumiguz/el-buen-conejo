@@ -1,33 +1,52 @@
-import { useState } from 'react';
 import Heading from "../../UI/Heading";
-import ButtonRecientes from "../../UI/ButtonRecientes";
-import FilterMarket from "../../UI/FilterMarket";
-import CardMarket from "../../Components/CardMarket"
-import CardCategory from '../../Components/CardCategory/CardCategory';
+import { allRabbitBreeds } from "../../utils/market/RabbitData";
+import CardImage from "../../Components/CardImage";
 
-const index = () => {
-  const AllCategories = ["MiniLop", "Blanc de Hotot", "Conejo Rex", "Gigantes de flandes"]
-
-  const [categories, setCategories] = useState(AllCategories);
-
+const Market = () => {
   return (
     <div className="container m-5">
       <Heading>Buscar por razas</Heading>
-      <div className="row grid-1">
-        <CardCategory categories={categories} />
+      <div className="row">
+        {allRabbitBreeds.map((breed, index) => (
+          <div key={index} className="my-2 col-sm-12 col-md-6 col-lg-3">
+            <CardImage
+              image="https://th.bing.com/th/id/R.ee0a6c9e58d5ab4cea013664d48478f1?rik=txuJi%2f9D5ENyAA&pid=ImgRaw&r=0&sres=1&sresct=1"
+              title={breed}
+            />
+          </div>
+        ))}
       </div>
-      <div className='d-flex justify-content-between my-2'>
-        <ButtonRecientes />
-        <FilterMarket />
+
+      <hr />
+
+      <div className="d-flex justify-content-between my-2">
+        <select className="btn btn-outline-dark p-1">
+          <option value="1">Recientes</option>
+          <option value="2">Conejo 1</option>
+          <option value="3">Conejo 2</option>
+        </select>
+        <select className="btn btn-outline-dark  p-1">
+          <option value="1">filtrar</option>
+          <option value="2">Conejo 1</option>
+          <option value="3">Conejo 2</option>
+        </select>
       </div>
-      <div className="row grid-1">
-        <CardMarket />
-        <CardMarket />
-        <CardMarket />
-        <CardMarket />
+
+      <div className="row">
+        {allRabbitBreeds.map((breed, index) => (
+          <div key={index} className="my-2 col-sm-12 col-md-6 col-lg-3">
+            <CardImage
+              image="https://th.bing.com/th/id/OIP.XRlOnjf2ZKcd6OvKLsOazgHaHa?pid=ImgDet&rs=1"
+              title="Titulo"
+              text="$9.99"
+              link={{ url: "#", text: "Ubicación", className: "text-muted" }}
+            />
+          </div>
+        ))}
       </div>
+      <hr />
     </div>
   );
 };
 
-export default index;
+export default Market;
