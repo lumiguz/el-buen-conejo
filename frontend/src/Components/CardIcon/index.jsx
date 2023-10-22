@@ -12,7 +12,7 @@ import AppLink from "../../UI/AppLink";
  * @param {object} link - The link object containing the URL and text for the card icon.
  * @return {JSX.Element} The card icon component.
  */
-const CardIcon = ({ className, icon, iconAbove, title, text, link }) => {
+const CardIcon = ({ className = "", icon, iconAbove, title, text, link }) => {
   const iconClass = !iconAbove ? "d-flex align-items-center" : "";
   return (
     <div className={`card ${className}`}>
@@ -24,15 +24,15 @@ const CardIcon = ({ className, icon, iconAbove, title, text, link }) => {
             </span>
           </div>
           {title && (
-            <h6 className={`card-title m-0 ${!iconAbove ? "ms-2" : ""}`}>
+            <h5 className={`card-title m-0 mb-2 ${!iconAbove ? "ms-2" : ""}`}>
               {title}
-            </h6>
+            </h5>
           )}
         </div>
 
         {text && <p className="card-text m-0">{text}</p>}
         {link && (
-          <AppLink href={link.url} className="small">
+          <AppLink href={link.url} className={link.className}>
             {link.text}{" "}
             <i
               className="bi bi-chevron-right"

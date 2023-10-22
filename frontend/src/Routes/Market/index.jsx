@@ -1,6 +1,7 @@
 import Heading from "../../UI/Heading";
 import { allRabbitBreeds } from "../../utils/market/RabbitData";
 import CardImage from "../../Components/CardImage";
+import AppLink from "../../UI/AppLink";
 
 const Market = () => {
   return (
@@ -13,14 +14,12 @@ const Market = () => {
               key={index}
               className="my-2 col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center"
             >
-              <CardImage
-                image="https://th.bing.com/th/id/R.ee0a6c9e58d5ab4cea013664d48478f1?rik=txuJi%2f9D5ENyAA&pid=ImgRaw&r=0&sres=1&sresct=1"
-                link={{
-                  url: `/market/${breed}`,
-                  text: breed,
-                  className: "h5 text-body",
-                }}
-              />
+              <AppLink href={`/market/${breed}`}>
+                <CardImage
+                  image="https://th.bing.com/th/id/R.ee0a6c9e58d5ab4cea013664d48478f1?rik=txuJi%2f9D5ENyAA&pid=ImgRaw&r=0&sres=1&sresct=1"
+                  title={breed}
+                />
+              </AppLink>
             </div>
           ))}
         </div>

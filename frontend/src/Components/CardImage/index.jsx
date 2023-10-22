@@ -20,7 +20,7 @@ const CardImage = ({ image, title, text, link }) => {
 
 CardImage.propTypes = {
   image: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   text: PropTypes.string,
   link: PropTypes.shape({
     url: PropTypes.string,

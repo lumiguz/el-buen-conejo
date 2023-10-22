@@ -41,7 +41,11 @@ const ViewRabbits = () => {
             </div>
           </div>
           <div className="container mt-2">
-            <Carousel />
+            <Carousel
+              images={[
+                "https://www.acws.cl/wp-content/uploads/2021/04/nota_conejo_abril.jpeg",
+              ]}
+            />
           </div>
           <div className="container mt-4">
             <MenuRabbit />
