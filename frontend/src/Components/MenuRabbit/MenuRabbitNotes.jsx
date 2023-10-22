@@ -1,20 +1,13 @@
 import React, {useState, useEffect} from "react";
 import RabbitForm from "../RabbitForm/RabbitForm";
 import CardNotesRabbit from "./CardNotesRabbit";
+import useLocalStorage from "./useLocalStorage";
 
 const MenuRabbitNotes =() =>{
 
   const [inputValue, setInputValue] = useState('');
-  const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-    const storedCards = JSON.parse(localStorage.getItem('notes') || '[]');
-    setCards(storedCards);
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('notes', JSON.stringify(cards));
-  }, [cards]);
+  const [cards, setCards] = useLocalStorage("menuRabbitNotesData", []);
+  
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);

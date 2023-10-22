@@ -8,7 +8,7 @@ function PaginatedView({ currentPage, onPageChange}){
   const pages = [
     { id: "perfil", label: "Perfil" },
     // { id: "camadas", label: "Camadas" },
-    { id: "notas", label: "Notas" },
+    { id: "notes", label: "Notas" },
   ];
 
   return (
@@ -56,7 +56,7 @@ const MenuRabbit = () =>{
     if (pageId === "perfil") {
       setPerfilActive(true);
       setNotasActive(false);
-    } else if (pageId === "notas") {
+    } else if (pageId === "notes") {
       setPerfilActive(false);
       setNotasActive(true);
     }
@@ -67,7 +67,7 @@ const MenuRabbit = () =>{
       <div>
         <PaginatedView 
         
-        currentPage={perfilActive ? "perfil" : "notas"}
+        currentPage={perfilActive ? "perfil" : "notes"}
           onPageChange={handlePageChange} 
           
           />
