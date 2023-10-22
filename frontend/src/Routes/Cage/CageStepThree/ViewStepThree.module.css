@@ -1,4 +1,4 @@
-.flexContainerOne{
+.flexContainerThree {
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;
@@ -11,7 +11,7 @@
     margin-right: 80px;
 }
 
-.flexContainerOneDiv1 {
+.flexContainerThreeDiv1 {
     margin-right: 12px;
     width: 628px;
     height: 381px;
@@ -19,7 +19,7 @@
     justify-content: center;
 }
 
-.flexContainerOneDiv1 h6{
+.flexContainerThreeDiv1 h6{
     margin-bottom: 24px;
     margin-top: 100px;
     font-family: Manrope;
@@ -30,7 +30,7 @@
     color: var(--primary-primary-400, #7989B6);
 }
 
-.flexContainerOneDiv1 h1{
+.flexContainerThreeDiv1 h1{
     margin-bottom: 24px;
     font-family: Manrope;
     font-size: 36px;
@@ -40,7 +40,7 @@
     color: var(--neutral-neutral-700, #333);
 }
 
-.flexContainerOneDiv1 p{
+.flexContainerThreeDiv1 p{
     margin-bottom: 24px;
     font-family: Manrope;
     font-size: 18px;
@@ -50,23 +50,22 @@
     color: var(--neutral-neutral-600, #4D4D4D);
 }
 
-.instructionsTextOne {
+.instructionsTextThree {
     font-family: Manrope;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: 120%; /* 19.2px */
     color: var(--neutral-neutral-600, #4D4D4D);
-     
 }
 
-.flexContainerOneDiv2 {
+.flexContainerThreeDiv2 {
     margin-left: 12px;
     width: 628px;
     height: 381px;
 }
 
-.buttonComenzar {
+.buttonSiguiente {
     background-color: #68763D;
     border: none;
     border-radius: 6px;
@@ -81,7 +80,7 @@
     height: 48px;
 }
 
-.imagenOne {
+.imagenThree {
     width: 600px;
     height: 600px;
 }

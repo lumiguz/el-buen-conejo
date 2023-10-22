@@ -19,6 +19,12 @@ import Market from "./Routes/Market";
 import AppContextProvider from "./context/AppContextProvider";
 import ViewCage from "./Routes/Cage/ViewCage";
 import ViewStepOne from "./Routes/Cage/CageStepOne/ViewStepOne";
+import ViewFormOne from "./Routes/Cage/CageStepOne/CageStepOneForm/ViewFormOne";
+import ViewStepTwo from "./Routes/Cage/CageStepTwo/ViewStepTwo";
+import ViewFormTwo from "./Routes/Cage/CageStepTwo/CageStepTwoForm/ViewFormTwo";
+import ViewStepThree from "./Routes/Cage/CageStepThree/ViewStepThree";
+import ViewDetails from "./Routes/Cage/CageDetails/ViewDetails";
+import ViewCageEdit from "./Routes/Cage/CageDetails/CageEdit/ViewCageEdit";
 import Layout from "./Layout";
 import Farms from "./Routes/Farms";
 import BreedInventory from "./Routes/Market/BreedInventory";
@@ -106,6 +112,54 @@ const router = createBrowserRouter([
     element: (
       <Layout>
         <ViewStepOne />
+      </Layout>
+    ),
+  },
+  {
+    path: "/cage/step1/createcage",
+    element: (
+      <Layout>
+        <ViewFormOne />
+      </Layout>
+    ),
+  },
+  {
+    path: "/cage/step2",
+    element: (
+      <Layout>
+        <ViewStepTwo />
+      </Layout>
+    ),
+  },
+  {
+    path: "/cage/step2/addrabbit",
+    element: (
+      <Layout>
+        <ViewFormTwo />
+      </Layout>
+    ),
+  },
+  {
+    path: "/cage/step3",
+    element: (
+      <Layout>
+        <ViewStepThree />
+      </Layout>
+    ),
+  },
+  {
+    path: "/cage/details",
+    element: (
+      <Layout>
+        <ViewDetails />
+      </Layout>
+    ),
+  },
+  {
+    path: "/cage/details/edit",
+    element: (
+      <Layout>
+        <ViewCageEdit />
       </Layout>
     ),
   },
