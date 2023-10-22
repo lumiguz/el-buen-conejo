@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from "react";
-import RabbitForm from "../RabbitForm/RabbitForm";
 import CardNotesRabbit from "./CardNotesRabbit";
 import useLocalStorage from "./useLocalStorage";
 
@@ -54,7 +53,6 @@ const MenuRabbitNotes =() =>{
         ))
       )}
 </div>
-<RabbitForm/>
     </div>
     </>
 }
