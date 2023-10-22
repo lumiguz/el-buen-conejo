@@ -21,6 +21,7 @@ import ViewCage from "./Routes/Cage/ViewCage";
 import ViewStepOne from "./Routes/Cage/CageStepOne/ViewStepOne";
 import Layout from "./Layout";
 import Farms from "./Routes/Farms";
+import BreedInventory from "./Routes/Market/BreedInventory";
 
 //implement routes with react-router-dom
 const router = createBrowserRouter([
@@ -40,6 +41,17 @@ const router = createBrowserRouter([
         <Market />
       </Layout>
     ),
+  },
+  {
+    path: "/market/:breed",
+    element: (
+      <Layout>
+        <BreedInventory />
+      </Layout>
+    ),
+    loader: ({ params }) => {
+      return params.breed;
+    },
   },
   {
     path: "/login",
@@ -109,7 +121,7 @@ const router = createBrowserRouter([
         <Farms />
       </Layout>
     ),
-  }
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
