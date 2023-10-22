@@ -1,10 +1,10 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import MenuRabbitPerfil from "./MenuRabbitPerfil";
-import styles from "../MenuRabbit/menuRabbit.module.css"
-import MenuRabbitCamada from "./MenuRabbitCamada"
+import styles from "../MenuRabbit/menuRabbit.module.css";
+import MenuRabbitCamada from "./MenuRabbitCamada";
 import MenuRabbitNotes from "./MenuRabbitNotes";
 
-function PaginatedView({ currentPage, onPageChange}){
+function PaginatedView({ currentPage, onPageChange }) {
   const pages = [
     { id: "perfil", label: "Perfil" },
     { id: "camadas", label: "Camadas" },
@@ -34,8 +34,7 @@ function PaginatedView({ currentPage, onPageChange}){
   );
 }
 
-const MenuRabbit = () =>{
-
+const MenuRabbit = () => {
   const [currentPage, setCurrentPage] = useState("perfil");
 
   const handlePageChange = (pageId) => {
@@ -45,23 +44,48 @@ const MenuRabbit = () =>{
 
   let content;
   if (currentPage === "perfil") {
-    content = <div>
-      <MenuRabbitPerfil/>
-    </div>;
+    const rabbitData = {
+      estado: "Vivo",
+      peso: "8 kg",
+      raza: "California",
+      edad: "8 meses",
+      color: "Blanco",
+      genotipo: "-",
+      criasVivas: "4",
+      totalDeCrias: "14",
+    };
+    content = (
+      <div>
+        <MenuRabbitPerfil rabbitData={rabbitData} />
+      </div>
+    );
   } else if (currentPage === "camadas") {
-    content = <div><MenuRabbitCamada/></div>;
+    content = (
+      <div>
+        <MenuRabbitCamada />
+      </div>
+    );
   } else if (currentPage === "notas") {
-    content = <div><MenuRabbitNotes/></div>;
+    content = (
+      <div>
+        <MenuRabbitNotes />
+      </div>
+    );
   }
 
-    return <>
-    <div>
+  return (
+    <>
       <div>
-        <PaginatedView currentPage={currentPage} onPageChange={handlePageChange} />
-       </div>
-       {content}
-    </div>
+        <div>
+          <PaginatedView
+            currentPage={currentPage}
+            onPageChange={handlePageChange}
+          />
+        </div>
+        {content}
+      </div>
     </>
-}
+  );
+};
 
-export default MenuRabbit
+export default MenuRabbit;
