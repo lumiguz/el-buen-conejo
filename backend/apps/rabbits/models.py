@@ -1,6 +1,7 @@
 from django.db import models
 from apps.cages.models import Cage
 from apps.abstracts.models import AbstractModel
+from django.utils import timezone
 
 
 # Create your models here.
@@ -38,6 +39,7 @@ class Rabbit(AbstractModel):
     cage_id = models.ForeignKey(Cage, on_delete=models.CASCADE)
     breed = models.CharField(choices=BREED_CHOICE, blank=False, default="Especie")
     genre = models.CharField(choices=GENDER_CHOICE, blank=False, default="Genero")
+    birthday = models.DateField(null=False, blank=False, default=timezone.now)
     price = models.DecimalField(max_digits=5, decimal_places=2, default=0)
     tag = models.CharField(max_length=15, unique=True, blank=False)
     weight = models.DecimalField(max_digits=2, decimal_places=1, default=1)
