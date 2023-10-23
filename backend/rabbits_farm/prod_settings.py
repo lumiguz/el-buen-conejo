@@ -12,3 +12,4 @@ DEBUG = False
 # CORS_ALLOW_CREDENTIALS = True
 
 MIDDLEWARE.append("corsheaders.middleware.CorsMiddleware")
+MIDDLEWARE.append("whitenoise.middleware.WhiteNoiseMiddleware")

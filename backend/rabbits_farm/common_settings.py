@@ -88,6 +88,7 @@ THIRD_APPS = [
     "django_extensions",
     "corsheaders",
     "storages",
+    "whitenoise.runserver_nostatic",
 ]
 
 INSTALLED_APPS = BASE_APPS + LOCAL_APPS + THIRD_APPS
