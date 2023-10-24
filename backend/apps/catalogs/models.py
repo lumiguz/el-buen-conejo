@@ -46,11 +46,24 @@ class State(AbstractModel):
         return self.state
 
 
+class CityManager(models.Manager):
+    def get_object_by_city_name(self, city):
+        try:
+            instance = City.objects.get(city=city)
+            return instance
+
+        except City.DoesNotExist:
+            message = "City with the giving name does not exist"
+            raise Http404(message)
+
+
 class City(AbstractModel):
     state = models.ForeignKey(
         State, on_delete=models.CASCADE, related_name="state_city"
     )
     city = models.CharField(max_length=100)
+
+    object_city = CityManager()
 
     class Meta:
         db_table = "cities_catalog"

@@ -104,6 +104,8 @@ LOCAL_APPS = [
     "apps.profiles",
     "apps.markets",
     "apps.catalogs",
+    "apps.unit_tests",
+    "apps.addresses",
 ]
 
 # Third persons applications
