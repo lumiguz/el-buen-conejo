@@ -88,6 +88,7 @@ THIRD_APPS = [
     "django_extensions",
     "corsheaders",
     "storages",
+    "whitenoise.runserver_nostatic",
 ]
 
 INSTALLED_APPS = BASE_APPS + LOCAL_APPS + THIRD_APPS
@@ -199,18 +200,28 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Configuration of environment variables for setup static files in a S3 bucket
 
-AWS_STORAGE_BUCKET_NAME = get_parameter("/good-rabbit/AWS_STORAGE_BUCKET_NAME")
-AWS_S3_SIGNATURE_NAME = get_parameter("/good-rabbit/AWS_S3_SIGNATURE_NAME")
-AWS_S3_REGION_NAME = get_parameter("/good-rabbit/AWS_S3_REGION_NAME")
-AWS_QUERYSTRING_AUTH = False
-AWS_S3_FILE_OVERWRITE = False
-AWS_DEFAULT_ACL = None
-AWS_S3_VERITY = True
-STORAGES = {
-    "default": {
-        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
-    },
-    "staticfiles": {
-        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
-    },
-}
+if DEBUG:
+    STORAGES = {
+        "default": {
+            "BACKEND": "django.core.files.storage.FileSystemStorage",
+        },
+        "staticfiles": {
+            "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+        },
+    }
+else:
+    AWS_STORAGE_BUCKET_NAME = env("AWS_STORAGE_BUCKET_NAME")
+    AWS_S3_SIGNATURE_NAME = env("AWS_S3_SIGNATURE_NAME")
+    AWS_S3_REGION_NAME = env("AWS_S3_REGION_NAME")
+    AWS_QUERYSTRING_AUTH = False
+    AWS_S3_FILE_OVERWRITE = False
+    AWS_DEFAULT_ACL = None
+    AWS_S3_VERITY = True
+    STORAGES = {
+        "default": {
+            "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+        },
+        "staticfiles": {
+            "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+        },
+    }
