@@ -44,7 +44,6 @@ const MenuRabbitPerfil = () =>{
 </table>
     </div>
     </>
-  );
 };
 
 MenuRabbitPerfil.propTypes = {
