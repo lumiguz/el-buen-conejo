@@ -11,5 +11,20 @@ DEBUG = False
 # CORS_ALLOW_ALL_ORIGINS = True
 # CORS_ALLOW_CREDENTIALS = True
 
-MIDDLEWARE.append("corsheaders.middleware.CorsMiddleware")
 MIDDLEWARE.append("whitenoise.middleware.WhiteNoiseMiddleware")
+
+CORS_ALLOWED_ORIGINS = [
+    "*",  # Agrega los dominios permitidos aquí
+]
+
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+]
