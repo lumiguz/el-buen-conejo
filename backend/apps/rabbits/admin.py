@@ -13,6 +13,8 @@ class RabbitAdmin(admin.ModelAdmin):
         "price",
         "weight",
         "is_active",
+        "created",
+        "updated",
     )
     search_fields = (
         "id",
@@ -25,8 +27,6 @@ class RabbitAdmin(admin.ModelAdmin):
         "weight",
         "is_active",
     )
-    ordering = ("breed",)
-    pass
 
 
 admin.site.register(Rabbit, RabbitAdmin)
