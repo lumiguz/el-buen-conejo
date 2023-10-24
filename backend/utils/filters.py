@@ -17,12 +17,15 @@ class RabbitFilterSet(rest_framework.FilterSet):
     class Meta:
         model = Rabbit
         fields = (
+            "created",
             "breed",
             "genre",
+            "birthday",
             "price",
             "tag",
             "weight",
             "cage_id",
+            "is_active",
         )
 
 
@@ -37,3 +40,4 @@ class CageFilterSet(rest_framework.FilterSet):
             "is_active",
             "total_weight",
         )
+        ordering = ("created",)
