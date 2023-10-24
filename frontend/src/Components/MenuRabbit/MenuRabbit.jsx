@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import MenuRabbitPerfil from "./MenuRabbitPerfil";
 import styles from "../MenuRabbit/menuRabbit.module.css";
-import MenuRabbitCamada from "./MenuRabbitCamada";
-import MenuRabbitNotes from "./MenuRabbitNotes";
+import MenuRabbitNotes from "../MenuRabbit/MenuRabbitNotes"
 
 function PaginatedView({ currentPage, onPageChange }) {
   const pages = [
     { id: "perfil", label: "Perfil" },
-    // { id: "camadas", label: "Camadas" },
     { id: "notes", label: "Notas" },
   ];
 
@@ -36,15 +34,11 @@ function PaginatedView({ currentPage, onPageChange }) {
 
 const MenuRabbit = () => {
   const [currentPage, setCurrentPage] = useState("perfil");
+  const [perfilActive, setPerfilActive] = useState(true);
+  const [notasActive, setNotasActive] = useState(false);
 
   const handlePageChange = (pageId) => {
-    if (pageId === "perfil") {
-      setPerfilActive(true);
-      setNotasActive(false);
-    } else if (pageId === "notes") {
-      setPerfilActive(false);
-      setNotasActive(true);
-    }
+    setCurrentPage(pageId);
   };
 
   let content;
@@ -64,16 +58,10 @@ const MenuRabbit = () => {
         <MenuRabbitPerfil rabbitData={rabbitData} />
       </div>
     );
-  } else if (currentPage === "camadas") {
-    content = (
-      <div>
-        <MenuRabbitCamada />
-      </div>
-    );
   } else if (currentPage === "notas") {
     content = (
       <div>
-        <MenuRabbitNotes />
+        <MenuRabbitNotes/>
       </div>
     );
   }

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import CardNotesRabbit from "./CardNotesRabbit";
 import useLocalStorage from "./useLocalStorage";
 
@@ -28,7 +28,7 @@ const MenuRabbitNotes =() =>{
 
     // Actualiza el LocalStorage
     localStorage.setItem("menuRabbitNotesData", JSON.stringify(updatedCards));
-  };
+   };
 
     return<>
     <div>
