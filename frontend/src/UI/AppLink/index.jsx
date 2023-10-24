@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
  * @param {string} href - The URL to navigate to when the link is clicked.
  * @return {ReactElement} The rendered link component.
  */
-const AppLink = ({ className, children, href = "#" }) => {
+const AppLink = ({ className = "", children, href = "#" }) => {
   return (
     <Link to={href} className={`text-decoration-none ${className}`}>
       {children}
@@ -23,7 +23,7 @@ const AppLink = ({ className, children, href = "#" }) => {
 
 AppLink.propTypes = {
   href: PropTypes.string,
-  className: PropTypes.string.isRequired,
+  className: PropTypes.string,
   children: PropTypes.node.isRequired,
 };
 

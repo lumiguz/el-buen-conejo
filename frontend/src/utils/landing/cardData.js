@@ -10,6 +10,7 @@ export const cardsWithLink = [
         link: {
             url: "/community",
             text: "Ver comunidad",
+            className: "small",
         },
     },
     {
@@ -21,6 +22,7 @@ export const cardsWithLink = [
         link: {
             url: "/market",
             text: "Ver mercado",
+            className: "small",
         },
     },
     {
@@ -32,6 +34,7 @@ export const cardsWithLink = [
         link: {
             url: "/events",
             text: "Ver eventos",
+            className: "small",
         },
     },
 ];
@@ -55,7 +58,7 @@ export const cardsTools = [
         className: "text-start border-0 bg-transparent",
         icon: `bi bi-clipboard-data-fill ${styles.text_yellow}`,
         iconAbove: true,
-        title: "Tomar desiciones basadas en datos",
+        title: "Desiciones basadas en datos",
         text: "Recibe reportes y obtén información relevante para estar al día con la granja.",
     },
 ];
