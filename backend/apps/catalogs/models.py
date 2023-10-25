@@ -4,9 +4,9 @@ from django.http import Http404
 
 
 class StateManager(models.Manager):
-    def get_object_by_state_name(self, state):
+    def get_object_state_by_id(self, pk):
         try:
-            instance = State.objects.get(state=state)
+            instance = State.objects.get(pk=pk)
             return instance
 
         except State.DoesNotExist:
@@ -47,9 +47,9 @@ class State(AbstractModel):
 
 
 class CityManager(models.Manager):
-    def get_object_by_city_name(self, city):
+    def get_object_by_city_id(self, pk):
         try:
-            instance = City.objects.get(city=city)
+            instance = City.objects.get(pk=pk)
             return instance
 
         except City.DoesNotExist:

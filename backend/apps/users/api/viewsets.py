@@ -16,6 +16,7 @@ from rest_framework.response import Response
 from apps.profiles.models import Profile
 from .permisssions import CreateUserPermission
 from django.contrib.auth.hashers import make_password
+from drf_spectacular.utils import extend_schema
 
 
 class UserViewSet(viewsets.GenericViewSet):
@@ -43,6 +44,7 @@ class UserViewSet(viewsets.GenericViewSet):
         return get_object_or_404(self.serializer_class.Meta.model, pk=pk)
 
     @action(methods=["post"], detail=True)
+    @extend_schema(description="Cambia la contraseña", summary="Users")
     def set_password(self, request, pk=None):
         """
         Change password
@@ -61,6 +63,7 @@ class UserViewSet(viewsets.GenericViewSet):
             status=status.HTTP_400_BAD_REQUEST,
         )
 
+    @extend_schema(description="Obtiene una colección de usuarios", summary="Users")
     def list(self, request, *args, **kwargs):
         """
         Get a collection of users
@@ -75,6 +78,7 @@ class UserViewSet(viewsets.GenericViewSet):
         serializer = self.list_serializer_class(queryset, many=True)
         return Response(serializer.data)
 
+    @extend_schema(description="Crea un usuario con perfil vacío", summary="Users")
     def create(self, request):
         """
         Create an user
@@ -92,7 +96,7 @@ class UserViewSet(viewsets.GenericViewSet):
         if user_serializer.is_valid():
             user = user_serializer.save()
             # Create the profile
-            Profile.objects.create(user_id=user.id, is_producer=is_producer)
+            Profile.objects.create(user_id=user, is_producer=is_producer)
             return Response(
                 {"message": "El usuario se creo correctamente!"},
                 status=status.HTTP_201_CREATED,
@@ -105,6 +109,7 @@ class UserViewSet(viewsets.GenericViewSet):
             status=status.HTTP_400_BAD_REQUEST,
         )
 
+    @extend_schema(description="Obtiene el detalle de un usuario", summary="Users")
     def retrieve(self, request, pk=None):
         """
         Get an user
@@ -113,6 +118,7 @@ class UserViewSet(viewsets.GenericViewSet):
         user_serializer = self.serializer_class(user)
         return Response(user_serializer.data)
 
+    @extend_schema(description="Actualiza un usuario", summary="Users")
     def update(self, request, pk=None):
         """
         Update an user
@@ -133,6 +139,7 @@ class UserViewSet(viewsets.GenericViewSet):
             status=status.HTTP_400_BAD_REQUEST,
         )
 
+    @extend_schema(description="Elimina un usuario en modo lógico", summary="Users")
     def destroy(self, request, pk=None):
         """
         Delete an user in logical mode

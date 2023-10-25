@@ -1,56 +1,28 @@
-from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, AllowAny
 from apps.catalogs.models import State, City
 from .serializers import StateSerializer, CitySerializer
 from apps.abstracts.viewsets import AbstractViewSet
-from django.http import Http404
-from rest_framework.response import Response
-from rest_framework import status
-from django.core import serializers
-from rest_framework.decorators import action
-import json
+from utils.mixin_classes.mixin_class import CommonViewSetMixin
 
 
-@action(methods=["get"], detail=True)
-class StateViewSet(AbstractViewSet):
-    http_methods_names = "GET"
-    permission_classes = (AllowAny,)
+class StateViewSet(CommonViewSetMixin, AbstractViewSet):
     serializer_class = StateSerializer
 
-    def list(self, request):
-        queryset = State.objects.all()
-        serializer = StateSerializer(queryset, many=True)
-        return Response(serializer.data)
+    def get_queryset(self):
+        return State.objects.all()
 
-    def retrieve(self, request, pk=None):
-        state_instance = State.object_state.get_object_by_state_name(pk)
-
-        if state_instance:
-            serializer = StateSerializer(state_instance)
-            return Response(serializer.data)
-        else:
-            custome_message = "Sorry"
-            return Response({"message": custome_message}, status=404)
+    def get_object(self):
+        obj = State.object_state.get_object_state_by_id(self.kwargs["pk"])
+        self.check_object_permissions(self.request, obj)
+        return obj
 
 
-class CityViewSet(AbstractViewSet):
-    http_methods_names = "GET"
-    permission_classes = (AllowAny,)
+class CityViewSet(CommonViewSetMixin, AbstractViewSet):
     serializer_class = CitySerializer
 
-    def list(self, request):
-        queryset = City.objects.all()
-        serializer = CitySerializer(queryset, many=True)
+    def get_queryset(self):
+        return City.objects.all()
 
-        return Response(serializer.data)
-
-    def retrieve(self, request, pk=None):
-        state_instance = City.object_city.get_object_by_city_name(pk)
-
-        if state_instance:
-            serializer = CitySerializer(state_instance)
-            return Response(serializer.data)
-        return Response(
-            {"message": "State not found"},
-            status=status.HTTP_404_NOT_FOUND,
-        )
+    def get_object(self):
+        obj = City.object_city.get_object_by_city_id(self.kwargs["pk"])
+        self.check_object_permissions(self.request, obj)
+        return obj
