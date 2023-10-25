@@ -8,14 +8,14 @@ ALLOWED_HOSTS = ["107.21.219.35"]
 DEBUG = False
 
 # Configuration of django-cors-headers
-# CORS_ALLOW_ALL_ORIGINS = True
-# CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
 
 MIDDLEWARE.append("whitenoise.middleware.WhiteNoiseMiddleware")
 
-CORS_ALLOWED_ORIGINS = [
-    "*",  # Agrega los dominios permitidos aquí
-]
+# CORS_ALLOWED_ORIGINS = [
+#     "*",  # Agrega los dominios permitidos aquí
+# ]
 
 CORS_ALLOW_HEADERS = [
     "accept",
