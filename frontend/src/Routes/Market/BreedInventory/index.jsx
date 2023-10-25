@@ -8,13 +8,13 @@ const BreedInventory = () => {
   const breed = useLoaderData();
   console.log(decodeURIComponent(breed));
 
-  /* 
-  const { isLoading, error, data, sendRequest } = useHttp();
-  useEffect(() => {
-    sendRequest(`https://jsonplaceholder.typicode.com/users/${breed}`);
-  }, [breed, sendRequest]); 
-  */
+  // const { isLoading, error, data, sendRequest } = useHttp();
+  // useEffect(() => {
+  //   sendRequest(`http://107.21.219.35/api/rabbits/`);
+  // }, [breed, sendRequest]);
 
+  // console.log(data);
+  // console.log(error);
   //demo
   const error = null;
   const isLoading = false;
