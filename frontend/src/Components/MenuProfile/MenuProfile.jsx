@@ -16,7 +16,7 @@ function PaginatedView({ currentPage, onPageChange }) {
   return (
     <div>
       {/* Paginación personalizada */}
-      <ul className="pagination">
+      <ul className="pagination" id={styles.menu}>
         {pages.map((page) => (
           <li
             key={page.id}
@@ -47,7 +47,7 @@ const MenuProfile = () => {
   let content;
   if (currentPage === "misJaulas") {
     content = (
-      <div>
+      <div className={styles.containerCages}>
         <MenuProfileJaulas />
       </div>
     );

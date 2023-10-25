@@ -3,7 +3,7 @@ import ProfileStyles from './ProfileStyles.module.css';
 
 const Profile = () => {
   return (
-    <div className={`${ProfileStyles.containerSize} d-flex align-items-center sm-m-auto`}>
+    <div className={`${ProfileStyles.containerSize }  d-flex align-items-center sm-m-auto `}>
       <svg
         width='112'
         height='112'
@@ -37,7 +37,7 @@ const Profile = () => {
 
       <div className='ms-3'>
         <h3 className='mb-3'>John Doe</h3>
-        <LittersProfileButton>Ver Perfil</LittersProfileButton>
+        <LittersProfileButton>Editar perfil</LittersProfileButton>
       </div>
     </div>
   );
