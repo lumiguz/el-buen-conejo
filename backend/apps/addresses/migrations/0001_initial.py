@@ -9,12 +9,12 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ("apps_farms", "0001_initial"),
+        ("apps_catalogs", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name="Cage",
+            name="Address",
             fields=[
                 (
                     "id",
@@ -30,24 +30,28 @@ class Migration(migrations.Migration):
                 ("created", models.DateTimeField(auto_now_add=True)),
                 ("updated", models.DateTimeField(auto_now=True)),
                 ("is_active", models.BooleanField(default=True)),
-                ("count_rabbits", models.IntegerField(default=0)),
+                ("address", models.CharField(max_length=150)),
                 (
-                    "price",
-                    models.DecimalField(decimal_places=2, default=0, max_digits=5),
-                ),
-                ("is_public", models.BooleanField(default=False)),
-                ("photo", models.CharField(blank=True, max_length=255)),
-                ("total_weight", models.IntegerField(default=0)),
-                (
-                    "farm_id",
+                    "city",
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
-                        to="apps_farms.farm",
+                        related_name="city_address",
+                        to="apps_catalogs.city",
+                    ),
+                ),
+                (
+                    "state",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="state_address",
+                        to="apps_catalogs.state",
                     ),
                 ),
             ],
             options={
-                "abstract": False,
+                "verbose_name": "Direccion",
+                "verbose_name_plural": "Direcciones",
+                "db_table": "addresses",
             },
         ),
     ]
