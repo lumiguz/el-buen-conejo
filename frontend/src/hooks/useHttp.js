@@ -14,11 +14,11 @@ export const useHttp = () => {
                 const response = await fetch(url, {
                     method,
                     body: body ? JSON.stringify(body) : null,
-                    headers: body ? { 
+                    headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
-                        //'Authorization': 'Bearer ' + localStorage.getItem('token')
-                    } : {}
+                        'Authorization': 'Bearer ' + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjk4MjU5OTYxLCJpYXQiOjE2OTgxNzM1NjEsImp0aSI6IjlkNWE5MTdlOTg2YTQ5ZGM4NDJmNjQ4YTQ3ZGU4MWJkIiwidXNlcl9pZCI6ImM0MTAxMTI5LTgzMWEtNGFmNC04Nzk2LWU5ZTVmOTU2NDBmNSJ9.slHVTvQUeGdYXXNRI6NcuPui6qfjUV17yyY2edY3VMY"
+                    }
                 });
 
                 if (!response.ok) {
@@ -27,11 +27,14 @@ export const useHttp = () => {
 
                 const data = await response.json();
                 setData(data);
+
             } catch (error) {
+                console.log(error);
                 setError(error.message || 'Something went wrong!');
             }
             setIsLoading(false);
         }, []
     );
+
     return { isLoading, error, data, sendRequest };
 }
