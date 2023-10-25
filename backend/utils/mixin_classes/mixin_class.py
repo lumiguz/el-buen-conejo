@@ -14,5 +14,4 @@ class ResetAutoIncrementMixin:
 
 class CommonViewSetMixin:
     http_methods_names = "GET"
-    permission_classes = (AllowAny,)
     pagination_class = ExtendedPagination
