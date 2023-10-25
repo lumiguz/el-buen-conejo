@@ -16,7 +16,11 @@ const Market = () => {
       {isLoading && (
         <h2 className="text-muted text-center m-5 p-5">Cargando...</h2>
       )}
-      {error && <h2 className="text-danger text-center m-5 p-5">{error}</h2>}
+      {error && (
+        <h2 className="text-danger text-center m-5 p-5">
+          Ha ocurrido un error, intente de nuevo
+        </h2>
+      )}
       {!isLoading && data && (
         <>
           {data.results.length === 0 && (
