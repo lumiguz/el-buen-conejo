@@ -4,7 +4,14 @@ import AppLink from "../../UI/AppLink";
 const CardImage = ({ image, title, text, link }) => {
   return (
     <div className="card" style={{ width: "16rem" }}>
-      {image && <img src={image} className="card-img-top" alt={title} />}
+      {image && (
+        <img
+          src={image}
+          className="card-img-top img-fluid"
+          alt={title}
+          style={{ objectFit: "cover", height: "10rem" }}
+        />
+      )}
       <div className="card-body">
         {title && <h5 className="card-title">{title}</h5>}
         {text && <p className="card-text">{text}</p>}
