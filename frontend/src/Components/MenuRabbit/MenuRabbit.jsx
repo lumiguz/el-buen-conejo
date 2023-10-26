@@ -58,7 +58,7 @@ const MenuRabbit = () => {
         <MenuRabbitPerfil rabbitData={rabbitData} />
       </div>
     );
-  } else if (currentPage === "notas") {
+  } else if (currentPage === "notes") {
     content = (
       <div>
         <MenuRabbitNotes/>

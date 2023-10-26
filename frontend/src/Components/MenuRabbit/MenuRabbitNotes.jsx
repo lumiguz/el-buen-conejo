@@ -1,5 +1,4 @@
-import React, {useState, useEffect} from "react";
-import RabbitForm from "../RabbitForm/RabbitForm";
+import React, {useState} from "react";
 import CardNotesRabbit from "./CardNotesRabbit";
 import useLocalStorage from "./useLocalStorage";
 
@@ -33,7 +32,7 @@ const MenuRabbitNotes =() =>{
 
     return<>
     <div>
-    <div>
+    <div className="form-input">
       <input
         type="text"
         value={inputValue}
@@ -45,7 +44,9 @@ const MenuRabbitNotes =() =>{
         <div className="col-md-12 d-flex justify-content-end">
       <button type="button" className="btn btn-success m-1" onClick={handleSaveButtonClick}>Agregar</button>
         </div>
+        <h3>
         Todas tus notas:
+        </h3>
         {cards.length === 0 ? (
         <p>Aún no hay notas.</p>
       ) : (
@@ -54,7 +55,6 @@ const MenuRabbitNotes =() =>{
         ))
       )}
 </div>
-<RabbitForm/>
     </div>
     </>
 }
