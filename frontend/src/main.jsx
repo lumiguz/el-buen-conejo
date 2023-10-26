@@ -21,6 +21,7 @@ import ViewCage from "./Routes/Cage/ViewCage";
 import Layout from "./Layout";
 import Farms from "./Routes/Farms";
 import Profile from "./Routes/Profile"
+import EditProfile from "./Routes/EditProfile";
 
 //implement routes with react-router-dom
 const router = createBrowserRouter([
@@ -107,6 +108,15 @@ const router = createBrowserRouter([
     element:(
       <Layout>
         <Profile/>
+      </Layout>
+
+    )
+  },
+  {
+    path:"/editProfile",
+    element:(
+      <Layout>
+        <EditProfile/>
       </Layout>
 
     )
