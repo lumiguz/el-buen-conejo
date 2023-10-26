@@ -2,14 +2,15 @@ import FarmCard from '../../Components/FarmCard/Index';
 import FarmForm from '../../Components/FarmForm';
 import FarmBanner from '../../UI/FarmBanner/index';
 
-import { useHttp } from "../../hooks/useHttp";
 import { useEffect } from 'react';
+import { useHttp } from "../../hooks/useHttp";
 
 const Farms = () => {
   const { isLoading, data, error, sendRequest } = useHttp();
   useEffect(() => {
-    sendRequest(`http://107.21.219.35/api/farms`);
+    sendRequest(`https://apiebc.online/api/farms`);
   }, [sendRequest]);
+  console.log(data);
 
 
   let mockData = [
@@ -18,35 +19,36 @@ const Farms = () => {
       name: "Farm 1",
       address: "address 1",
       description: "Our rabbit farm is a perfect destination for families and animal lovers...",
-      image: "https://res.cloudinary.com/deq0czqep/image/upload/v1697685310/farmProfile_fkkin4.jpg",
+      image: "https://th.bing.com/th/id/R.fa31cafa6d8b4d403e7504b471cbca48?rik=mkgATWCvr09j8w&pid=ImgRaw&r=0",
     },
     {
       id: 2,
       name: "Farm 2",
       address: "address 2",
       description: "At our rabbit farm, we are committed to sustainable and ethical farming practic...",
-      image: "https://res.cloudinary.com/deq0czqep/image/upload/v1697685310/farmProfile_fkkin4.jpg",
+      image: "https://th.bing.com/th/id/R.fa31cafa6d8b4d403e7504b471cbca48?rik=mkgATWCvr09j8w&pid=ImgRaw&r=0",
     },
     {
       id: 3,
       name: "Farm 3",
       address: "address 3",
       description: "Discover the world of rabbits like never before at our educational rabbit farm...",
-      image: "https://res.cloudinary.com/deq0czqep/image/upload/v1697685310/farmProfile_fkkin4.jpg",
+      image: "https://th.bing.com/th/id/R.fa31cafa6d8b4d403e7504b471cbca48?rik=mkgATWCvr09j8w&pid=ImgRaw&r=0",
     },
     {
       id: 4,
       name: "Farm 4",
       address: "address 4",
       description: "We specialize in the breeding and care of Angora rabbits, known for their luxuri...",
-      image: "https://res.cloudinary.com/deq0czqep/image/upload/v1697685310/farmProfile_fkkin4.jpg",
+      image: "https://th.bing.com/th/id/R.fa31cafa6d8b4d403e7504b471cbca48?rik=mkgATWCvr09j8w&pid=ImgRaw&r=0",
     },
     {
       id: 5,
       name: "Farm 5",
       address: "address 5",
       description: "Need a safe and caring place for your pet rabbit while you re away? Look no furthe...",
-      image: "https://res.cloudinary.com/deq0czqep/image/upload/v1697685310/farmProfile_fkkin4.jpg",
+      image: "https://th.bing.com/th/id/R.fa31cafa6d8b4d403e7504b471cbca48?rik=mkgATWCvr09j8w&pid=ImgRaw&r=0",
+      //https://res.cloudinary.com/deq0czqep/image/upload/v1697685310/farmProfile_fkkin4.jpg
     }
   ];
   return (
@@ -66,8 +68,19 @@ const Farms = () => {
       </header>
 
       <section className='d-flex flex-wrap justify-content-center row row-cols-lg-3 row-cols-sm-1 row-cols-md-2'>
-        {isLoading && <p>Loading...</p>}
         {/* for each id will use a farm card */}
+
+        {data && data.map((farm) => (
+          <FarmCard
+            key={farm.id}
+            name={farm.name}
+            description={farm.description}
+            address={farm.address}
+            photo={farm.photo}
+            id={farm.id}
+          />
+        ))}
+
         {mockData && mockData.map((farm) => (
           <FarmCard
             key={farm.id}

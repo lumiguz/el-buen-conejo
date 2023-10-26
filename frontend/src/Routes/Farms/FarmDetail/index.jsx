@@ -1,13 +1,15 @@
 import { useEffect } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { useHttp } from '../../../hooks/useHttp';
+import { apiUrls } from "../../../utils/links";
 
 const FarmDetail = () => {
   const farmId = useLoaderData();
-  const { isLoading, error, sendRequest } = useHttp();
-  //   useEffect(() => {
-  //     sendRequest(`http://107.21.219.35/api/farms/${farmId}`);
-  //   }, [sendRequest, farmId]);
+  const { isLoading, data, error, sendRequest } = useHttp();
+
+  useEffect(() => {
+    sendRequest(`${apiUrls.urlFarms}${farmId}`);
+  }, [sendRequest, farmId]);
 
   //create mock data for farm detail with id
   const mockData = [
@@ -64,43 +66,69 @@ const FarmDetail = () => {
   ];
 
   //get the farm detail with id
-  const data = mockData.find((farm) => farm.id === parseInt(farmId));
-
-  //   const data = {
-  //     name: 'Granja de prueba',
-  //     description: `Lorem ipsum dolor, sit amet co
-  //       nsectetur adipisicing elit. Possimus illo
-  //       blanditiis dolorum veniam corrupti, fugit digniss
-  //       imos? Labore facere laboriosam placeat officiis hic, e
-  //       rror libero dolorem iusto optio blanditiis totam mollitia fuga
-  //       natus dicta iure aut a eveniet beatae harum soluta non rerum repe
-  //       llat excepturi! Recusandae debitis alias aperiam necessitatibus blanditiis?.`,
-  //     address: 'Calle 182 # 7-62 Ciudad de Mexico - Codigo Postal 12345 - Mexico',
-  //     avatar:
-  //       'https://res.cloudinary.com/deq0czqep/image/upload/v1697685310/farmProfile_fkkin4.jpg',
-  //   };
+  const mData = mockData.find((farm) => farm.id === parseInt(farmId));
 
   return (
     <div>
+      {data && (
       <div className='d-flex flex-column'>
         <h2 className='mt-5 d-flex justify-content-center align-items-center '>
           Detalles de la granja {farmId}
         </h2>
 
-        {/* show the entire farm detail  */}
         <h4 className='my-3 title'>{data.name}</h4>
         <p className='text-break lh-sm text-center'>{data.description}</p>
 
         <div className='d-flex flex-column justify-content-center align-items-center'>
           <p className='mb-4 fst-italic'>{data.address}</p>
           <img
-            src={data.avatar}
+            src={data.photo}
             alt='farmProfile'
             width={'350'}
             className='img-fluid rounded'
           />
         </div>
       </div>
+      )}
+
+     {/*  if data is null use mock data */}
+      {!data && (
+        <div className='d-flex flex-column'>
+          <h2 className='mt-5 d-flex justify-content-center align-items-center '>
+            Detalles de la granja {farmId}
+          </h2>
+
+          <h4 className='my-3 title'>{mData.name}</h4>
+          <p className='text-break lh-sm text-center'>{mData.description}</p>
+
+          <div className='d-flex flex-column justify-content-center align-items-center'>
+            <p className='mb-4 fst-italic'>{mData.address}</p>
+            <img
+              src={mData.avatar}
+              alt='farmProfile'
+              width={'350'}
+              className='img-fluid rounded'
+            />
+          </div>
+        </div>
+      )}
+
+
+      {isLoading && (
+        <h2 className='text-muted text-center m-5 p-5'>Cargando...</h2>
+      )}
+
+      {error && (
+        <h2 className='text-danger text-center m-5 p-5'>
+          Ha ocurrido un error, intente de nuevo
+        </h2>
+      )}
+
+      {!isLoading && !error && !data && (
+        <h2 className='text-muted text-center m-5 p-5'>
+          No hay granjas disponibles
+        </h2>
+      )}
     </div>
   );
 };

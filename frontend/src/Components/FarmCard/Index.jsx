@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useNavigate } from "react-router-dom";
+import FarmCardStyles from './FarmCardStyles.module.css';
 
 const FarmCard = ({id, photo, name, description, address}) => {
 
@@ -7,20 +8,12 @@ const FarmCard = ({id, photo, name, description, address}) => {
 
   return (
     <div>
-        {/* <div className='card d-inline-flex flex-column rounded m-3'>
-            <img src="https://res.cloudinary.com/deq0czqep/image/upload/v1697685310/farmProfile_fkkin4.jpg" alt="farmProfile" width={'350'} className='img-fluid'/>
-            <div className='card-body'>
-                <h5 className='card-title'>Nombre de la Granja</h5>
-                <p className='card-text'>Descripción corta de la Granja</p>
-                <button onClick={()=> navigate(`/farms/${id}`)} className='btn btn-primary'>Ver Granja</button>
-            </div>
-        </div> */}
-
-        <div className='card d-inline-flex flex-column rounded m-3 shadow bg-body-tertiary rounded'>
-            <img src={photo} alt="farmProfile" width='auto' className='img-fluid'/>
+        <div className={`card d-inline-flex flex-column rounded m-3 shadow bg-body-tertiary rounded `}>
+            <img src={photo} alt="farmProfile" width='auto' className={`img-fluid`}/>
             <div className='card-body'>
                 <h5 className='card-title'>{name}</h5>
                 <p className='card-text'>{description}</p>
+                <p className='card-text'>{address}</p>
                 <button onClick={()=> navigate(`/farms/${id}`)} className='btn btn-primary'>Ver Granja</button>
             </div>
         </div>
@@ -33,7 +26,8 @@ FarmCard.propTypes = {
     name: PropTypes.string,
     description: PropTypes.string,
     address: PropTypes.string,
-    id: PropTypes.number,
+    id: PropTypes.string,
+    photo: PropTypes.string,
 }
 
 export default FarmCard
