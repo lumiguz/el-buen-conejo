@@ -66,13 +66,35 @@ const Farms = () => {
       </header>
 
       <section className='d-flex flex-wrap justify-content-center row row-cols-lg-3 row-cols-sm-1 row-cols-md-2'>
-        <FarmCard name={mockData[0].name} description={mockData[0].description} address={mockData[0].address} photo={mockData[0].image} id={mockData[0].id} />
+        {isLoading && <p>Loading...</p>}
+        {/* for each id will use a farm card */}
+        {mockData && mockData.map((farm) => (
+          <FarmCard
+            key={farm.id}
+            name={farm.name}
+            description={farm.description}
+            address={farm.address}
+            photo={farm.image}
+            id={farm.id}
+          />
+        ))}
+
+        {/* <FarmCard name={mockData[0].name} description={mockData[0].description} address={mockData[0].address} photo={mockData[0].image} id={mockData[0].id} />
         <FarmCard name={mockData[1].name} description={mockData[1].description} address={mockData[1].address} photo={mockData[1].image} id={mockData[1].id} />
         <FarmCard name={mockData[2].name} description={mockData[2].description} address={mockData[2].address} photo={mockData[2].image} id={mockData[2].id} />
         <FarmCard name={mockData[3].name} description={mockData[3].description} address={mockData[3].address} photo={mockData[3].image} id={mockData[3].id} />
-        <FarmCard name={mockData[4].name} description={mockData[4].description} address={mockData[4].address} photo={mockData[4].image} id={mockData[4].id} />
+        <FarmCard name={mockData[4].name} description={mockData[4].description} address={mockData[4].address} photo={mockData[4].image} id={mockData[4].id} /> */}
       </section>
-      <FarmForm />
+      <section className='d-flex flex-wrap justify-content-center mt-3 '>
+
+        <h4 className='mt-2'>¿Quieres registrar tu granja?</h4>
+        <p className='text-center'>
+          Si deseas registrar tu granja de conejos en nuestra plataforma, puedes
+          hacerlo a continuación. Solo debes llenar el formulario con la
+          información de tu granja.
+        </p>
+        <FarmForm />
+      </section>
     </div>
   );
 };
