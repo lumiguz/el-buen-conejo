@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import { useNavigate } from "react-router-dom";
-import FarmCardStyles from './FarmCardStyles.module.css';
 
 const FarmCard = ({id, photo, name, description, address}) => {
 
