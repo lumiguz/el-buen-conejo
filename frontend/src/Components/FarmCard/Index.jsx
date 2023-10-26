@@ -16,8 +16,8 @@ const FarmCard = ({id, photo, name, description, address}) => {
             </div>
         </div> */}
 
-        <div className='card d-inline-flex flex-column rounded m-3'>
-            <img src={photo} alt="farmProfile" width={'350'} className='img-fluid'/>
+        <div className='card d-inline-flex flex-column rounded m-3 shadow bg-body-tertiary rounded'>
+            <img src={photo} alt="farmProfile" width='auto' className='img-fluid'/>
             <div className='card-body'>
                 <h5 className='card-title'>{name}</h5>
                 <p className='card-text'>{description}</p>
