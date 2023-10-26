@@ -67,7 +67,6 @@ const FarmDetail = () => {
 
   //get the farm detail with id
   const mData = mockData.find((farm) => farm.id === parseInt(farmId));
-  console.log(data);
 
   return (
     <div>
@@ -91,33 +90,6 @@ const FarmDetail = () => {
         </div>
       </div>
       )}
-
-
-     
-     {/*  if data is null use mock data */}
-      { setTimeout  ( () => {
-      data === null && (
-        <div className='d-flex flex-column'>
-          <h2 className='mt-5 d-flex justify-content-center align-items-center '>
-            Detalles de la granja {farmId}
-          </h2>
-
-          <h4 className='my-3 title'>{mData.name}</h4>
-          <p className='text-break lh-sm text-center'>{mData.description}</p>
-
-          <div className='d-flex flex-column justify-content-center align-items-center'>
-            <p className='mb-4 fst-italic'>{mData.address}</p>
-            <img
-              src={mData.avatar}
-              alt='farmProfile'
-              width={'350'}
-              className='img-fluid rounded'
-            />
-          </div>
-        </div>
-      )}, 3000)}
-
-
 
       {isLoading && (
         <h2 className='text-muted text-center m-5 p-5'>Cargando...</h2>
