@@ -7,5 +7,5 @@ export const BREED_CHOICE = [
     { "name": "Mariposa", "urlImage": "https://i.pinimg.com/originals/4f/9b/9b/4f9b9be8fd68eca517054b17a68b1d0d.jpg" },
     { "name": "Nueva Zelanda", "urlImage": "https://th.bing.com/th/id/OIP.HvMCW-snhllpSeSrB0tiewHaE8?pid=ImgDet&rs=1" },
     { "name": "Rex", "urlImage": "https://th.bing.com/th/id/OIP.p7egnwYIRQMfVBefA7pv9wHaFF?pid=ImgDet&rs=1" },
-    { "name": "Otras", "urlImage": "https://th.bing.com/th/id/R.452309c7abf4b56ff3aa893a16641bcb?rik=db%2fk%2fu81r9T7%2bw&pid=ImgRaw&r=0" },
+    { "name": "Otro", "urlImage": "https://th.bing.com/th/id/R.452309c7abf4b56ff3aa893a16641bcb?rik=db%2fk%2fu81r9T7%2bw&pid=ImgRaw&r=0" },
 ]
