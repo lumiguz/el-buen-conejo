@@ -1,12 +1,27 @@
-import LittersProfileButton from '../../UI/LittersProfileButton';
-import ProfileStyles from './ProfileStyles.module.css';
+import { FormEditProfile } from "../../Components/FormEditProfile";
+import styles from "../EditProfile/editProfile.module.css"
 
-const Profile = () => {
-  return (
-    <div className={`${ProfileStyles.containerSize }  d-flex align-items-center sm-m-auto `}>
-      <svg
-        width='112'
-        height='112'
+import { NavLink } from "react-router-dom";
+
+const EditProfile =  () =>{
+
+    return(
+        <>
+
+        <div className="container-fluid mt-4">
+            <div className="row px-5">
+                <aside className="col-md-3 d-md-block d-none ">
+               {/* componente perfil de aside  */}
+               <div className="container">
+                <div className="row">
+                    <div className="col-md-3">
+                        <div className="" style={{height:"4rem" , width:"4rem"}}>
+                            {/* <img className="rounded-circle" alt="foto de perfil" style = {{width:'4rem',height:'4rem'}}>
+                            </img> */}
+
+<svg
+        width='44'
+        height='64'
         viewBox='0 0 112 112'
         fill='none'
         xmlns='http://www.w3.org/2000/svg'
@@ -35,12 +50,92 @@ const Profile = () => {
         </defs>
       </svg>
 
-      <div className='ms-3'>
-        <h3 className='mb-3'>John Doe</h3>
-        <LittersProfileButton>Editar perfil</LittersProfileButton>
-      </div>
-    </div>
-  );
-};
+                          
 
-export default Profile;
+
+                        </div>
+                    </div>
+                    <div className="col-md-9 ">
+                    <span className="fs-5"
+                    >John Doe</span>
+                   <p  style={{color:"#4d4d4d"}}>Tu cuenta de productor</p>
+                    </div>
+                </div>
+               </div>
+
+
+
+
+
+      
+      <nav className={ ` flex-column shadow p-4 rounded ${styles.navbar}`}>
+        <li className={styles.list}>
+          <NavLink href="#" className={ `font-weight-bold ${styles.li}`} >General</NavLink>
+        </li>
+        <li>
+          <NavLink href="#" className={ `font-weight-bold ${styles.li}`}>Datos de Contacto</NavLink>
+        </li>
+        <li>
+          <NavLink href="#" className={ `font-weight-bold ${styles.li}`}>Modificar Contraseña</NavLink>
+        </li>
+        <li>
+          <NavLink href="#" className={ `font-weight-bold text-danger ${styles.li}`}>Eliminar Cuenta</NavLink>
+        </li>
+      </nav>
+
+
+                </aside>
+             <main className={ `col-md-9 shadow rounded  ${styles.mainContainer}`}>
+                <h2 className="fs-4 pt-4">
+                    Editar Perfil
+                </h2>
+                <p  style={{color:"#4d4d4d"}}>Administra tu cuenta</p>
+                <div className="py-4">
+
+                <FormEditProfile/>
+                </div>
+             </main>
+                
+            </div>
+
+
+        </div>
+        {/* <div className={styles.container}>
+
+       <aside className="">
+        <header>
+            <div>
+            <img src="" alt="" />
+            <div>
+                <span>
+                    Jhon Doe
+                </span>
+                <p>
+                    tu cuenta de productor
+                </p>
+            </div>
+
+            </div>
+
+        </header>
+        <nav>
+
+        </nav>
+        
+       </aside>
+
+       <main className="">
+        <form action="">
+        
+
+        </form>
+       </main>
+
+        </div>
+        */}
+        </>
+    )
+
+}
+
+export default EditProfile;
