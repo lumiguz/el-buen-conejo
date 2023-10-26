@@ -15,7 +15,11 @@ const Market = () => {
               className="my-2 col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center"
             >
               <AppLink href={`/market/${breed.name}`}>
-                <CardImage image={breed.urlImage} title={breed.name} />
+                <CardImage
+                  image={breed.urlImage}
+                  title={breed.name}
+                  text={breed.description}
+                />
               </AppLink>
             </div>
           ))}
