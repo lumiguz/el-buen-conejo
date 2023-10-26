@@ -1,49 +1,65 @@
-import { useEffect } from "react";
-import { useHttp } from "../../../hooks/useHttp";
+import { useEffect, useState } from "react";
+import { useHttp, headers } from "../../../hooks/useHttp";
 import { useLoaderData } from "react-router-dom";
 import Carousel from "../../../Components/Carousel/Carousel";
 import MenuRabbitPerfil from "../../../Components/MenuRabbit/MenuRabbitPerfil";
 import CardIcon from "../../../Components/CardIcon";
 import { apiUrls } from "../../../utils/links";
-import CardImage from "../../../Components/CardImage";
 
 const RabbitDetails = () => {
   const rabbitId = useLoaderData();
-  const dataInfoRabbit = {};
-  let imagesCarousel = [];
+  const [rabbit, setRabbit] = useState(null);  
   const { isLoading, error, data, sendRequest } = useHttp();
+
   useEffect(() => {
     sendRequest(`${apiUrls.urlRabbits}${rabbitId}/`);
   }, [sendRequest, rabbitId]);
 
-  if (!isLoading && data) {
-    // Eliminar propiedades
-    delete data.created;
-    delete data.updated;
-    delete data.is_active;
-    delete data.id;
-    delete data.cage_id;
+  useEffect(() => {
+    if (!isLoading && data) {
+      fetch(`${apiUrls.urlCages}${data.cage_id}`, { headers })
+        .then((response) => response.json())
+        .then((cageData) =>
+          fetch(`${apiUrls.urlFarms}${cageData.farm_id}`, { headers })
+            .then((response) => response.json())
+            .then((farmData) => {
+              setRabbit({
+                ...data,
+                farmName: farmData.name,
+                farmAddress: farmData.address,
+              });
+            })
+        );
+    }
+  }, [isLoading, data]);
 
-    dataInfoRabbit.nombre = data.tag;
-    dataInfoRabbit.raza = data.breed;
-    dataInfoRabbit.genero = data.genre;
-    dataInfoRabbit.fechaNacimiento = data.birthday;
-    dataInfoRabbit.edad = data.age;
-    dataInfoRabbit.peso = data.weight;
-    dataInfoRabbit.precio = data.price;
+  if (isLoading || !rabbit) {
+    return <h2 className="text-muted text-center m-5 p-5">Cargando...</h2>;
+  }
 
-    imagesCarousel = data.photo.split(",");
+  let dataInfoRabbit = {};
+  const imagesCarousel = rabbit.photo.split(",");
+
+  if (!isLoading && rabbit) {
+    dataInfoRabbit = {
+      nombre: rabbit.tag,
+      raza: rabbit.breed,
+      genero: rabbit.genre,
+      fechaNacimiento: rabbit.birthday,
+      edad: rabbit.age,
+      peso: rabbit.weight,
+      precio: rabbit.price,
+    };
   }
 
   return (
     <>
-      {isLoading && <h2 className="text-muted">Loading...</h2>}
       {error && (
         <h2 className="text-danger">Ha ocurrido un error, intente de nuevo</h2>
       )}
-      {!isLoading && data && (
+      {!isLoading && rabbit && (
         <section className="bg-body p-3">
-          <h2 className="text-center">{data.tag}</h2>
+          <h2 className="text-center">{rabbit.tag}</h2>
           <div className="row container">
             <div className="col-12 my-3">
               <Carousel images={imagesCarousel} />
@@ -56,8 +72,8 @@ const RabbitDetails = () => {
                 <div className="col-12 w-75 mx-auto">
                   <CardIcon
                     className="bg-light"
-                    title={`$ ${data.price}`}
-                    text="Mejor precio del mercado "
+                    title={`$ ${rabbit.price}`}
+                    text={`Granja: ${rabbit.farmName}, Ubicacion: ${rabbit.farmAddress}`}
                     link={{
                       url: "#",
                       text: "Contactar al productor",
