@@ -30,6 +30,7 @@ const Carousel = ({ images = [] }) => {
               src={image}
               className="d-block w-100"
               alt={`Slide ${index + 1}`}
+              style={{ objectFit: "cover", maxHeight: "500px" }}
             />
           </div>
         ))}
