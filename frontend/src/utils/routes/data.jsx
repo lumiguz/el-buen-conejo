@@ -32,6 +32,7 @@ import ViewCageEdit from "../../Routes/Cage/CageDetails/CageEdit/ViewCageEdit";
 //#endregion
 //#region import farms
 import Farms from "../../Routes/Farms";
+import FarmDetail from "../../Routes/Farms/FarmDetail";
 //#endregion
 //#region import litters
 import Litters from "../../Routes/Litters";
@@ -200,6 +201,15 @@ export const routes = createBrowserRouter([
         <Farms />
       </Layout>
     ),
+  },
+  {
+    path: "/farms/:farmId",
+    element: (
+      <Layout>
+        <FarmDetail />
+      </Layout>
+    ),
+    loader: ({ params }) => params.farmId,
   },
   //#endregion
   //#region routes for litters: stop implementing
