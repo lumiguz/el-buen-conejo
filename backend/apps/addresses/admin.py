@@ -1,6 +1,19 @@
 from django.contrib import admin
 from .models import Address
 
-# Register your models here.
 
-admin.site.register(Address)
+class AddressAdmin(admin.ModelAdmin):
+    list_display = (
+        "id",
+        "address",
+        "state",
+        "city",
+    )
+    search_fields = (
+        "state",
+        "city",
+    )
+    ordering = ("city",)
+
+
+admin.site.register(Address, AddressAdmin)
