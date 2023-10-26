@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MenuRabbitPerfil from "./MenuRabbitPerfil";
 import styles from "../MenuRabbit/menuRabbit.module.css";
 import MenuRabbitNotes from "../MenuRabbit/MenuRabbitNotes"
@@ -37,6 +37,25 @@ const MenuRabbit = () => {
   const [perfilActive, setPerfilActive] = useState(true);
   const [notasActive, setNotasActive] = useState(false);
 
+  useEffect(() => {
+    // Cargar el estado desde el LocalStorage
+    const storedPaginationState = JSON.parse(
+      localStorage.getItem("paginationState")
+    );
+    if (storedPaginationState) {
+      setPerfilActive(storedPaginationState.perfilActive);
+      setNotasActive(storedPaginationState.notasActive);
+    }
+  }, []);
+
+  useEffect(() => {
+    // Guardar el estado en el LocalStorage
+    localStorage.setItem(
+      "paginationState",
+      JSON.stringify({ perfilActive, notasActive })
+    );
+  }, [perfilActive, notasActive]);
+
   const handlePageChange = (pageId) => {
     setCurrentPage(pageId);
   };
@@ -71,11 +90,12 @@ const MenuRabbit = () => {
       <div>
         <div>
           <PaginatedView
-            currentPage={currentPage}
+            currentPage={perfilActive ? "perfil" : "notes"}
             onPageChange={handlePageChange}
           />
         </div>
-        {content}
+        {perfilActive && <MenuRabbitPerfil rabbitData={rabbitData} />}
+        {notasActive && <MenuRabbitNotes />}
       </div>
     </>
   );
