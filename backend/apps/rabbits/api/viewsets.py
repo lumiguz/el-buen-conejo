@@ -1,23 +1,32 @@
 from rest_framework import viewsets, status, filters
 from apps.rabbits.models import Rabbit
+from utils.filters import RabbitFilterSet
 from utils.pagination import RabbitPagination
-from apps.rabbits.api.serializers import RabbitSerializer 
+from apps.rabbits.api.serializers import RabbitSerializer
 from rest_framework.response import Response
+from django_filters.rest_framework import DjangoFilterBackend
 from django.db.models import Q
 
 
 class RabbitViewSet(viewsets.ModelViewSet):
-    queryset = Rabbit.objects.all()
+    queryset = Rabbit.objects.all().order_by("-created")
     serializer_class = RabbitSerializer
     pagination_class = RabbitPagination
-    filter_backends = [filters.OrderingFilter]
+    filter_backends = [
+        DjangoFilterBackend,
+        filters.OrderingFilter,
+        filters.SearchFilter,
+    ]
+    filterset_class = RabbitFilterSet
     read_only_fields = (
         "created",
         "id",
+        "age",
+        "tag",
     )
 
     def get_queryset(self):
-        queryset = Rabbit.objects.all().order_by("-created")
+        queryset = Rabbit.objects.all()
 
         created = self.request.query_params.get("created")
         breed = self.request.query_params.get("breed")
@@ -60,7 +69,7 @@ class RabbitViewSet(viewsets.ModelViewSet):
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop("partial", False)
         instance = self.get_object()
-        serializer = RabbitSerializer(instance, data=request.data, partial=partial) 
+        serializer = RabbitSerializer(instance, data=request.data, partial=partial)
 
         # Check if the updated field is read-only
         for field in self.read_only_fields:
