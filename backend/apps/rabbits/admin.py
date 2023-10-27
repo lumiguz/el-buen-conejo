@@ -27,6 +27,7 @@ class RabbitAdmin(admin.ModelAdmin):
         "weight",
         "is_active",
     )
+    ordering = ["created"]
 
 
 admin.site.register(Rabbit, RabbitAdmin)
