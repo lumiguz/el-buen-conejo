@@ -37,3 +37,13 @@ fake:
 										python3 manage.py runscript fake_data_cities &&\
 												python3 manage.py runscript fake_data_addresses &&\
 														python3 manage.py runscript fake_data_profiles
+
+m:
+		python3 manage.py makemigrations 
+		python3 manage.py migrate
+
+run:
+		python3 manage.py runserver
+
+us:
+		python3 manage.py createsuperuser
