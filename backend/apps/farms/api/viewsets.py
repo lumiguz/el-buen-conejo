@@ -8,7 +8,7 @@ from utils.pagination import FarmPagination
 class FarmViewset(GenericViewSet):
     queryset = Farm.objects.all()
     serializer_class = farmSerializer
-    permission_classes = [permissions.AllowAny]
+    pagination_class = FarmPagination
     
     
     def create(self, request, *args, **kwargs):
