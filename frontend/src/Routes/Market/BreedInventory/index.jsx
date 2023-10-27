@@ -11,7 +11,7 @@ const BreedInventory = () => {
   const breedSelected = useLoaderData();
   const [rabbits, setRabbits] = useState([]);
   const { isLoading, error, data, sendRequest } = useHttpGetWithPagination();
-  //
+  const [errorFarmData, setErrorFarmData] = useState(null);
   const [isDataReady, setIsDataReady] = useState(false);
 
   useEffect(() => {
@@ -39,24 +39,29 @@ const BreedInventory = () => {
                 }))
             )
         )
-      ).then((rabbitsWithFarmData) => {
-        setRabbits(rabbitsWithFarmData);
-        setIsDataReady(true);
-      });
+      )
+        .then((rabbitsWithFarmData) => {
+          setRabbits(rabbitsWithFarmData);
+          setIsDataReady(true);
+        })
+        .catch((error) => {
+          console.error("Ha ocurrido un error:", error);
+          setErrorFarmData(error.message || "Something went wrong!");
+        });
     }
   }, [isLoading, data, sendRequest, breedSelected]);
 
   return (
     <>
-      {!isDataReady && (
+      {!isDataReady && !error && (
         <h2 className="text-muted text-center m-5 p-5">Cargando...</h2>
       )}
-      {error && (
+      {(error || errorFarmData) && (
         <h2 className="text-danger text-center m-5 p-5">
           Ha ocurrido un error, intente de nuevo
         </h2>
       )}
-      {isDataReady && !error && rabbits.length === 0 && (
+      {isDataReady && !error && !errorFarmData && rabbits.length === 0 && (
         <h2 className="text-muted text-center m-5 p-5">
           No hay conejos disponibles
         </h2>

@@ -5,11 +5,14 @@ import Carousel from "../../../Components/Carousel/Carousel";
 import MenuRabbitPerfil from "../../../Components/MenuRabbit/MenuRabbitPerfil";
 import CardIcon from "../../../Components/CardIcon";
 import { apiUrls } from "../../../utils/links";
+import ChatContainer from "../../../Components/chat/ChatContainer";
+import Modal from "../../../Components/Modal";
 
 const RabbitDetails = () => {
   const rabbitId = useLoaderData();
-  const [rabbit, setRabbit] = useState(null);  
+  const [rabbit, setRabbit] = useState(null);
   const { isLoading, error, data, sendRequest } = useHttp();
+  const [errorFarmData, setErrorFarmData] = useState(null);
 
   useEffect(() => {
     sendRequest(`${apiUrls.urlRabbits}${rabbitId}/`);
@@ -29,7 +32,11 @@ const RabbitDetails = () => {
                 farmAddress: farmData.address,
               });
             })
-        );
+        )
+        .catch((error) => {
+          console.error("error from fetch cage or farm:", error);
+          setErrorFarmData(error.message || "error from fetch cage or farm!");
+        });
     }
   }, [isLoading, data]);
 
@@ -39,6 +46,16 @@ const RabbitDetails = () => {
 
   let dataInfoRabbit = {};
   const imagesCarousel = rabbit.photo.split(",");
+  const button = (
+    <button
+      type="button"
+      className="btn btn-success mt-3"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+    >
+      Contactar al productor
+    </button>
+  );
 
   if (!isLoading && rabbit) {
     dataInfoRabbit = {
@@ -54,7 +71,7 @@ const RabbitDetails = () => {
 
   return (
     <>
-      {error && (
+      {(error || errorFarmData) && (
         <h2 className="text-danger">Ha ocurrido un error, intente de nuevo</h2>
       )}
       {!isLoading && rabbit && (
@@ -74,13 +91,12 @@ const RabbitDetails = () => {
                     className="bg-light"
                     title={`$ ${rabbit.price}`}
                     text={`Granja: ${rabbit.farmName}, Ubicacion: ${rabbit.farmAddress}`}
-                    link={{
-                      url: "#",
-                      text: "Contactar al productor",
-                      className: "btn btn-success mt-3",
-                    }}
+                    button={button}
                   />
                 </div>
+                <Modal id="exampleModal" title="Jhon Doe" chat={true}>
+                  <ChatContainer />
+                </Modal>
                 <div className="col-12 mt-3 w-75 mx-auto">
                   <h5>Productor:</h5>
                   <CardIcon
@@ -88,7 +104,7 @@ const RabbitDetails = () => {
                     icon="bi bi-person-circle"
                     title="Jhon Doe"
                     link={{
-                      url: "#",
+                      url: "/profile",
                       text: "Ver perfil",
                       className: "btn btn-outline-success",
                     }}

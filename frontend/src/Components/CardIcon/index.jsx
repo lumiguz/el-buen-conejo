@@ -10,9 +10,18 @@ import AppLink from "../../UI/AppLink";
  * @param {string} title - The title of the card icon.
  * @param {string} text - The text content of the card icon.
  * @param {object} link - The link object containing the URL and text for the card icon.
+ * @param {Element} button - The button element for the card icon.
  * @return {JSX.Element} The card icon component.
  */
-const CardIcon = ({ className = "", icon, iconAbove, title, text, link }) => {
+const CardIcon = ({
+  className = "",
+  icon,
+  iconAbove,
+  title,
+  text,
+  link,
+  button,
+}) => {
   const iconClass = !iconAbove ? "d-flex align-items-center" : "";
   return (
     <div className={`card ${className}`}>
@@ -40,6 +49,7 @@ const CardIcon = ({ className = "", icon, iconAbove, title, text, link }) => {
             ></i>
           </AppLink>
         )}
+        {button}
       </div>
     </div>
   );
@@ -52,6 +62,7 @@ CardIcon.propTypes = {
   title: PropTypes.string,
   text: PropTypes.string,
   link: PropTypes.object,
+  button: PropTypes.element,
 };
 
 export default CardIcon;
