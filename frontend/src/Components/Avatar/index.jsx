@@ -1,8 +1,10 @@
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import avatarImage from "../../assets/blank.png";
 import styles from "./Avatar.module.css";
 import { usuarios } from "../../utils/database";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Avatar = ({ imageUrl }) => {
 
@@ -10,7 +12,12 @@ const Avatar = ({ imageUrl }) => {
 
   const navigate = useNavigate()
   const cuenta = JSON.parse(localStorage.getItem('logedAccount'))
-  const userData = usuarios.filter(usuario => usuario?.email === cuenta?.email)
+  const userData = usuarios.filter(usuario => usuario?.username === cuenta?.username)
+
+  // const [token, setToken] = useState("")
+
+  // token tiene un valor de un código almacenado en cookies, cuando se hace una petición POST a {{URL}}logout/
+  // con {refresh_token: token} se desogea
 
   const handleLogout = () => {
     localStorage.removeItem('logedAccount')

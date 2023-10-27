@@ -2,27 +2,36 @@
 // Name, Lastname, Email and password, the button type submit sends the information to validate to backend
 // if everything is ok, you can login at the route /login using these credentials.
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import FormSection from '../../UI/FormSection'
 import PasswordSection from '../../UI/PasswordSection'
 import Button from '../../UI/Button'
 import FormSelect from '../../UI/FormSelect'
-import { usuarios } from '../../utils/database'
 import { roles } from '../../utils/roles'
+import { useHttp } from '../../hooks/useHttp'
+import { useNavigate } from 'react-router-dom'
 
 const index = () => {
 
-    const correos = usuarios.map(usuario => usuario.email)
-    const [alert, setAlert] = useState(false)
-    const [error, setError] = useState(false)
+    const [warning, setWarning] = useState(false)
+    const [formSubmited, setFormSubmited] = useState(false)
+    const { isLoading, error, data, sendRequest } = useHttp()
+    const navigate = useNavigate()
 
     const [formData, setFormData] = useState({
-        name: '',
-        lastname: '',
-        email: '',
-        password: '',
-        rol: '',
+        username: "",
+        email: "",
+        password: "",
+        is_producer: "",
     });
+
+    // {"username": "usuarioP19", "email": "usuarioPrueba19@gmail.com", "password": "usuariop19", "is_producer": "True"}
+
+    useEffect(() => {
+        if (formSubmited) {
+            sendRequest(`https://apiebc.online/api/users/`, 'POST', formData)
+        }
+    }, [formSubmited])
     
     const handleInputChange = (e) => {
         const { id, value } = e.target;
@@ -34,46 +43,34 @@ const index = () => {
     
     const handleSubmit = (e) => {
         e.preventDefault()
-        setError(false)
-        setAlert(false)
-        
-        if (correos.includes(formData.email)) {
-            setAlert(true)
-        } else if (formData.password.length < 8) {
-            setError(true)
+        setWarning(false)
+
+        if (formData.password.length < 8) {
+            setWarning(true)
         } else {
             console.log('Datos a enviar:', formData)
-            setError(false)
-            setAlert(false)
+            setFormSubmited(true)
+            setWarning(false)
         }
     };
+
+    if (data) {
+        setTimeout(() => {
+            navigate('/login')
+        }, 2000);
+    }
     
     return (
         <form onSubmit={handleSubmit}>
-            <div className="mb-3 d-flex justify-content-between">
-                <div className="w-100 me-2">
-                    <FormSection 
-                        type="text"
-                        id="name"
-                        placeholder="Ingresa tu nombre"
-                        label="Nombre"
-                        className="w-100 me-2"
-                        onChange={handleInputChange}
-                        value={formData.name}
-                    />
-                </div>
-                <div className="w-100">
-                    <FormSection 
-                        type="text"
-                        id="lastname"
-                        placeholder="Ingresa tu apellido"
-                        label="Apellido"
-                        className="w-100"
-                        onChange={handleInputChange}
-                        value={formData.lastname}
-                    />
-                </div>
-            </div>
+            <FormSection 
+                type="text"
+                id="username"
+                placeholder="Granjero12"
+                label="Username"
+                className="w-100"
+                onChange={handleInputChange}
+                value={formData.username}
+            />
             <FormSection 
                 type="email" 
                 id="email" 
@@ -90,14 +87,14 @@ const index = () => {
                 value={formData.password}
             />
             <FormSelect 
-                id="rol"
-                value={formData.rol}
+                id="is_producer"
+                value={formData.is_producer}
                 list={roles} 
                 onChange={handleInputChange}
             />
-            {alert && <p className="text-danger"> El correo ingresado ya tiene una cuenta asociada </p>}
-            {error && <p className="text-danger"> La contraseña debe tener más de 8 caracteres </p>}
-            <Button type="submit" className="btn-success w-100">Crear cuenta</Button>
+            {warning && <p className="text-danger"> La contraseña debe tener más de 8 caracteres </p>}
+            {error && <p className="text-danger"> {formData.username} ya se encuentra en uso </p>}
+            <Button type="submit" className="btn-success w-100">{isLoading ? "..." : "Crear cuenta"}</Button>
         </form>
     )
 }

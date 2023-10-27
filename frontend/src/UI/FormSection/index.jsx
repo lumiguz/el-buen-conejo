@@ -13,7 +13,7 @@ const index = ({type, id, placeholder, label, onChange}) => {
         onChange={onChange}
         required
       />
-      <div class="invalid-feedback">
+      <div className="invalid-feedback">
         Por favor escribe un {label}
       </div>
     </div>

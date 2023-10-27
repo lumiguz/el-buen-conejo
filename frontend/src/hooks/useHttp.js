@@ -17,7 +17,7 @@ export const useHttp = () => {
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
-                        'Authorization': 'Bearer ' + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjk4MjU5OTYxLCJpYXQiOjE2OTgxNzM1NjEsImp0aSI6IjlkNWE5MTdlOTg2YTQ5ZGM4NDJmNjQ4YTQ3ZGU4MWJkIiwidXNlcl9pZCI6ImM0MTAxMTI5LTgzMWEtNGFmNC04Nzk2LWU5ZTVmOTU2NDBmNSJ9.slHVTvQUeGdYXXNRI6NcuPui6qfjUV17yyY2edY3VMY"
+                        'Authorization': 'Bearer ' + ""
                     }
                 });
 
@@ -26,10 +26,11 @@ export const useHttp = () => {
                 }
 
                 const data = await response.json();
+                console.log(data)
                 setData(data);
 
             } catch (error) {
-                console.log(error);
+                console.error(error);
                 setError(error.message || 'Something went wrong!');
             }
             setIsLoading(false);

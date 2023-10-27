@@ -15,8 +15,10 @@ const index = ({setSuccess}) => {
 
   const [formData, setFormData] = useState({
     password: '',
-    repeatPass: '',
+    password_confirm: '',
   });
+
+  // formData es el Body de la solicitud POST {{URL}}api/users/user_id/set_password/ --> Así se cambia la contraseña
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
@@ -31,9 +33,9 @@ const index = ({setSuccess}) => {
     setError(false)
     setWarning(false)
 
-    if (formData.password !== formData.repeatPass) {
+    if (formData.password !== formData.password_confirm) {
       setError(true)
-    } else if (formData.password.length < 8 || formData.repeatPass.length < 8) {
+    } else if (formData.password.length < 8 || formData.password_confirm.length < 8) {
       setWarning(true)
     } else {
       setError(false)
@@ -59,11 +61,11 @@ const index = ({setSuccess}) => {
       />
       <PasswordSection 
         type="password" 
-        id="repeatPass" 
+        id="password_confirm" 
         placeholder="************" 
         label="Confirmar contraseña" 
         onChange={handleInputChange}
-        value={formData.repeatPass}
+        value={formData.password_confirm}
       />
       {error && <p className="text-danger"> Las contraseñas no coinciden </p>}
       {warning && <p className="text-warning"> Las contraseña debe tener 8 caracteres como mínimo</p>}

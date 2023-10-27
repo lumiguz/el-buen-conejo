@@ -12,7 +12,7 @@ const Heading = ({ children, className = "h2" }) => {
 };
 
 Heading.propTypes = {
-  children: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
   className: PropTypes.string,
 };
 
