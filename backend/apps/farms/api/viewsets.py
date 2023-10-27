@@ -1,16 +1,14 @@
 from rest_framework import status
-from rest_framework.permissions import DjangoObjectPermissions
 from rest_framework.response import Response 
 from apps.farms.api.serializer import farmSerializer
 from apps.farms.models import Farm
 from rest_framework.viewsets import GenericViewSet
-from rest_framework import viewsets, permissions
-
+from utils.pagination import FarmPagination
 
 class FarmViewset(GenericViewSet):
     queryset = Farm.objects.all()
     serializer_class = farmSerializer
-    permission_classes = [permissions.AllowAny]
+    pagination_class = FarmPagination
     
     
     def create(self, request, *args, **kwargs):
