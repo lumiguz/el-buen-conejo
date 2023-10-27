@@ -43,4 +43,10 @@ class Rabbit(AbstractModel):
     price = models.DecimalField(max_digits=7, decimal_places=2, default=0)
     tag = models.CharField(max_length=15, unique=True, blank=False)
     weight = models.DecimalField(max_digits=3, decimal_places=1, default=1)
-    photo = models.CharField(max_length=255, blank=True)
+    photo = models.ImageField(
+        "Rabbits",
+        upload_to="fotos/conejos/",
+        default="conejo.jpg",
+        null=True,
+        blank=True,
+    )
