@@ -5,16 +5,16 @@ from rest_framework.decorators import action
 
 from apps.cages.api.serializers import CageSerializer
 from utils.filters import CageFilterSet
-from utils.pagination import ExtendedPagination
+from utils.pagination import CagePagination
 from apps.cages.models import Cage
 
 
 class CageViewSet(viewsets.ModelViewSet):
-    queryset = Cage.objects.all()
+    queryset = Cage.objects.all().order_by("-created")
     serializer_class = CageSerializer
 
     # custom pagination
-    pagination_class = ExtendedPagination
+    pagination_class = CagePagination
 
     # search filter and filtering
     filter_backends = [DjangoFilterBackend,
@@ -24,6 +24,8 @@ class CageViewSet(viewsets.ModelViewSet):
 
     # Define fields for ordering
     ordering_fields = ['count_rabbits', 'price']
+    
+    read_only_fields = ( "id", "price", "count_rabbits", "total_weight", "created",)
 
     # Range of price filter
     @action(detail=False, methods=['get'])
@@ -88,7 +90,16 @@ class CageViewSet(viewsets.ModelViewSet):
         instance = self.get_object()
         serializer = self.get_serializer(
             instance, data=request.data, partial=True)
-
+        
+        for field in self.read_only_fields:
+            if field in request.data:
+                return Response(
+                    {
+                        "error": f"No puedes actualizar el campo de solo lectura <<'{field}'>>"
+                    },
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+                
         if serializer.is_valid():
             self.perform_update(serializer)
             update_cage = self.get_object()
