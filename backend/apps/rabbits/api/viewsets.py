@@ -46,7 +46,7 @@ class RabbitViewSet(viewsets.ModelViewSet):
         if weight:
             filters &= Q(weight=weight)
         if cage_id:
-            filters &= Q(cage_id_icontains=cage_id)
+            filters &= Q(cage_id=cage_id)
         if is_active:
             if is_active.lower() == "true":
                 filters &= Q(is_active=True)
