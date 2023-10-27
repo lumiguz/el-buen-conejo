@@ -1,7 +1,7 @@
 from rest_framework import viewsets, status, filters
 from apps.rabbits.models import Rabbit
 from utils.pagination import RabbitPagination
-from apps.rabbits.api.serializers import RabbitSerializer
+from apps.rabbits.api.serializers import RabbitSerializer 
 from rest_framework.response import Response
 from django.db.models import Q
 
@@ -46,7 +46,7 @@ class RabbitViewSet(viewsets.ModelViewSet):
         if weight:
             filters &= Q(weight=weight)
         if cage_id:
-            filters &= Q(cage_id_icontains=cage_id)
+            filters &= Q(cage_id=cage_id)
         if is_active:
             if is_active.lower() == "true":
                 filters &= Q(is_active=True)
@@ -60,7 +60,7 @@ class RabbitViewSet(viewsets.ModelViewSet):
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop("partial", False)
         instance = self.get_object()
-        serializer = RabbitSerializer(instance, data=request.data, partial=partial)
+        serializer = RabbitSerializer(instance, data=request.data, partial=partial) 
 
         # Check if the updated field is read-only
         for field in self.read_only_fields:

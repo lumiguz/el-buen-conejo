@@ -1,24 +1,16 @@
 from rest_framework import status
-from rest_framework.permissions import DjangoObjectPermissions
-from rest_framework.response import Response
+from rest_framework.response import Response 
 from apps.farms.api.serializer import farmSerializer
 from apps.farms.models import Farm
 from rest_framework.viewsets import GenericViewSet
-from rest_framework import viewsets, permissions
-
-
-"""
-    The FarmViewset class is a generic viewset that allows any user to access and manipulate Farm
-    objects. It is used to create, retrieve, update, and delete Farm objects using the farmSerializer.
-"""
-
+from utils.pagination import FarmPagination
 
 class FarmViewset(GenericViewSet):
     queryset = Farm.objects.all()
     serializer_class = farmSerializer
-
-    """este es el docstring de esta funcion """
-
+    pagination_class = FarmPagination
+    
+    
     def create(self, request, *args, **kwargs):
         """
         The above function creates a new object using the provided request data and saves it using the
