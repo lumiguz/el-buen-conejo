@@ -60,6 +60,13 @@ const MenuRabbit = () => {
 
   const handlePageChange = (pageId) => {
     setCurrentPage(pageId);
+    if (pageId === "perfil") {
+      setPerfilActive(true);
+      setNotasActive(false);
+    } else if (pageId === "notes") {
+      setPerfilActive(false);
+      setNotasActive(true);
+    }
   };
 
   let rabbitData = {
