@@ -14,6 +14,7 @@ import ChangePass from "../../Routes/ChangePass";
 //#endregion
 //#region import rabbits
 import ViewRabbits from "../../Routes/Rabbits/ViewRabbits";
+import ViewAllRabbits from "../../Routes/Rabbits/ViewAllRabbits";
 //#endregion
 //#region import market
 import Market from "../../Routes/Market";
@@ -129,6 +130,14 @@ export const routes = createBrowserRouter([
     element: (
       <Layout>
         <ViewRabbits />
+      </Layout>
+    ),
+  },
+  {
+    path: "/allrabits/rabbits",
+    element: (
+      <Layout>
+        <ViewAllRabbits/>
       </Layout>
     ),
   },
