@@ -126,7 +126,7 @@ export const routes = createBrowserRouter([
   //#endregion
   //#region routes for rabbits
   {
-    path: "/rabbits",
+    path: "/rabbits/:rabbitId",
     element: (
       <Layout>
         <ViewRabbits />

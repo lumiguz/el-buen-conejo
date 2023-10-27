@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import MenuRabbitPerfil from "./MenuRabbitPerfil";
 import styles from "../MenuRabbit/menuRabbit.module.css";
 import MenuRabbitNotes from "../MenuRabbit/MenuRabbitNotes"
+import { apiUrls } from "../../utils/links"
 
 function PaginatedView({ currentPage, onPageChange }) {
   const pages = [
@@ -11,14 +12,13 @@ function PaginatedView({ currentPage, onPageChange }) {
 
   return (
     <div>
-      {/* Paginación personalizada */}
       <ul className="pagination">
         {pages.map((page) => (
           <li
             key={page.id}
             className={`page-item ${page.id === currentPage ? "active" : ""}`}
             onClick={(e) => {
-              e.preventDefault(); // Previene el comportamiento predeterminado del enlace
+              e.preventDefault();
               onPageChange(page.id);
             }}
           >
@@ -32,82 +32,68 @@ function PaginatedView({ currentPage, onPageChange }) {
   );
 }
 
-const MenuRabbit = () => {
+const MenuRabbit = ({ selectedRabbitId }) => {
   const [currentPage, setCurrentPage] = useState("perfil");
   const [perfilActive, setPerfilActive] = useState(true);
   const [notasActive, setNotasActive] = useState(false);
-
-  let content = null; // Inicializa content con un valor nulo
-
-  useEffect(() => {
-    // Cargar el estado desde el LocalStorage
-    const storedPaginationState = JSON.parse(
-      localStorage.getItem("paginationState")
-    );
-    if (storedPaginationState) {
-      setPerfilActive(storedPaginationState.perfilActive);
-      setNotasActive(storedPaginationState.notasActive);
-    }
-  }, []);
+  const [selectedRabbitDetails, setSelectedRabbitDetails] = useState(null);
 
   useEffect(() => {
-    // Guardar el estado en el LocalStorage
-    localStorage.setItem(
-      "paginationState",
-      JSON.stringify({ perfilActive, notasActive })
-    );
-  }, [perfilActive, notasActive]);
-
-  const handlePageChange = (pageId) => {
-    setCurrentPage(pageId);
-    if (pageId === "perfil") {
-      setPerfilActive(true);
-      setNotasActive(false);
-    } else if (pageId === "notes") {
-      setPerfilActive(false);
-      setNotasActive(true);
+    // Aquí puedes hacer una llamada a la API para obtener el detalle del conejo seleccionado
+    if (selectedRabbitId) {
+      fetch(`${apiUrls.urlRabbits}${selectedRabbitId}/`)
+        .then((response) => response.json())
+        .then((rabbitDetails) => {
+          setSelectedRabbitDetails(rabbitDetails);
+        })
+        .catch((error) => {
+          console.error("Error al obtener los detalles del conejo:", error);
+        });
     }
-  };
+  }, [selectedRabbitId]);
 
-  let rabbitData = {
-    estado: "Vivo",
-    peso: "8 kg",
-    raza: "California",
-    edad: "8 meses",
-    color: "Blanco",
-    genotipo: "-",
-    criasVivas: "4",
-    totalDeCrias: "14",
-  };
-  
   if (currentPage === "perfil") {
-    content = (
+    return (
       <div>
-        <MenuRabbitPerfil rabbitData={rabbitData} />
+        <PaginatedView
+          currentPage={currentPage}
+          onPageChange={(pageId) => {
+            setCurrentPage(pageId);
+            if (pageId === "perfil") {
+              setPerfilActive(true);
+              setNotasActive(false);
+            } else if (pageId === "notes") {
+              setPerfilActive(false);
+              setNotasActive(true);
+            }
+          }}
+        />
+        {perfilActive && selectedRabbitDetails ? (
+          <MenuRabbitPerfil rabbitData={selectedRabbitDetails} />
+        ) : null}
+        {notasActive && <MenuRabbitNotes />}
       </div>
     );
   } else if (currentPage === "notes") {
-    content = (
+    return (
       <div>
-        <MenuRabbitNotes/>
+        <PaginatedView
+          currentPage={currentPage}
+          onPageChange={(pageId) => {
+            setCurrentPage(pageId);
+            if (pageId === "perfil") {
+              setPerfilActive(true);
+              setNotasActive(false);
+            } else if (pageId === "notes") {
+              setPerfilActive(false);
+              setNotasActive(true);
+            }
+          }}
+        />
+        <MenuRabbitNotes />
       </div>
     );
   }
-
-  return (
-    <>
-      <div>
-        <div>
-          <PaginatedView
-            currentPage={currentPage}
-            onPageChange={handlePageChange}
-          />
-        </div>
-        {perfilActive && <MenuRabbitPerfil rabbitData={rabbitData} />}
-        {notasActive && <MenuRabbitNotes />}
-      </div>
-    </>
-  );
 };
 
 export default MenuRabbit;
