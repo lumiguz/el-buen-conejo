@@ -32,9 +32,16 @@ import ViewCageEdit from "../../Routes/Cage/CageDetails/CageEdit/ViewCageEdit";
 //#endregion
 //#region import farms
 import Farms from "../../Routes/Farms";
+import FarmDetail from "../../Routes/Farms/FarmDetail";
 //#endregion
 //#region import litters
 import Litters from "../../Routes/Litters";
+
+//#endregion
+
+//#region import profile
+import ProfileHome from "../../Routes/ProfileHome";
+import EditProfile from "../../Routes/EditProfile";
 //#endregion
 
 //implement routes with react-router-dom
@@ -201,11 +208,39 @@ export const routes = createBrowserRouter([
       </Layout>
     ),
   },
+  {
+    path: "/farms/:farmId",
+    element: (
+      <Layout>
+        <FarmDetail />
+      </Layout>
+    ),
+    loader: ({ params }) => params.farmId,
+  },
   //#endregion
   //#region routes for litters: stop implementing
   {
     path: "/litters",
     element: <Litters />,
+  },
+  //#endregion
+
+    //#region routes for profile
+  {
+    path: "/profile",
+    element: (
+      <Layout>
+    <ProfileHome/>
+      </Layout>
+    ),
+  },
+  {
+    path: "/editProfile",
+    element: (
+     
+    <EditProfile/>
+    
+    ),
   },
   //#endregion
 ]);

@@ -30,7 +30,7 @@ const FarmForm = () => {
   return (
     //on submit, save the data of the new litter
     <form
-      className={`${FarmFormStyles.formFarm} border rounded px-3 py-4`}
+      className={`${FarmFormStyles.formFarm} border rounded px-3 py-4 shadow bg-body-tertiary`}
       onSubmit={handleSubmit}
     >
       <h4>Agregar nueva granja</h4>

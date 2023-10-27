@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 const MenuRabbitPerfil = ({ rabbitData }) => {
   return (
     <>
-      <h6> Datos del conejo: </h6>
+      <h5> Datos del conejo: </h5>
       <table className="table">
         <tbody>
           {Object.entries(rabbitData).map(([key, value], index) => {
