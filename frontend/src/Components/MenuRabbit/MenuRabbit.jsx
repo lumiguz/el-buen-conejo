@@ -37,6 +37,8 @@ const MenuRabbit = () => {
   const [perfilActive, setPerfilActive] = useState(true);
   const [notasActive, setNotasActive] = useState(false);
 
+  let content = null; // Inicializa content con un valor nulo
+
   useEffect(() => {
     // Cargar el estado desde el LocalStorage
     const storedPaginationState = JSON.parse(
@@ -60,18 +62,18 @@ const MenuRabbit = () => {
     setCurrentPage(pageId);
   };
 
-  let content;
+  let rabbitData = {
+    estado: "Vivo",
+    peso: "8 kg",
+    raza: "California",
+    edad: "8 meses",
+    color: "Blanco",
+    genotipo: "-",
+    criasVivas: "4",
+    totalDeCrias: "14",
+  };
+  
   if (currentPage === "perfil") {
-    const rabbitData = {
-      estado: "Vivo",
-      peso: "8 kg",
-      raza: "California",
-      edad: "8 meses",
-      color: "Blanco",
-      genotipo: "-",
-      criasVivas: "4",
-      totalDeCrias: "14",
-    };
     content = (
       <div>
         <MenuRabbitPerfil rabbitData={rabbitData} />
@@ -90,7 +92,7 @@ const MenuRabbit = () => {
       <div>
         <div>
           <PaginatedView
-            currentPage={perfilActive ? "perfil" : "notes"}
+            currentPage={currentPage}
             onPageChange={handlePageChange}
           />
         </div>

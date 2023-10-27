@@ -1,0 +1,31 @@
+
+.container{
+
+    
+    
+
+}
+
+.navbar{
+    background:white;
+    list-style-type: none;
+    text-decoration:none;
+    color:black;
+    
+}
+
+.li{
+    text-decoration:none;
+    /* list-style-type: none; */
+    color:black;
+    
+}
+
+.list{
+    list-style-type: none;
+    text-decoration:none;
+}
+
+.mainContainer{
+    background:white;
+}
