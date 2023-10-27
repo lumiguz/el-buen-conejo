@@ -23,4 +23,4 @@ class Cage(AbstractModel):
     price = models.DecimalField(max_digits=5, decimal_places=2, default=0)
     is_public = models.BooleanField(default=False)
     photo = models.CharField(max_length=255, blank=True)
-    total_weight = models.IntegerField(default=0)
+    total_weight = models.DecimalField(default=0)
