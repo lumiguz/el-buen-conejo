@@ -18,9 +18,14 @@ class Farm(AbstractModel):
     name = models.CharField(max_length=150, blank=False)
     address = models.CharField(max_length=150, blank=False)
     description = models.TextField(max_length=200)
-    photo = models.CharField(max_length=250)
-      
-    
+    photo = models.ImageField(
+        "Farms",
+        upload_to="fotos/granjas/",
+        default="granja.jpg",
+        null=True,
+        blank=True,
+    )
+
     # Modifica como se visualiza el nombre de la clase en el admin
     # Como ordenar los datos en el admin
     class Meta:

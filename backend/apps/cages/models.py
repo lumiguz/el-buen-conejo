@@ -21,5 +21,11 @@ class Cage(AbstractModel):
     count_rabbits = models.IntegerField(default=0)
     price = models.DecimalField(max_digits=20, decimal_places=2, default=0)
     is_public = models.BooleanField(default=False)
-    photo = models.CharField(max_length=255, blank=True)
     total_weight = models.DecimalField(max_digits=20, decimal_places=2, default=0)
+    photo = models.ImageField(
+        "Cages",
+        upload_to="fotos/jaulas/",
+        default="jaula.jpg",
+        null=True,
+        blank=True,
+    )
