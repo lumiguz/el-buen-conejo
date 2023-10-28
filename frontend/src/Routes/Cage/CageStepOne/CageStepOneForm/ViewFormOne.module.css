@@ -93,5 +93,19 @@
     font-size: 18px;
     /* width: 89px; */
     height: 48px;
+}
 
+.buttonFormCage2 {
+    background-color: #68763D;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    padding: 0px 24px;
+    justify-content: center;
+    align-items: center;
+    /* gap: 24px; */
+    font-size: 18px;
+    /* width: 89px; */
+    height: 48px;
+    margin-top: 8px;
 }
