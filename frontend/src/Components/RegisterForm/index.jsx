@@ -13,6 +13,11 @@ import { useNavigate } from 'react-router-dom'
 
 const index = () => {
 
+    const dinamicHeaders = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+    }
+
     const [warning, setWarning] = useState(false)
     const [formSubmited, setFormSubmited] = useState(false)
     const { isLoading, error, data, sendRequest } = useHttp()
@@ -25,11 +30,9 @@ const index = () => {
         is_producer: "",
     });
 
-    // {"username": "usuarioP19", "email": "usuarioPrueba19@gmail.com", "password": "usuariop19", "is_producer": "True"}
-
     useEffect(() => {
         if (formSubmited) {
-            sendRequest(`https://apiebc.online/api/users/`, 'POST', formData)
+            sendRequest(`https://apiebc.online/api/users/`, 'POST', formData, dinamicHeaders)
         }
     }, [formSubmited])
     
@@ -93,7 +96,7 @@ const index = () => {
                 onChange={handleInputChange}
             />
             {warning && <p className="text-danger"> La contraseña debe tener más de 8 caracteres </p>}
-            {error && <p className="text-danger"> {formData.username} ya se encuentra en uso </p>}
+            {error && <p className="text-danger"> {error.message} </p>}
             <Button type="submit" className="btn-success w-100">{isLoading ? "..." : "Crear cuenta"}</Button>
         </form>
     )

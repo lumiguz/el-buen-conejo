@@ -1,12 +1,12 @@
 import { useState, useCallback } from "react";
-import { headers } from "./useHttp";
+// import { headers } from "./useHttp";
 
 const useHttpGetWithPagination = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const [data, setData] = useState(null);
 
-    const sendRequest = useCallback(async (url) => {
+    const sendRequest = useCallback(async (url, headers) => {
         setIsLoading(true);
         setError(null);
         try {
