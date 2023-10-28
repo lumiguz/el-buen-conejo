@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import useHttpGetWithPagination from "../../../hooks/useHttpGetWithPagination";
-import { headers } from "../../../hooks/useHttp";
 import { useLoaderData } from "react-router-dom";
 import CardImage from "../../../Components/CardImage";
 import AppLink from "../../../UI/AppLink";
 import Heading from "../../../UI/Heading";
 import { apiUrls } from "../../../utils/links";
+import Cookies from "js-cookie";
 
 const BreedInventory = () => {
   const breedSelected = useLoaderData();
@@ -13,6 +13,12 @@ const BreedInventory = () => {
   const { isLoading, error, data, sendRequest } = useHttpGetWithPagination();
   const [errorFarmData, setErrorFarmData] = useState(null);
   const [isDataReady, setIsDataReady] = useState(false);
+
+  const headers = {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'Authorization': Cookies.get('authToken') ? `Bearer ${Cookies.get('authToken')}` : null
+  } 
 
   useEffect(() => {
     sendRequest(`${apiUrls.urlRabbits}`);
@@ -27,10 +33,10 @@ const BreedInventory = () => {
 
       Promise.all(
         filteredRabbits.map((rabbit) =>
-          fetch(`${apiUrls.urlCages}${rabbit.cage_id}`, { headers })
+          fetch(`${apiUrls.urlCages}${rabbit.cage_id}`, {headers})
             .then((response) => response.json())
             .then((cageData) =>
-              fetch(`${apiUrls.urlFarms}${cageData.farm_id}`, { headers })
+              fetch(`${apiUrls.urlFarms}${cageData.farm_id}`, {headers})
                 .then((response) => response.json())
                 .then((farmData) => ({
                   ...rabbit,
@@ -63,7 +69,7 @@ const BreedInventory = () => {
       )}
       {isDataReady && !error && !errorFarmData && rabbits.length === 0 && (
         <h2 className="text-muted text-center m-5 p-5">
-          No hay conejos disponibles
+          No hay conejos disponibles de raza {breedSelected}
         </h2>
       )}
       {rabbits.length > 0 && (

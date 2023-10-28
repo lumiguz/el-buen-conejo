@@ -10,17 +10,13 @@ import Button from '../../UI/Button'
 import { useNavigate } from 'react-router-dom'
 import { useHttp } from '../../hooks/useHttp'
 import Cookies from 'js-cookie'
+import { apiUrls } from '../../utils/links'
 
 const index = () => {
 
-    const dinamicHeaders = {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-    }
-
     const navigate = useNavigate()
     const [formSubmited, setFormSubmited] = useState(false)
-    const { isLoading, error, data, sendRequest } = useHttp()
+    const { isLoading, error, data, sendRequest, isntOk } = useHttp()
 
     const [formData, setFormData] = useState({
         username: '',
@@ -29,7 +25,7 @@ const index = () => {
 
     useEffect(() => {
         if (formSubmited) {
-            sendRequest(`https://apiebc.online/login/`, 'POST', formData, dinamicHeaders)
+            sendRequest(`${apiUrls.urlLogin}`, 'POST', formData)
         }
     }, [formSubmited])
 
@@ -51,10 +47,9 @@ const index = () => {
     };
 
     if (data) {
-        setTimeout(() => {
-            Cookies.set('authToken', data.token)
-            navigate('/')
-        }, 2000);
+        Cookies.set('authToken', data.token)
+        localStorage.setItem('logedAccount', JSON.stringify(data.user?.username))
+        navigate('/')
     }
     
     return (
@@ -74,8 +69,7 @@ const index = () => {
                 onChange={handleInputChange}
                 value={formData.password}
             />
-            {error && <p className="text-danger"> Nombre de usuario o contraseña incorrectos </p>}
-            {error && <p className="text-danger"> Nombre de usuario o contraseña incorrectos </p>}
+            {isntOk && <p className="text-danger"> {isntOk.error} </p>}
             <Button type="submit" className="btn-success w-100 my-3">
                 {isLoading ? "..." : "Ingresar"}
             </Button>

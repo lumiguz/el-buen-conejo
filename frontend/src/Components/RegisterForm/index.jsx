@@ -10,17 +10,13 @@ import FormSelect from '../../UI/FormSelect'
 import { roles } from '../../utils/roles'
 import { useHttp } from '../../hooks/useHttp'
 import { useNavigate } from 'react-router-dom'
+import { apiUrls } from '../../utils/links'
 
 const index = () => {
 
-    const dinamicHeaders = {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-    }
-
     const [warning, setWarning] = useState(false)
     const [formSubmited, setFormSubmited] = useState(false)
-    const { isLoading, error, data, sendRequest } = useHttp()
+    const { isLoading, error, data, sendRequest, isntOk } = useHttp()
     const navigate = useNavigate()
 
     const [formData, setFormData] = useState({
@@ -32,7 +28,7 @@ const index = () => {
 
     useEffect(() => {
         if (formSubmited) {
-            sendRequest(`https://apiebc.online/api/users/`, 'POST', formData, dinamicHeaders)
+            sendRequest(`${apiUrls.urlUsers}`, 'POST', formData)
         }
     }, [formSubmited])
     
@@ -96,7 +92,7 @@ const index = () => {
                 onChange={handleInputChange}
             />
             {warning && <p className="text-danger"> La contraseña debe tener más de 8 caracteres </p>}
-            {error && <p className="text-danger"> {error.message} </p>}
+            {isntOk && <p className="text-danger"> {Object.values(Object.values(isntOk)[1])[0][0]} </p>}
             <Button type="submit" className="btn-success w-100">{isLoading ? "..." : "Crear cuenta"}</Button>
         </form>
     )

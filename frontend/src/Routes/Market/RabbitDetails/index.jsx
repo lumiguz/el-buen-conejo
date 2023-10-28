@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useHttp, headers } from "../../../hooks/useHttp";
+import { useHttp } from "../../../hooks/useHttp";
 import { useLoaderData } from "react-router-dom";
 import Carousel from "../../../Components/Carousel/Carousel";
 import MenuRabbitPerfil from "../../../Components/MenuRabbit/MenuRabbitPerfil";
@@ -7,25 +7,34 @@ import CardIcon from "../../../Components/CardIcon";
 import { apiUrls } from "../../../utils/links";
 import ChatContainer from "../../../Components/chat/ChatContainer";
 import Modal from "../../../Components/Modal";
+import Cookies from "js-cookie";
 
 const RabbitDetails = () => {
   const rabbitId = useLoaderData();
   const [rabbit, setRabbit] = useState(null);
-  const { isLoading, error, data, sendRequest } = useHttp();
+  const { isLoading, error, data, sendRequest, isntOk } = useHttp();
   const [errorFarmData, setErrorFarmData] = useState(null);
+
+  const headers = {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'Authorization': Cookies.get('authToken') ? `Bearer ${Cookies.get('authToken')}` : null
+  } 
 
   useEffect(() => {
     sendRequest(`${apiUrls.urlRabbits}${rabbitId}/`);
   }, [sendRequest, rabbitId]);
 
+
   useEffect(() => {
     if (!isLoading && data) {
-      fetch(`${apiUrls.urlCages}${data.cage_id}`, { headers })
+      fetch(`${apiUrls.urlCages}${data.cage_id}`, {headers})
         .then((response) => response.json())
         .then((cageData) =>
-          fetch(`${apiUrls.urlFarms}${cageData.farm_id}`, { headers })
+          fetch(`${apiUrls.urlFarms}${cageData.farm_id}`, {headers})
             .then((response) => response.json())
             .then((farmData) => {
+              console.log(farmData)
               setRabbit({
                 ...data,
                 farmName: farmData.name,
@@ -40,12 +49,12 @@ const RabbitDetails = () => {
     }
   }, [isLoading, data]);
 
-  if (isLoading || !rabbit) {
+  if (isLoading) {
     return <h2 className="text-muted text-center m-5 p-5">Cargando...</h2>;
   }
 
   let dataInfoRabbit = {};
-  const imagesCarousel = rabbit.photo.split(",");
+  const imagesCarousel = rabbit?.photo.split(",");
   const button = (
     <button
       type="button"
@@ -72,7 +81,7 @@ const RabbitDetails = () => {
   return (
     <>
       {(error || errorFarmData) && (
-        <h2 className="text-danger">Ha ocurrido un error, intente de nuevo</h2>
+        <h2 className="text-danger text-center m-5 p-5">Ha ocurrido un error, intente de nuevo</h2>
       )}
       {!isLoading && rabbit && (
         <section className="bg-body p-3">
