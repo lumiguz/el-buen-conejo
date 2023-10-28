@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from apps.farms.api.serializer import farmSerializer, FarmPhotoSerializer
 from apps.farms.models import Farm
 from rest_framework.viewsets import GenericViewSet
+from utils.pagination import FarmPagination
 from rest_framework import viewsets, permissions
 from rest_framework import generics, status
 from rest_framework.decorators import action
@@ -25,8 +26,7 @@ PATH_PHOTOS = "/fotos/granjas/"
 class FarmViewset(GenericViewSet):
     queryset = Farm.objects.all()
     serializer_class = farmSerializer
-
-    """este es el docstring de esta funcion """
+    pagination_class = FarmPagination
 
     def create(self, request, *args, **kwargs):
         """

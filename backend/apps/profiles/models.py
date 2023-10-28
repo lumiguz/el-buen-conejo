@@ -23,7 +23,6 @@ class Profile(models.Model):
     is_producer = models.BooleanField(default=False)
     first_name = models.CharField(max_length=50, null=True, blank=True)
     last_name = models.CharField(max_length=100, null=True, blank=True)
-    photo = models.CharField(max_length=255, blank=True, default=AVATAR_PROFILE)
     address_id = models.OneToOneField(
         Address, on_delete=models.CASCADE, blank=True, null=True
     )
@@ -31,6 +30,13 @@ class Profile(models.Model):
     is_active = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    photo = models.ImageField(
+        "Profiles",
+        upload_to="fotos/perfiles/",
+        default="perfil.jpg",
+        null=True,
+        blank=True,
+    )
 
     class Meta:
         verbose_name = "Perfil"
