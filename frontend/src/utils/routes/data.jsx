@@ -230,14 +230,13 @@ export const routes = createBrowserRouter([
     path: "/profile",
     element: (
       <Layout>
-    <ProfileHome/>
+        <ProfileHome/>
       </Layout>
     ),
   },
   {
     path: "/editProfile",
     element: (
-     
     <EditProfile/>
     
     ),

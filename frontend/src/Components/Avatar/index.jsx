@@ -1,8 +1,10 @@
+import React from "react";
 import PropTypes from "prop-types";
 import avatarImage from "../../assets/blank.png";
 import styles from "./Avatar.module.css";
-import { usuarios } from "../../utils/database";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
+import AppLink from "../../UI/AppLink";
 
 const Avatar = ({ imageUrl }) => {
 
@@ -10,17 +12,18 @@ const Avatar = ({ imageUrl }) => {
 
   const navigate = useNavigate()
   const cuenta = JSON.parse(localStorage.getItem('logedAccount'))
-  const userData = usuarios.filter(usuario => usuario?.email === cuenta?.email)
 
   const handleLogout = () => {
     localStorage.removeItem('logedAccount')
+    Cookies.remove('authToken')
     setTimeout(() => {
-      navigate('/login')
+      navigate('/')
+      location.reload()
     }, 500);
   }
 
   return (
-    <div className="dropdown ms-2">
+    <div className="dropdown ms-2 btn cursor-pointer">
       <img
         src={imageUrl}
         className={`img-fluid rounded-circle ${styles.avatar}`}
@@ -30,10 +33,10 @@ const Avatar = ({ imageUrl }) => {
       />
       <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="avatarDropdown">
         <li>
-          <p className="dropdown-item text-primary">{userData[0]?.nombre + " " + userData[0]?.apellido}</p>
-          <a className="dropdown-item" href="#/mi-perfil">
+          <p className="dropdown-item text-primary">{cuenta}</p>
+          <AppLink className="dropdown-item" href="/profile">
             Mi Perfil
-          </a>
+          </AppLink>
         </li>
         <li>
           <button className="dropdown-item text-danger" onClick={handleLogout}>
