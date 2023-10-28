@@ -126,13 +126,21 @@ export const routes = createBrowserRouter([
   //#endregion
   //#region routes for rabbits
   {
-    path: "/rabbits/:rabbitId",
+    path: "/rabbits",
     element: (
       <Layout>
         <ViewRabbits />
       </Layout>
     ),
   },
+  // {
+  //   path: "/rabbits/:rabbitId",
+  //   element: (
+  //     <Layout>
+  //       <ViewRabbits />
+  //     </Layout>
+  //   ),
+  // },
   {
     path: "/allrabits/rabbits",
     element: (
