@@ -8,5 +8,12 @@ class farmSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class FarmPhotoSerializer(serializers.Serializer):
-    photo = serializers.FileField()
+class FarmPhotoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Farm
+        fields = ("photo",)
+
+    def update(self, instance, validated_data):
+        instance.photo = validated_data.get("photo", instance.photo)
+        instance.save()
+        return instance
