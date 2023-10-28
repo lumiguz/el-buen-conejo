@@ -4,6 +4,8 @@ from apps.abstracts.models import AbstractModel
 
 # Create your models here.
 
+AVATAR_FARM = "https://django-good-rabbit.s3.amazonaws.com/fotos/granjas/granja.jpg"
+
 
 class Farm(AbstractModel):
     """
@@ -18,9 +20,8 @@ class Farm(AbstractModel):
     name = models.CharField(max_length=150, blank=False)
     address = models.CharField(max_length=150, blank=False)
     description = models.TextField(max_length=200)
-    photo = models.CharField(max_length=250)
-      
-    
+    photo = models.CharField(max_length=255, blank=True, default=AVATAR_FARM)
+
     # Modifica como se visualiza el nombre de la clase en el admin
     # Como ordenar los datos en el admin
     class Meta:

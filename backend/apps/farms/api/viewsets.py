@@ -1,16 +1,25 @@
 from rest_framework import status
 from rest_framework.permissions import DjangoObjectPermissions
 from rest_framework.response import Response
-from apps.farms.api.serializer import farmSerializer
+from apps.farms.api.serializer import farmSerializer, FarmPhotoSerializer
 from apps.farms.models import Farm
 from rest_framework.viewsets import GenericViewSet
 from rest_framework import viewsets, permissions
-
+from rest_framework import generics, status
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from rest_framework.parsers import MultiPartParser
+from boto3.session import Session
+import os
+from apps.farms.models import Farm
+from rabbits_farm import settings
 
 """
     The FarmViewset class is a generic viewset that allows any user to access and manipulate Farm
     objects. It is used to create, retrieve, update, and delete Farm objects using the farmSerializer.
 """
+
+PATH_PHOTOS = "/fotos/granjas/"
 
 
 class FarmViewset(GenericViewSet):
@@ -78,3 +87,35 @@ class FarmViewset(GenericViewSet):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+    @action(detail=True, methods=["post"], parser_classes=[MultiPartParser])
+    def upload_photo(self, request, pk=None, *args, **kwargs):
+        serializer = FarmPhotoSerializer(data=request.FILES)
+        serializer.is_valid(raise_exception=True)
+
+        # Obtiene el archivo cargado desde la solicitud y asigna la URL de S3 al campo 'photo'
+        uploaded_file = request.FILES["photo"]
+        file_extension = os.path.splitext(uploaded_file)[-1]
+        filename = f"{PATH_PHOTOS}/{uploaded_file}"
+
+        session = Session(
+            region_name=settings.AWS_S3_REGION_NAME,
+            aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+            aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+        )
+        s3 = session.resource("s3")
+        s3.Bucket(settings.AWS_STORAGE_BUCKET_NAME).put_object(
+            Key=filename, Body=uploaded_file
+        )
+
+        # Guardar la URL de S3 en el campo 'photo' del perfil
+        serializer.validated_data[
+            "photo"
+        ] = f"https://{settings.AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/{filename}"
+
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+
+        return Response(
+            serializer.data, status=status.HTTP_201_CREATED, headers=headers
+        )

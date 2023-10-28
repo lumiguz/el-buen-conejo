@@ -196,13 +196,13 @@ MIDDLEWARE = [
 
 STATIC_URL = "static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
-MEDIA_URLS = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URLS = "/fotos/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "fotos")
 
 
 # Configuration of environment variables for setup static files in a S3 bucket
 
-if DEBUG:
+if not DEBUG:
     STORAGES = {
         "default": {
             "BACKEND": "django.core.files.storage.FileSystemStorage",

@@ -3,6 +3,8 @@ from apps.cages.models import Cage
 from apps.abstracts.models import AbstractModel
 from django.utils import timezone
 
+AVATAR_RABBIT = "https://django-good-rabbit.s3.amazonaws.com/fotos/conejos/conejo.jpg"
+
 
 # Create your models here.
 class Rabbit(AbstractModel):
@@ -43,4 +45,4 @@ class Rabbit(AbstractModel):
     price = models.DecimalField(max_digits=5, decimal_places=2, default=0)
     tag = models.CharField(max_length=15, unique=True, blank=False)
     weight = models.DecimalField(max_digits=2, decimal_places=1, default=1)
-    photo = models.CharField(max_length=255, blank=True)
+    photo = models.CharField(max_length=255, blank=True, default=AVATAR_RABBIT)
