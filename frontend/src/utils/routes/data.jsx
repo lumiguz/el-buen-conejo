@@ -230,31 +230,27 @@ export const routes = createBrowserRouter([
         farmId: params.farmId,
         cageId: params.cageId,
       };
-    } ,
+    },
+  },
+  //#endregion
+  //#region routes for profile
+  {
+    path: "/profile",
+    element: (
+      <Layout>
+        <ProfileHome />
+      </Layout>
+    ),
+  },
+  {
+    path: "/editProfile",
+    element: <EditProfile />,
   },
   //#endregion
   //#region routes for litters: stop implementing
   {
     path: "/litters",
     element: <Litters />,
-  },
-  //#endregion
-
-    //#region routes for profile
-  {
-    path: "/profile",
-    element: (
-      <Layout>
-        <ProfileHome/>
-      </Layout>
-    ),
-  },
-  {
-    path: "/editProfile",
-    element: (
-    <EditProfile/>
-    
-    ),
   },
   //#endregion
 ]);
