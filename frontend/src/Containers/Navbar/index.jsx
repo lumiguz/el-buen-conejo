@@ -1,4 +1,4 @@
-import { useIsAuthPath, useIsLoggedIn } from "../../hooks/useAuth";
+import { useIsAuthPath } from "../../hooks/useAuth";
 import NavbarToggler from "../../Components/NavbarToggler";
 import NavItem from "../../Components/NavItem";
 import Avatar from "../../Components/Avatar";
@@ -13,9 +13,8 @@ import logo from "../../assets/logoText.svg";
  */
 const Navbar = () => {
   const isAuthPath = useIsAuthPath(authPaths);
-  // const isLoggedIn = useIsLoggedIn();
 
-  const isLoggedIn = JSON.parse(localStorage.getItem('logedAccount'))
+  const isLoggedIn = JSON.parse(localStorage.getItem("logedAccount"));
 
   return (
     <nav className="navbar navbar-expand-lg bg-white">
@@ -32,15 +31,16 @@ const Navbar = () => {
               id="navbarSupportedContent"
             >
               <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-                {links.map((link, index) => (
-                  <NavItem
-                    key={index}
-                    href={link.href}
-                    className={link.className}
-                  >
-                    {link.name}
-                  </NavItem>
-                ))}
+                {isLoggedIn &&
+                  links.map((link, index) => (
+                    <NavItem
+                      key={index}
+                      href={link.href}
+                      className={link.className}
+                    >
+                      {link.name}
+                    </NavItem>
+                  ))}
                 {!isLoggedIn && (
                   <>
                     <NavItem href="/login" className="text-primary">

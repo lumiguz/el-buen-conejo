@@ -1,60 +1,29 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useHttp } from "../../../hooks/useHttp";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useSearchParams } from "react-router-dom";
 import Carousel from "../../../Components/Carousel/Carousel";
 import MenuRabbitPerfil from "../../../Components/MenuRabbit/MenuRabbitPerfil";
 import CardIcon from "../../../Components/CardIcon";
 import { apiUrls } from "../../../utils/links";
 import ChatContainer from "../../../Components/chat/ChatContainer";
 import Modal from "../../../Components/Modal";
-import Cookies from "js-cookie";
 
 const RabbitDetails = () => {
   const rabbitId = useLoaderData();
-  const [rabbit, setRabbit] = useState(null);
-  const { isLoading, error, data, sendRequest, isntOk } = useHttp();
-  const [errorFarmData, setErrorFarmData] = useState(null);
-
-  const headers = {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-    'Authorization': Cookies.get('authToken') ? `Bearer ${Cookies.get('authToken')}` : null
-  } 
+  const [searchParams] = useSearchParams();
+  const farmName = decodeURIComponent(searchParams.get("farmName"));
+  const farmAddress = decodeURIComponent(searchParams.get("farmAddress"));
+  const { isLoading, error, data, sendRequest } = useHttp();
 
   useEffect(() => {
     sendRequest(`${apiUrls.urlRabbits}${rabbitId}/`);
   }, [sendRequest, rabbitId]);
 
-
-  useEffect(() => {
-    if (!isLoading && data) {
-      fetch(`${apiUrls.urlCages}${data.cage_id}`, {headers})
-        .then((response) => response.json())
-        .then((cageData) =>
-          fetch(`${apiUrls.urlFarms}${cageData.farm_id}`, {headers})
-            .then((response) => response.json())
-            .then((farmData) => {
-              console.log(farmData)
-              setRabbit({
-                ...data,
-                farmName: farmData.name,
-                farmAddress: farmData.address,
-              });
-            })
-        )
-        .catch((error) => {
-          console.error("error from fetch cage or farm:", error);
-          setErrorFarmData(error.message || "error from fetch cage or farm!");
-        });
-    }
-  }, [isLoading, data]);
-
   if (isLoading) {
     return <h2 className="text-muted text-center m-5 p-5">Cargando...</h2>;
   }
 
-  let dataInfoRabbit = {};
-  const imagesCarousel = rabbit?.photo.split(",");
+  const imagesCarousel = data?.photo.split(",");
   const button = (
     <button
       type="button"
@@ -66,40 +35,45 @@ const RabbitDetails = () => {
     </button>
   );
 
-  if (!isLoading && rabbit) {
-    dataInfoRabbit = {
-      nombre: rabbit.tag,
-      raza: rabbit.breed,
-      genero: rabbit.genre,
-      fechaNacimiento: rabbit.birthday,
-      edad: rabbit.age,
-      peso: rabbit.weight,
-      precio: rabbit.price,
-    };
-  }
+  const dataInfoRabbit = () => {
+    if (!isLoading && data) {
+      return {
+        nombre: data.tag,
+        raza: data.breed,
+        genero: data.genre,
+        fechaNacimiento: data.birthday,
+        edad: data.age,
+        peso: data.weight,
+        precio: data.price,
+      };
+    }
+    return {};
+  };
 
   return (
     <>
-      {(error || errorFarmData) && (
-        <h2 className="text-danger text-center m-5 p-5">Ha ocurrido un error, intente de nuevo</h2>
+      {error && (
+        <h2 className="text-danger text-center m-5 p-5">
+          Ha ocurrido un error, intente de nuevo
+        </h2>
       )}
-      {!isLoading && rabbit && (
+      {!isLoading && data && (
         <section className="bg-body p-3">
-          <h2 className="text-center">{rabbit.tag}</h2>
+          <h2 className="text-center">{data.tag}</h2>
           <div className="row container">
             <div className="col-12 my-3">
               <Carousel images={imagesCarousel} />
             </div>
             <div className="col-12 col-md-6 my-3">
-              <MenuRabbitPerfil rabbitData={dataInfoRabbit} />
+              <MenuRabbitPerfil rabbitData={dataInfoRabbit()} />
             </div>
             <div className="col-12 col-md-6 my-3">
               <div className="row mt-3">
                 <div className="col-12 w-75 mx-auto">
                   <CardIcon
                     className="bg-light"
-                    title={`$ ${rabbit.price}`}
-                    text={`Granja: ${rabbit.farmName}, Ubicacion: ${rabbit.farmAddress}`}
+                    title={`$ ${data.price}`}
+                    text={`Granja: ${farmName}, Ubicacion: ${farmAddress}`}
                     button={button}
                   />
                 </div>

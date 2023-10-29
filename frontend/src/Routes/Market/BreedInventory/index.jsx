@@ -1,62 +1,28 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import useHttpGetWithPagination from "../../../hooks/useHttpGetWithPagination";
+import useFetchRabbitsWithFarmData from "../../../hooks/useFetchRabbitsWithFarmData";
 import { useLoaderData } from "react-router-dom";
 import CardImage from "../../../Components/CardImage";
 import AppLink from "../../../UI/AppLink";
 import Heading from "../../../UI/Heading";
 import { apiUrls } from "../../../utils/links";
-import Cookies from "js-cookie";
 
 const BreedInventory = () => {
   const breedSelected = useLoaderData();
-  const [rabbits, setRabbits] = useState([]);
   const { isLoading, error, data, sendRequest } = useHttpGetWithPagination();
-  const [errorFarmData, setErrorFarmData] = useState(null);
-  const [isDataReady, setIsDataReady] = useState(false);
-
-  const headers = {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-    'Authorization': Cookies.get('authToken') ? `Bearer ${Cookies.get('authToken')}` : null
-  } 
 
   useEffect(() => {
-    sendRequest(`${apiUrls.urlRabbits}`);
+    sendRequest(
+      `${apiUrls.urlRabbits}?breed=${decodeURIComponent(breedSelected)}`
+    );
   }, [sendRequest, breedSelected]);
 
-  useEffect(() => {
-    if (!isLoading && data) {
-      setIsDataReady(false);
-      const filteredRabbits = data.filter(
-        (breed) => breed.breed === decodeURIComponent(breedSelected)
-      );
-
-      Promise.all(
-        filteredRabbits.map((rabbit) =>
-          fetch(`${apiUrls.urlCages}${rabbit.cage_id}`, {headers})
-            .then((response) => response.json())
-            .then((cageData) =>
-              fetch(`${apiUrls.urlFarms}${cageData.farm_id}`, {headers})
-                .then((response) => response.json())
-                .then((farmData) => ({
-                  ...rabbit,
-                  farmName: farmData.name,
-                  farmAddress: farmData.address,
-                }))
-            )
-        )
-      )
-        .then((rabbitsWithFarmData) => {
-          setRabbits(rabbitsWithFarmData);
-          setIsDataReady(true);
-        })
-        .catch((error) => {
-          console.error("Ha ocurrido un error:", error);
-          setErrorFarmData(error.message || "Something went wrong!");
-        });
-    }
-  }, [isLoading, data, sendRequest, breedSelected]);
-
+  const { rabbits, errorFarmData, isDataReady } = useFetchRabbitsWithFarmData(
+    isLoading,
+    data,
+    sendRequest,
+    breedSelected
+  );
   return (
     <>
       {!isDataReady && !error && (
@@ -83,7 +49,9 @@ const BreedInventory = () => {
                 key={rabbit.id}
                 className="my-2 col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center"
               >
-                <AppLink href={`/market/rabbit/${rabbit.id}`}>
+                <AppLink
+                  href={`/market/rabbit/${rabbit.id}?farmName=${rabbit.farmName}&farmAddress=${rabbit.farmAddress}`}
+                >
                   <CardImage
                     image={rabbit.photo}
                     title={rabbit.tag}
