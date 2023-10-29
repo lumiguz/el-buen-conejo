@@ -1,13 +1,19 @@
 import { useState } from 'react';
 import FarmFormStyles from './FarmFormStyles.module.css';
+import { useHttp } from '../../hooks/useHttp'
+import { apiUrls } from '../../utils/links'
 
 const FarmForm = () => {
   const [farmImage, setFarmImage] = useState(
     '/static/images/littersPlaceHolder.svg'
   );
+  
+  const { isLoading, error, data, sendRequest, isntOk } = useHttp()
+  const [formSubmited, setFormSubmited] = useState(false)
 
   const [farmData, setFarmName] = useState({
-    avatar: '',
+    is_active: true,
+    photo: 'asd',
     name: '',
     address: '',
     description: '',
@@ -22,9 +28,10 @@ const FarmForm = () => {
     console.log(farmData);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(farmData);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    sendRequest(`${apiUrls.urlFarms}`, 'POST', farmData)
+    setFormSubmited(true)
   };
 
   return (
@@ -36,7 +43,7 @@ const FarmForm = () => {
       <h4>Agregar nueva granja</h4>
       <h6 className='fw-normal'>Añade los datos de la granja</h6>
       <label htmlFor='formFile'>
-        <h6>Avatar de la granja</h6>
+        <h6>photo de la granja</h6>
         {/* after upload the image render on component */}
         {/* and convert the image to the size 72x72*/}
         <div className='d-flex align-items-center'>
@@ -50,7 +57,7 @@ const FarmForm = () => {
           {/* if a image is uploaded in the input change the state of the image */}
           <input
             type='file'
-            name='avatar'
+            name='photo'
             id='formFile'
             className={`ms-1  ${FarmFormStyles.inputFileC} form-control-file`}
             onChange={(event) => {
@@ -113,11 +120,12 @@ const FarmForm = () => {
         <button className='btn btn-primary me-3' type='submit'>
           Agregar y guardar
         </button>
-        {/* cancel button */}
-        <button className='btn btn-danger' type='button'>
-          Cancelar
-        </button>
       </div>
+
+      {/* if the form is submited show a message */}
+      {formSubmited && <p className="text-success"> Granja creada correctamente</p>}
+      {/* if the form has a error show a message */}
+      {isntOk && <p className="text-danger"> {isntOk.error} </p>}
     </form>
   );
 };
