@@ -1,5 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import useHttpGetWithPagination from "../../../hooks/useHttpGetWithPagination";
+import useFetchRabbitsWithFarmData from "../../../hooks/useFetchRabbitsWithFarmData";
 import { useLoaderData } from "react-router-dom";
 import CardImage from "../../../Components/CardImage";
 import AppLink from "../../../UI/AppLink";
@@ -11,29 +12,30 @@ const BreedInventory = () => {
   const { isLoading, error, data, sendRequest } = useHttpGetWithPagination();
 
   useEffect(() => {
-    sendRequest(`${apiUrls.urlRabbits}`);
+    sendRequest(
+      `${apiUrls.urlRabbits}?breed=${decodeURIComponent(breedSelected)}`
+    );
   }, [sendRequest, breedSelected]);
 
-  const rabbits =
-    !isLoading && data
-      ? data.filter(
-          (breed) => breed.breed === decodeURIComponent(breedSelected)
-        )
-      : [];
-
+  const { rabbits, errorFarmData, isDataReady } = useFetchRabbitsWithFarmData(
+    isLoading,
+    data,
+    sendRequest,
+    breedSelected
+  );
   return (
     <>
-      {isLoading && (
+      {!isDataReady && !error && (
         <h2 className="text-muted text-center m-5 p-5">Cargando...</h2>
       )}
-      {error && (
+      {(error || errorFarmData) && (
         <h2 className="text-danger text-center m-5 p-5">
           Ha ocurrido un error, intente de nuevo
         </h2>
       )}
-      {!isLoading && !error && rabbits.length === 0 && (
+      {isDataReady && !error && !errorFarmData && rabbits.length === 0 && (
         <h2 className="text-muted text-center m-5 p-5">
-          No hay conejos disponibles
+          No hay conejos disponibles de raza {breedSelected}
         </h2>
       )}
       {rabbits.length > 0 && (
@@ -47,11 +49,18 @@ const BreedInventory = () => {
                 key={rabbit.id}
                 className="my-2 col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center"
               >
-                <AppLink href={`/market/rabbit/${rabbit.id}`}>
+                <AppLink
+                  href={`/market/rabbit/${rabbit.id}?farmName=${rabbit.farmName}&farmAddress=${rabbit.farmAddress}`}
+                >
                   <CardImage
                     image={rabbit.photo}
                     title={rabbit.tag}
                     text={`$ ${rabbit.price}`}
+                    link={{
+                      url: "#",
+                      className: "text-muted",
+                      text: `Granja: ${rabbit.farmName}, Ubicacion: ${rabbit.farmAddress}`,
+                    }}
                   />
                 </AppLink>
               </div>

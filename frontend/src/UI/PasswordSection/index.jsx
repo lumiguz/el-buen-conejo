@@ -22,7 +22,7 @@ const index = ({id, placeholder, label, onChange}) => {
                 className="h-100 position-absolute end-0 btn pointer"
                 onClick={() => setState(!state)}
                 />
-                <div class="invalid-feedback">
+                <div className="invalid-feedback">
                     Por favor escribe un {label}
                 </div>
             </div>
