@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useNavigate } from "react-router-dom";
+import styles from './styles.module.css';
 
 const FarmCard = ({id, photo, name, description, address}) => {
 
@@ -7,12 +8,12 @@ const FarmCard = ({id, photo, name, description, address}) => {
 
   return (
     <div>
-        <div className={`card d-inline-flex flex-column rounded m-3 shadow bg-body-tertiary rounded `}>
-            <img src={photo} alt="farmProfile" width='auto' className={`img-fluid`}/>
+        <div className={`card d-inline-flex flex-column rounded m-3 shadow bg-body-tertiary rounded align-self-center `}>
+            <img src={photo} alt="farm img" className={`card-img-top img-fluid ${styles.imageSize}`}/>
             <div className='card-body'>
                 <h5 className='card-title'>{name}</h5>
-                <p className='card-text'>{description}</p>
-                <p className='card-text'>{address}</p>
+                <p className={`card-text ${styles.textLimit}`}>{description}</p>
+                <p className={`card-text ${styles.textLimit}`}>{address}</p>
                 <button onClick={()=> navigate(`/farms/${id}`)} className='btn btn-primary'>Ver Granja</button>
             </div>
         </div>
