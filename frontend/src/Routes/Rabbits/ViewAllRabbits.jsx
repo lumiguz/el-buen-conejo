@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import useHttpGetWithPagination from "../../hooks/useHttpGetWithPagination";
-import { headers } from "../../hooks/useHttp";
 import { useLoaderData } from "react-router-dom";
 import CardImage from "../../Components/CardImage";
 import { Link } from "react-router-dom";
