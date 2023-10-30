@@ -7,9 +7,9 @@ const FarmForm = () => {
   const [farmImage, setFarmImage] = useState(
     '/static/images/littersPlaceHolder.svg'
   );
-  
-  const { isLoading, error, data, sendRequest, isntOk } = useHttp()
-  const [formSubmited, setFormSubmited] = useState(false)
+
+  const { isLoading, error, data, sendRequest, isntOk } = useHttp();
+  const [formSubmited, setFormSubmited] = useState(false);
 
   const [farmData, setFarmName] = useState({
     is_active: true,
@@ -30,8 +30,8 @@ const FarmForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    sendRequest(`${apiUrls.urlFarms}`, 'POST', farmData)
-    setFormSubmited(true)
+    sendRequest(`${apiUrls.urlFarms}`, 'POST', farmData);
+    setFormSubmited(true);
   };
 
   return (
@@ -123,9 +123,11 @@ const FarmForm = () => {
       </div>
 
       {/* if the form is submited show a message */}
-      {formSubmited && <p className="text-success"> Granja creada correctamente</p>}
+      {formSubmited && (
+        <p className='text-success'> Granja creada correctamente</p>
+      )}
       {/* if the form has a error show a message */}
-      {isntOk && <p className="text-danger"> {isntOk.error} </p>}
+      {isntOk && <p className='text-danger'> {isntOk.error} </p>}
     </form>
   );
 };
