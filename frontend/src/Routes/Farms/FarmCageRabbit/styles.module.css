@@ -1,0 +1,11 @@
+.cardSize {
+    max-width: 300px;
+    min-width: 300px;
+    max-height: 500px;
+    min-height: 300px;
+}
+
+.imgSize{
+    width: 300px !important;
+    height: 200px !important;
+}

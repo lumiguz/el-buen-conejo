@@ -7,10 +7,8 @@ const ProfileHome =  () =>{
 
     return(
         <>
-       
-        <Profile/>
-       
-       <MenuProfile/>
+            <Profile/>
+            <MenuProfile/>
         </>
     )
 

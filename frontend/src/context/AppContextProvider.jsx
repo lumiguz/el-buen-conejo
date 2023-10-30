@@ -1,5 +1,4 @@
 import React from 'react'
-import { usuarios } from '../utils/database'
 
 const AppContext = React.createContext()
 

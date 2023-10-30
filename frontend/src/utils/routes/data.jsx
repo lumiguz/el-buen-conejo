@@ -34,6 +34,7 @@ import ViewCageEdit from "../../Routes/Cage/CageDetails/CageEdit/ViewCageEdit";
 //#region import farms
 import Farms from "../../Routes/Farms";
 import FarmDetail from "../../Routes/Farms/FarmDetail";
+import FarmCageRabbit from "../../Routes/Farms/FarmCageRabbit";
 //#endregion
 //#region import litters
 import Litters from "../../Routes/Litters";
@@ -234,30 +235,39 @@ export const routes = createBrowserRouter([
     ),
     loader: ({ params }) => params.farmId,
   },
-  //#endregion
-  //#region routes for litters: stop implementing
   {
-    path: "/litters",
-    element: <Litters />,
+    path: "/farms/:farmId/cages/:cageId",
+    element: (
+      <Layout>
+        <FarmCageRabbit />
+      </Layout>
+    ),
+    loader: ({ params }) => {
+      return {
+        farmId: params.farmId,
+        cageId: params.cageId,
+      };
+    },
   },
   //#endregion
-
-    //#region routes for profile
+  //#region routes for profile
   {
     path: "/profile",
     element: (
       <Layout>
-    <ProfileHome/>
+        <ProfileHome />
       </Layout>
     ),
   },
   {
     path: "/editProfile",
-    element: (
-     
-    <EditProfile/>
-    
-    ),
+    element: <EditProfile />,
+  },
+  //#endregion
+  //#region routes for litters: stop implementing
+  {
+    path: "/litters",
+    element: <Litters />,
   },
   //#endregion
 ]);

@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
-import { headers } from "./useHttp";
+import Cookies from "js-cookie";
+// import { headers } from "./useHttp";
 
 const useHttpGetWithPagination = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -15,7 +16,11 @@ const useHttpGetWithPagination = () => {
             while (nextPageUrl) {
                 const response = await fetch(nextPageUrl, {
                     method: 'GET',
-                    headers: headers
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Authorization': Cookies.get('authToken') ? `Bearer ${Cookies.get('authToken')}` : null
+                    }
                 });
                 if (!response.ok) {
                     throw new Error('Request failed!');

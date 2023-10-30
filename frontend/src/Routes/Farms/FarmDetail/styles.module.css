@@ -1,0 +1,11 @@
+.maxSize {
+    max-width: 400px;
+    max-height: 700px;
+    cursor: pointer;
+}
+
+.imageSize{
+    width: auto !important;
+    height: 200px !important;
+    object-fit: cover;
+}
