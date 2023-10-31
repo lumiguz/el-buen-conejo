@@ -13,9 +13,6 @@ const ViewAllRabbits = () => {
     const { isLoading, error, data, sendRequest } = useHttpGetWithPagination();
     const [isDataReady, setIsDataReady] = useState(false);
   
-    // Agrega el estado para almacenar el ID del conejo seleccionado
-    const [selectedRabbitId, setSelectedRabbitId] = useState(null);
-  
     useEffect(() => {
       sendRequest(`${apiUrls.urlRabbits}`);
     }, [sendRequest, breedSelected]);
@@ -33,10 +30,10 @@ const ViewAllRabbits = () => {
   
         Promise.all(
           rabbitsData.map((rabbit) =>
-            fetch(`${apiUrls.urlCages}${rabbit.cage_id}`, { headers })
+            fetch(`${apiUrls.urlCages}${rabbit.cage_id}`)
               .then((response) => response.json())
               .then((cageData) =>
-                fetch(`${apiUrls.urlFarms}${cageData.farm_id}`, { headers })
+                fetch(`${apiUrls.urlFarms}${cageData.farm_id}`)
                   .then((response) => response.json())
                   .then((farmData) => ({
                     ...rabbit,
@@ -51,11 +48,6 @@ const ViewAllRabbits = () => {
         });
       }
     }, [isLoading, data, sendRequest, breedSelected]);
-  
-    // Manejar la función para establecer el conejo seleccionado
-    const handleSelectRabbit = (rabbitId) => {
-      setSelectedRabbitId(rabbitId);
-    };
   
     return (
       <>
@@ -81,7 +73,7 @@ const ViewAllRabbits = () => {
                   key={rabbit.id}
                   className="my-2 col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center"
                 >
-                  <AppLink href={`/market/rabbit/${rabbit.id}`}>
+                  <AppLink href={`/rabbits/${rabbit.id}`}>
                     <CardImage
                       image={rabbit.photo}
                       title={rabbit.tag}

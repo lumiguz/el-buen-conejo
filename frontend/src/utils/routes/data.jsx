@@ -130,23 +130,15 @@ export const routes = createBrowserRouter([
     path: "/rabbits",
     element: (
       <Layout>
-        <ViewRabbits />
+        <ViewAllRabbits/>
       </Layout>
     ),
   },
-  // {
-  //   path: "/rabbits/:rabbitId",
-  //   element: (
-  //     <Layout>
-  //       <ViewRabbits />
-  //     </Layout>
-  //   ),
-  // },
   {
-    path: "/allrabits/rabbits",
+    path: "/rabbits/:rabbitId",
     element: (
       <Layout>
-        <ViewAllRabbits/>
+        <ViewRabbits />
       </Layout>
     ),
   },

@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
+import { useHttp } from "../../hooks/useHttp";
+import { useLoaderData } from "react-router-dom";
 import MenuRabbitPerfil from "./MenuRabbitPerfil";
 import styles from "../MenuRabbit/menuRabbit.module.css";
 import MenuRabbitNotes from "../MenuRabbit/MenuRabbitNotes"
@@ -32,25 +34,36 @@ function PaginatedView({ currentPage, onPageChange }) {
   );
 }
 
-const MenuRabbit = ({ selectedRabbitId }) => {
+const MenuRabbit = () => {
   const [currentPage, setCurrentPage] = useState("perfil");
   const [perfilActive, setPerfilActive] = useState(true);
   const [notasActive, setNotasActive] = useState(false);
-  const [selectedRabbitDetails, setSelectedRabbitDetails] = useState(null);
+
+  const rabbitId = useLoaderData();
+  const { isLoading, error, data, sendRequest } = useHttp();
 
   useEffect(() => {
-    // Aquí puedes hacer una llamada a la API para obtener el detalle del conejo seleccionado
-    if (selectedRabbitId) {
-      fetch(`${apiUrls.urlRabbits}${selectedRabbitId}/`)
-        .then((response) => response.json())
-        .then((rabbitDetails) => {
-          setSelectedRabbitDetails(rabbitDetails);
-        })
-        .catch((error) => {
-          console.error("Error al obtener los detalles del conejo:", error);
-        });
+    sendRequest(`${apiUrls.urlRabbits}${rabbitId}/`);
+  }, [sendRequest, rabbitId]);
+
+  if (isLoading) {
+    return <h2 className="text-muted text-center m-5 p-5">Cargando...</h2>;
+  }
+
+  const dataInfoRabbit = () => {
+    if (!isLoading && data) {
+      return {
+        nombre: data.tag,
+        raza: data.breed,
+        genero: data.genre,
+        fechaNacimiento: data.birthday,
+        edad: data.age,
+        peso: data.weight,
+        precio: data.price,
+      };
     }
-  }, [selectedRabbitId]);
+    return {};
+  };
 
   if (currentPage === "perfil") {
     return (
@@ -68,9 +81,7 @@ const MenuRabbit = ({ selectedRabbitId }) => {
             }
           }}
         />
-        {perfilActive && selectedRabbitDetails ? (
-          <MenuRabbitPerfil rabbitData={selectedRabbitDetails} />
-        ) : null}
+        <MenuRabbitPerfil rabbitData={ dataInfoRabbit() } />
         {notasActive && <MenuRabbitNotes />}
       </div>
     );
