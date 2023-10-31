@@ -8,7 +8,8 @@ from django_filters.rest_framework import DjangoFilterBackend
 from django.db.models import Q
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.decorators import action
-from drf_spectacular.utils import extend_schema
+from drf_spectacular.utils import extend_schema, OpenApiParameter, OpenApiExample
+from utils.permisssions import ListAndRetrievePermission
 
 
 class RabbitViewSet(viewsets.ModelViewSet):
@@ -27,6 +28,7 @@ class RabbitViewSet(viewsets.ModelViewSet):
         "age",
         "tag",
     )
+    permission_classes = [ListAndRetrievePermission]
 
     def get_queryset(self):
         queryset = Rabbit.objects.all()
@@ -117,3 +119,25 @@ class RabbitViewSet(viewsets.ModelViewSet):
             return Response(data=serializer.data, status=status.HTTP_200_OK)
         else:
             return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    @extend_schema(
+        examples=[
+            OpenApiExample(
+                "Example Schema",
+                {
+                    "breed": "Azteca",
+                    "genre": "Macho",
+                    "birthday": "2023-10-31",
+                    "price": "-",
+                    "weight": "-1",
+                    "cage_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                },
+            )
+        ],
+    )
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        return Response(serializer.data, status=status.HTTP_201_CREATED)

@@ -98,7 +98,7 @@ class UserViewSet(viewsets.GenericViewSet):
                     "username": "string",
                     "email": "user@example",
                     "password": "string",
-                    "is_active": "True",
+                    "is_producer": "True",
                 },
             )
         ],

@@ -9,21 +9,33 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
 from apps.farms.models import Farm
-from drf_spectacular.utils import extend_schema
+from drf_spectacular.utils import extend_schema, OpenApiParameter, OpenApiExample
+from utils.permisssions import ListAndRetrievePermission
 
 """
     The FarmViewset class is a generic viewset that allows any user to access and manipulate Farm
     objects. It is used to create, retrieve, update, and delete Farm objects using the farmSerializer.
 """
 
-PATH_PHOTOS = "/fotos/granjas/"
-
 
 class FarmViewset(GenericViewSet):
     queryset = Farm.objects.all()
     serializer_class = farmSerializer
     pagination_class = FarmPagination
+    permission_classes = [ListAndRetrievePermission]
 
+    @extend_schema(
+        examples=[
+            OpenApiExample(
+                "Example Schema",
+                {
+                    "name": "string",
+                    "address": "string",
+                    "description": "string",
+                },
+            )
+        ],
+    )
     def create(self, request, *args, **kwargs):
         """
         The above function creates a new object using the provided request data and saves it using the

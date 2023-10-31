@@ -8,7 +8,8 @@ from utils.filters import CageFilterSet
 from utils.pagination import CagePagination
 from apps.cages.models import Cage
 from rest_framework.parsers import MultiPartParser, FormParser
-from drf_spectacular.utils import extend_schema
+from drf_spectacular.utils import extend_schema, OpenApiParameter, OpenApiExample
+from utils.permisssions import ListAndRetrievePermission
 
 
 class CageViewSet(viewsets.ModelViewSet):
@@ -37,6 +38,8 @@ class CageViewSet(viewsets.ModelViewSet):
         "total_weight",
         "created",
     )
+
+    permission_classes = [ListAndRetrievePermission]
 
     # Range of price filter
     @action(detail=False, methods=["get"])
@@ -85,6 +88,17 @@ class CageViewSet(viewsets.ModelViewSet):
         return super().list(request, *args, **kwargs)
 
     # create cage
+    @extend_schema(
+        examples=[
+            OpenApiExample(
+                "Example Schema",
+                {
+                    "is_public": True,
+                    "farm_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                },
+            )
+        ],
+    )
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
 
