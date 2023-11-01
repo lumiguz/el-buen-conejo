@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom'
 import { useHttp } from '../../hooks/useHttp'
 import Cookies from 'js-cookie'
 import { apiUrls } from '../../utils/links'
+import Loader from '../../UI/Loader'
 
 const index = () => {
 
@@ -75,7 +76,7 @@ const index = () => {
             {!data && isntOk && <p className="text-danger"> {isntOk.error} </p>}
             {data && <p className="text-success"> {data.message} </p>}
             <Button type="submit" className="btn-success w-100 my-3">
-                {isLoading ? "Cargando..." : "Ingresar"}
+                {isLoading ? <Loader active={isLoading} /> : "Ingresar"}
             </Button>
             <AppLink href="/forgot" className="form-check-label" htmlFor="forgotPass">
                 ¿Olvidaste la contraseña?
