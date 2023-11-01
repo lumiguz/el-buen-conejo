@@ -2,13 +2,14 @@ import FarmCard from '../../Components/FarmCard/Index';
 import FarmForm from '../../Components/FarmForm';
 import FarmBanner from '../../UI/FarmBanner/index';
 import { useEffect, useState } from 'react';
-import { useHttp } from "../../hooks/useHttp";
+import  useHttpGetWithPagination  from "../../hooks/useHttpGetWithPagination";
 
 const Farms = () => {
-  const { isLoading, data, error, sendRequest } = useHttp();
+  const { isLoading, data, error, sendRequest } = useHttpGetWithPagination();
+
   const [farmData, setfarmData] = useState([])
   useEffect(() => {
-    sendRequest(`https://apiebc.online/api/farms`);
+    sendRequest(`https://apiebc.online/api/farms/`);
   }, [sendRequest]);
 
   useEffect(() => {
@@ -16,6 +17,7 @@ const Farms = () => {
       setfarmData(data)
     }
   }, [data])
+
   
   return (
     <div>
