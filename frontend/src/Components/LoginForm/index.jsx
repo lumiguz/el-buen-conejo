@@ -48,7 +48,8 @@ const index = () => {
 
     if (data) {
         Cookies.set('authToken', data.token)
-        localStorage.setItem('logedAccount', JSON.stringify(data.user?.username))
+        Cookies.set('userId', data.id)
+        localStorage.setItem('logedAccount', JSON.stringify(data.user))
         setTimeout(() => {
             navigate('/')
         }, 1000);
