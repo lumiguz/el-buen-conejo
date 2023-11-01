@@ -2,6 +2,7 @@ import  {useState} from "react";
 
 import CardCageProfile from "../cardCageProfile";
 import styles from "../MenuProfile/menuProfileJaulas.module.css";
+import AppLink from "../../UI/AppLink";
 
 const MenuRabbitCamada = () =>{
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -12,7 +13,8 @@ const MenuRabbitCamada = () =>{
     
     return<>
     <div className={styles.container}>
-    <div className="dropdown">
+      {/* filtro  */}
+    {/* <div className="dropdown">
         <a className="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" onClick={toggleDropdown}>
           Todas
         </a>
@@ -25,10 +27,13 @@ const MenuRabbitCamada = () =>{
           <li><a className="dropdown-item" href="#">Activas</a></li>
           <li><a className="dropdown-item" href="#">Inactivas</a></li>
         </ul>
-      </div>
+      </div> */}
       <div className="row">
         <div className="col-md-12 d-flex justify-content-end">
+          <AppLink href='/cage'>
+
       <button type="button" className="btn btn-success m-1">Crear Jaula</button>
+          </AppLink>
         </div>
       </div>
       <div className="container">
