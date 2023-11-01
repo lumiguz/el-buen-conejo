@@ -38,7 +38,7 @@ class FarmViewset(viewsets.ModelViewSet):
         examples=[
             OpenApiExample(
                 "Example Schema",
-                {
+                {   "profile_id": "60dda079-2c9c-4c18-b787-d1de9fd45189",
                     "name": "string",
                     "address": "string",
                     "description": "string",
@@ -64,13 +64,16 @@ class FarmViewset(viewsets.ModelViewSet):
     def get_queryset(self):
         queryset = Farm.objects.filter(is_active=True)
 
+        profile_id = self.request.query_params.get("profile_id")
         created = self.request.query_params.get("created")
         name = self.request.query_params.get("name")
         address = self.request.query_params.get("address")
         description = self.request.query_params.get("description")
 
-        filters = Q()
+        filters = Q() 
 
+        if profile_id:
+            filters &= Q(profile_id=profile_id)
         if created:
             filters &= Q(created__icontains=created)
         if name:
