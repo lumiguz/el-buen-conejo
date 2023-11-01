@@ -13,3 +13,15 @@ class CageSerializer(serializers.ModelSerializer):
     def get_rabbits(self, obj):
         rabbits = obj.rabbits.filter(is_active=True).order_by("-created",)
         return RabbitSerializer(rabbits, many=True).data
+        
+
+
+class CagePhotoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Cage
+        fields = ("photo",)
+
+    def update(self, instance, validated_data):
+        instance.photo = validated_data.get("photo", instance.photo)
+        instance.save()
+        return instance

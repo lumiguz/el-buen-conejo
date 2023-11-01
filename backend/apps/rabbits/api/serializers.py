@@ -100,3 +100,14 @@ class RabbitSerializer(serializers.ModelSerializer):
         instance.is_active = False
         instance.save()
 
+
+
+class RabbitPhotoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Rabbit
+        fields = ("photo",)
+
+    def update(self, instance, validated_data):
+        instance.photo = validated_data.get("photo", instance.photo)
+        instance.save()
+        return instance
