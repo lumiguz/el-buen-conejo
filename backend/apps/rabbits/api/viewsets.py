@@ -9,7 +9,7 @@ from django.db.models import Q
 
 
 class RabbitViewSet(viewsets.ModelViewSet):
-    queryset = Rabbit.objects.all().order_by("-created")
+    queryset = Rabbit.objects.all().order_by("-created") 
     serializer_class = RabbitSerializer
     pagination_class = RabbitPagination
     filter_backends = [
@@ -26,7 +26,7 @@ class RabbitViewSet(viewsets.ModelViewSet):
     )
 
     def get_queryset(self):
-        queryset = Rabbit.objects.all()
+        queryset = Rabbit.objects.filter(is_active=True)
 
         created = self.request.query_params.get("created")
         breed = self.request.query_params.get("breed")
@@ -87,11 +87,11 @@ class RabbitViewSet(viewsets.ModelViewSet):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def destroy(self, request, pk=None):
-        rabbit_destroy = self.serializer_class.Meta.model.objects.filter(id=pk).update(
-            is_active=False
-        )
-        if rabbit_destroy == 1:
+    def destroy(self, request, pk=None):   
+        rabbit_destroy = self.serializer_class.Meta.model.objects.filter(id=pk).first()
+        if rabbit_destroy:
+            serializer = self.get_serializer(rabbit_destroy)
+            serializer.delete(rabbit_destroy)
             return Response(
                 {"message": "Conejo eliminado correctamente"},
                 status=status.HTTP_204_NO_CONTENT,
@@ -99,3 +99,4 @@ class RabbitViewSet(viewsets.ModelViewSet):
         return Response(
             {"message": "El conejo no existe"}, status=status.HTTP_404_NOT_FOUND
         )
+
