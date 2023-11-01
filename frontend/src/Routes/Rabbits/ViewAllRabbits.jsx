@@ -60,18 +60,8 @@ const ViewAllRabbits = () => {
                       image={rabbit.photo}
                       title={rabbit.tag}
                       text={`$ ${rabbit.price}`}
-                      link={{
-                        url: "#",
-                        className: "text-muted",
-                        text: `Granja: ${rabbit.farmName}, Ubicación: ${rabbit.farmAddress}`,
-                      }}
                     />
                   </AppLink>
-  
-                  {/* Agrega un botón para "Ver detalles" y llama a la función handleSelectRabbit con el ID del conejo */}
-                  <Link to={`/rabbits/${rabbit.id}`}>
-    Ver detalles
-  </Link>
                 </div>
               ))}
             </div>
