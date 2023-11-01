@@ -8,7 +8,7 @@ const FarmCard = ({id, photo, name, description, address}) => {
 
   return (
     <div>
-        <div className={`card d-inline-flex flex-column rounded m-3 shadow bg-body-tertiary rounded align-self-center `}>
+        <div className={`card d-inline-flex flex-column rounded m-3 shadow bg-body-tertiary rounded align-self-center ${styles.cardSize} `}>
             <img src={photo} alt="farm img" className={`card-img-top img-fluid ${styles.imageSize}`}/>
             <div className='card-body'>
                 <h5 className='card-title text-wrap'>{name}</h5>

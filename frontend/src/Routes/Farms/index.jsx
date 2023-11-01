@@ -1,21 +1,22 @@
-import FarmCard from "../../Components/FarmCard/Index";
-import FarmForm from "../../Components/FarmForm";
-import FarmBanner from "../../UI/FarmBanner/index";
-import { useEffect, useState } from "react";
-import { useHttp } from "../../hooks/useHttp";
+import FarmCard from '../../Components/FarmCard/Index';
+import FarmForm from '../../Components/FarmForm';
+import FarmBanner from '../../UI/FarmBanner/index';
+import { useEffect, useState } from 'react';
+import  useHttpGetWithPagination  from "../../hooks/useHttpGetWithPagination";
 
 const Farms = () => {
-  const { isLoading, data, error, sendRequest } = useHttp();
-  const [farmData, setfarmData] = useState([]);
+  const { isLoading, data, error, sendRequest } = useHttpGetWithPagination();
+
+  const [farmData, setfarmData] = useState([])
   useEffect(() => {
-    sendRequest(`https://apiebc.online/api/farms`);
+    sendRequest(`https://apiebc.online/api/farms/`);
   }, [sendRequest]);
 
   useEffect(() => {
     if (data) {
       setfarmData(data);
     }
-  }, [data]);
+  }, [data])
 
   return (
     <div>
