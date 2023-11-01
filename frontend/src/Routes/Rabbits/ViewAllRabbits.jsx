@@ -25,27 +25,9 @@ const ViewAllRabbits = () => {
           tag: rabbit.tag,
           photo: rabbit.photo,
           price: rabbit.price,
-          farm_id: rabbit.farm_id,
         }));
-  
-        Promise.all(
-          rabbitsData.map((rabbit) =>
-            fetch(`${apiUrls.urlCages}${rabbit.cage_id}`)
-              .then((response) => response.json())
-              .then((cageData) =>
-                fetch(`${apiUrls.urlFarms}${cageData.farm_id}`)
-                  .then((response) => response.json())
-                  .then((farmData) => ({
-                    ...rabbit,
-                    farmName: farmData.name,
-                    farmAddress: farmData.address,
-                  }))
-              )
-          )
-        ).then((rabbitsWithFarmData) => {
-          setRabbits(rabbitsWithFarmData);
-          setIsDataReady(true);
-        });
+        setRabbits(rabbitsData);
+        setIsDataReady(true);
       }
     }, [isLoading, data, sendRequest, breedSelected]);
   

@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from "react";
 import { useHttp } from "../../hooks/useHttp";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useLocation } from "react-router-dom";
 import MenuRabbitPerfil from "./MenuRabbitPerfil";
 import styles from "../MenuRabbit/menuRabbit.module.css";
 import MenuRabbitNotes from "../MenuRabbit/MenuRabbitNotes"
@@ -39,7 +39,7 @@ const MenuRabbit = () => {
   const [perfilActive, setPerfilActive] = useState(true);
   const [notasActive, setNotasActive] = useState(false);
 
-  const rabbitId = useLoaderData();
+  const rabbitId = useLocation().pathname.split("/").pop();
   const { isLoading, error, data, sendRequest } = useHttp();
 
   useEffect(() => {

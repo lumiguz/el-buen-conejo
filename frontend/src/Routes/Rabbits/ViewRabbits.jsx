@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useHttp } from "../../hooks/useHttp";
-import { useLoaderData, useSearchParams } from "react-router-dom";
+import { useLoaderData, useLocation } from "react-router-dom";
 import { apiUrls } from "../../utils/links";
 import styles from "../Rabbits/ViewRabbits.module.css";
 import Infocard from "../../Components/InfocardRabbit/Infocard.jsx";
@@ -9,18 +9,35 @@ import Carousel from "../../Components/Carousel/Carousel";
 import MenuRabbit from "../../Components/MenuRabbit/MenuRabbit";
 // import RabbitForm from "../../Components/RabbitForm/RabbitForm";
 const ViewRabbits = () => {
-  const rabbitId = useLoaderData();
+  const rabbitId = useLocation().pathname.split("/").pop();
   const { isLoading, error, data, sendRequest } = useHttp();
 
   useEffect(() => {
     sendRequest(`${apiUrls.urlRabbits}${rabbitId}/`);
   }, [sendRequest, rabbitId]);
 
+  console.log(rabbitId.pathname)
+
   if (isLoading) {
     return <h2 className="text-muted text-center m-5 p-5">Cargando...</h2>;
   }
 
   const imagesCarousel = data?.photo.split(",");
+
+    const dataInfoRabbit = () => {
+    if (!isLoading && data) {
+      return {
+        nombre: data.tag,
+        raza: data.breed,
+        genero: data.genre,
+        fechaNacimiento: data.birthday,
+        edad: data.age,
+        peso: data.weight,
+        precio: data.price,
+      };
+    }
+    return {};
+  };
 
   return (
     <>
