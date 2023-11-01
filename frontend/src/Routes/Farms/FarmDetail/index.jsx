@@ -24,7 +24,7 @@ const FarmDetail = () => {
   return (
     <div>
       {data && (
-      <div className='d-flex flex-column'>
+      <div className={`d-flex flex-column ${styles.backG} rounded`}>
         <h2 className='mt-5 d-flex justify-content-center align-items-center '>
           {data.name}
         </h2>
@@ -42,11 +42,11 @@ const FarmDetail = () => {
 
         {/* <h4 className='my-3 title d-flex flex-column justify-content-center align-items-center'>{data.name}</h4> */}
         <p className='text-break lh-sm text-center fs-5'>{data.description}</p>
-        <section>
+        <section className='pb-5'>
 
           {dataCages && (
             <div className='d-flex flex-column justify-content-center align-items-center'>
-              <h4 className='mt-5'>Jaulas de {data.name}</h4>
+              <h4 className='mt-4'>Jaulas de {data.name}</h4>
               <div className='d-flex flex-wrap justify-content-center align-items-center'>
                 {/* map the cages only matched with farmId */}
                 {dataCages.filter(cage => cage.farm_id === farmId).map((cage) => (
