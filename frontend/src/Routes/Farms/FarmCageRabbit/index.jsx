@@ -12,20 +12,23 @@ const Index = () => {
   useEffect(() => {
     sendRequest(`${apiUrls.urlRabbits}?cage_id=${id.cageId}`);
   }, [sendRequest, id]);
-  console.log(data);
 
   return (
     <div>
-      <h3 className='text-center mt-2'>Conejos detro de la jaula: {id.farmId}</h3>
+      <h3 className='text-center mt-2'>Conejos detro de la jaula: {id.cageId}</h3>
 
-      <div className='d-flex flex-wrap justify-content-center align-items-center row row-cols-lg-3 row-cols-sm-1 row-cols-md-2'>
-        {isLoading && <p>Loading...</p>}
+      <p className='text-center text-wrap'>Los conejos en las granjas son cuidados de manera meticulosa para garantizar su bienestar. Los agricultores proporcionan un ambiente limpio y seguro, asegurando que tengan acceso a una dieta equilibrada y agua fresca en todo momento. Además, se les brinda refugio adecuado para protegerlos de condiciones climáticas extremas y depredadores. Se monitorea de cerca su salud y se les brinda atención veterinaria cuando es necesario. En resumen, en las granjas, los conejos reciben un cuidado constante y dedicado para asegurar su salud y comodidad.</p>
+
+      <div className='d-flex flex-wrap justify-content-center align-items-center row row-cols-lg-3 row-cols-sm-1 row-cols-md-2 '>
+        {isLoading && <p className='text-center'>Loading...</p>}
         {error && <p>{error}</p>}
+
+        {data && data.length === 0 && <h2 className='text-center mt-5 text-danger'>No hay conejos en esta jaula ):</h2>}
         {data &&
           data.map((rabbit) => (
             <div
               key={rabbit.id}
-              className={`card ${styles.cardSize} m-4 shadow bg-body-tertiary`}
+              className={`card ${styles.cardSize} m-4 shadow ${rabbit.genre === 'Hembra' ? styles.backColorF : styles.backColor}`}
             >
               <img
                 src={rabbit.photo}
@@ -34,7 +37,7 @@ const Index = () => {
               />
 
               <div className='card-body'>
-                <h6 className='card-subtitle mb-2 text-muted'>
+                <h6 className='card-subtitle mb-2'>
                   <span className='fw-bold'>Raza: </span>
                   {rabbit.breed}
                 </h6>

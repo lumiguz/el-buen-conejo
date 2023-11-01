@@ -9,3 +9,7 @@
     height: 200px !important;
     object-fit: cover;
 }
+
+.backG {
+    background-color: #d6d6d634 !important;
+}
