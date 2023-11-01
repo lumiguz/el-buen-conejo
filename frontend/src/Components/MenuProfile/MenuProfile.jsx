@@ -7,8 +7,8 @@ import styles from "../MenuProfile/menuProfile.module.css";
 function PaginatedView({ currentPage, onPageChange }) {
   const pages = [
     { id: "misJaulas", label: "Mis Jaulas" },
-    { id: "camadas", label: "Camadas" },
-    { id: "informes", label: "Informes" },
+    // { id: "camadas", label: "Camadas" }, Por implementar
+    // { id: "informes", label: "Informes" }, Por implementar
     { id: "misVideos", label: "Mis videos" },
     { id: "enElMercado", label: "En el mercado" },
   ];
@@ -37,7 +37,7 @@ function PaginatedView({ currentPage, onPageChange }) {
 }
 
 const MenuProfile = () => {
-  const [currentPage, setCurrentPage] = useState("perfil");
+  const [currentPage, setCurrentPage] = useState("misJaulas");
 
   const handlePageChange = (pageId) => {
     // Actualiza la página actual cuando se hace clic en la paginación personalizada
