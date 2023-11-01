@@ -14,19 +14,18 @@ const Farms = () => {
 
   useEffect(() => {
     if (data) {
-      setfarmData(data)
+      setfarmData(data);
     }
   }, [data])
 
-  
   return (
     <div>
-      <header className='d-flex flex-column justify-content-center align-items-center'>
+      <header className="d-flex flex-column justify-content-center align-items-center">
         <FarmBanner />
 
-        <h4 className='mt-4'>Nuestras Granjas</h4>
+        <h4 className="mt-4">Nuestras Granjas</h4>
 
-        <p className='text-center text-wrap'>
+        <p className="text-center text-wrap">
           Las granjas de conejos son instalaciones donde se crían conejos en un
           entorno controlado. Los conejos se alimentan con una dieta
           equilibrada, reciben atención veterinaria y se reproducen para
@@ -35,31 +34,30 @@ const Farms = () => {
         </p>
       </header>
 
-      <section className='d-flex flex-wrap justify-content-center align-items-center row row-cols-lg-3 row-cols-sm-1 row-cols-md-2'>
+      <section className="d-flex flex-wrap justify-content-center align-items-center row row-cols-lg-3 row-cols-sm-1 row-cols-md-2">
         {/* for each id will use a farm card */}
-
-        {farmData && farmData.map((farm) => (
-          <FarmCard
-            key={farm.id}
-            name={farm.name}
-            description={farm.description}
-            address={farm.address}
-            photo={farm.photo}
-            id={farm.id}
-          />
-        ))}
+        {farmData.length > 0 &&
+          farmData.results.map((farm) => (
+            <FarmCard
+              key={farm.id}
+              name={farm.name}
+              description={farm.description}
+              address={farm.address}
+              photo={farm.photo}
+              id={farm.id}
+            />
+          ))}
       </section>
 
-      <section className='d-flex flex-wrap justify-content-center mt-3 '>
-
-        <h4 className='mt-2'>¿Quieres registrar tu granja?</h4>
-        <p className='text-center'>
+      <section className="d-flex flex-wrap justify-content-center mt-3 ">
+        <h4 className="mt-2">¿Quieres registrar tu granja?</h4>
+        <p className="text-center">
           Si deseas registrar tu granja de conejos en nuestra plataforma, puedes
           hacerlo a continuación. Solo debes llenar el formulario con la
           información de tu granja.
         </p>
         {/* send farmData to the form */}
-        <FarmForm addFarm={setfarmData}/>
+        <FarmForm addFarm={setfarmData} />
       </section>
     </div>
   );

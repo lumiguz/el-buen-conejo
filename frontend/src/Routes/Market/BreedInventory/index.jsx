@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect } from "react";
 import useHttpGetWithPagination from "../../../hooks/useHttpGetWithPagination";
 import useFetchRabbitsWithFarmData from "../../../hooks/useFetchRabbitsWithFarmData";
 import { useLoaderData } from "react-router-dom";
@@ -9,12 +9,11 @@ import { apiUrls } from "../../../utils/links";
 
 const BreedInventory = () => {
   const breedSelected = useLoaderData();
+  // const breedDecode = decodeURIComponent(breedSelected);
   const { isLoading, error, data, sendRequest } = useHttpGetWithPagination();
 
   useEffect(() => {
-    sendRequest(
-      `${apiUrls.urlRabbits}?breed=${decodeURIComponent(breedSelected)}`
-    );
+    sendRequest(`${apiUrls.urlRabbits}?breed=${breedSelected}&is_active=true`);
   }, [sendRequest, breedSelected]);
 
   const { rabbits, errorFarmData, isDataReady } = useFetchRabbitsWithFarmData(

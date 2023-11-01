@@ -43,6 +43,8 @@ const Navbar = () => {
                   ))}
                 {!isLoggedIn && (
                   <>
+                    <NavItem href="/market">Mercado</NavItem>
+                    <NavItem href="/about">Nosotros</NavItem>
                     <NavItem href="/login" className="text-primary">
                       Iniciar sesión
                     </NavItem>

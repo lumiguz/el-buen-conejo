@@ -11,6 +11,7 @@ import { roles } from '../../utils/roles'
 import { useHttp } from '../../hooks/useHttp'
 import { useNavigate } from 'react-router-dom'
 import { apiUrls } from '../../utils/links'
+import Loader from '../../UI/Loader'
 
 const index = () => {
 
@@ -98,7 +99,7 @@ const index = () => {
             {warning && <p className="text-danger"> La contraseña debe tener más de 8 caracteres </p>}
             {!data && isntOk && <p className="text-danger"> {Object.values(Object.values(isntOk)[1])[0][0]} </p>}
             {data && <p className="text-success"> {data.message} </p>}
-            <Button type="submit" className="btn-success w-100">{isLoading ? "Cargando..." : "Crear cuenta"}</Button>
+            <Button type="submit" className="btn-success w-100">{isLoading ? <Loader active={isLoading} /> : "Crear cuenta"}</Button>
         </form>
     )
 }
