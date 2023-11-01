@@ -7,7 +7,7 @@ const FarmCard = ({id, photo, name, description, address}) => {
   const navigate = useNavigate();
 
   return (
-    <div className={``}>
+    <div>
         <div className={`card d-inline-flex flex-column rounded m-3 shadow bg-body-tertiary rounded align-self-center ${styles.cardSize} `}>
             <img src={photo} alt="farm img" className={`card-img-top img-fluid ${styles.imageSize}`}/>
             <div className='card-body'>
