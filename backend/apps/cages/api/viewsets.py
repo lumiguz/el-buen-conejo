@@ -10,7 +10,7 @@ from apps.cages.models import Cage
 
 
 class CageViewSet(viewsets.ModelViewSet):
-    queryset = Cage.objects.all().order_by("-created")
+    queryset = Cage.objects.filter(is_active=True).order_by("-created",)
     serializer_class = CageSerializer
 
     # custom pagination
@@ -112,8 +112,17 @@ class CageViewSet(viewsets.ModelViewSet):
                             status=status.HTTP_400_BAD_REQUEST)
 
     # delete cage
-    def destroy(self, request, *args, **kwargs):
-        instance = self.get_object()
-        self.perform_destroy(instance)
-        return Response({"message": "La jaula se ha eliminado correctamente."}, 
-                        status=status.HTTP_204_NO_CONTENT)
+    def destroy(self, request, pk=None):
+        cage = self.serializer_class.Meta.model.objects.filter(id=pk, is_active=True).first()
+        if cage:
+            cage.is_active = False
+            cage.save()
+            return Response(
+                {"message": "Jaula eliminada correctamente"},
+                status=status.HTTP_204_NO_CONTENT,
+            )
+        else:
+            return Response(
+                {"message": "La jaula no existe o ya fue eliminada"},
+                status=status.HTTP_404_NOT_FOUND,
+            )
