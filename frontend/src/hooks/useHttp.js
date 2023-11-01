@@ -1,3 +1,9 @@
+// This custom hook is used to manage more easily the Http via axios, you can use the properties isLoading while
+// the state of the promise isn't resolved, in case of error you can use error to show to user the problem in the UI
+// data is an object with some utils properties to manage anothers http petitions and isnt ok can be used to show
+// validation problems in the UI, on another hand sendRequest is the function to realize the http petition, receive
+// url, method, body and use headers to validate a JWT
+
 import Cookies from "js-cookie"
 import { useCallback, useState } from "react"
 
@@ -32,7 +38,7 @@ export const useHttp = () => {
 
                 const responseData = await response.json();
                 setData(responseData);
-                console.log(responseData)
+
             } catch (error) {
                 console.error(error.message);
                 setError(error.message || 'Something went wrong!');

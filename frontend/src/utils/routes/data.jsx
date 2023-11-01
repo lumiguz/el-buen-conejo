@@ -45,6 +45,7 @@ import Litters from "../../Routes/Litters";
 import ProfileHome from "../../Routes/ProfileHome";
 import EditProfile from "../../Routes/EditProfile";
 //#endregion
+import AboutUs from '../../Components/AboutUs';
 
 //implement routes with react-router-dom
 export const routes = createBrowserRouter([
@@ -261,5 +262,15 @@ export const routes = createBrowserRouter([
     path: "/litters",
     element: <Litters />,
   },
+  //#endregion
+  //#region about us
+  {
+    path: "/about",
+    element: (
+      <Layout>
+        <AboutUs />
+      </Layout>
+    ),
+  }
   //#endregion
 ]);
