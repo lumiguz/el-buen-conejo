@@ -1,4 +1,5 @@
-import RabbitForm from "../../../../Components/RabbitForm/RabbitForm";
+import RabbitCageForm from "../../../../Components/RabbitCageForm/RabbitCage";
+/* import RabbitForm from "../../../../Components/RabbitForm/RabbitForm"; */
 import styles from "../CageStepTwoForm/ViewFormTwo.module.css";
 import { useNavigate } from "react-router-dom";
 
@@ -11,7 +12,7 @@ const ViewFormTwo = () => {
         <>
             <section className={styles.flexContainerForm}>
                 <div className={styles.flexContainerFormDiv1}>
-                    <RabbitForm/>
+                    <RabbitCageForm/>
                     <button onClick={() => navigate('/cage/step3')} className={styles.buttonFormRabbit}> Continuar </button>
                 </div>
 
