@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useHttp } from "../../hooks/useHttp";
-import { useLoaderData, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { apiUrls } from "../../utils/links";
 import styles from "../Rabbits/ViewRabbits.module.css";
 import Infocard from "../../Components/InfocardRabbit/Infocard.jsx";
@@ -43,33 +43,12 @@ const ViewRabbits = () => {
     <>
       <div>
         <div className="container">
-          <nav id={styles.breadcrumbRabbit}>
-            <ol className="breadcrumb">
-              <li className="breadcrumb-item">
-                <a href="#" id={styles.linkBreadcrumbRabbit}>
-                  Perfil
-                </a>
-              </li>
-              <li className="breadcrumb-item active" aria-current="page">
-                Biblioteca
-              </li>
-              <li className="breadcrumb-item active" aria-current="page">
-                Biblioteca
-              </li>
-            </ol>
-          </nav>
           <div className="container">
             <div className="d-flex flex-row">
               <div className="col-md-9 m-2">
                 <CardRabbit />
               </div>
-              <div className="col-md-1 m-2">
-                <Infocard />
-              </div>
-              <div className="col-md-1 m-2">
-                <Infocard />
-              </div>
-              <div className="col-md-1 m-2">
+              <div className="col-md-3 m-2">
                 <Infocard />
               </div>
             </div>

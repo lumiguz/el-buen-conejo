@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useHttp } from "../../hooks/useHttp";
-import { useLoaderData, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { apiUrls } from "../../utils/links";
 import styles from "../CardRabbit/CardRabbit.module.css"
 const CardRabbit = () =>{
@@ -35,8 +35,6 @@ const CardRabbit = () =>{
     }
     return {};
   };
-
-  console.log(data.tag)
 
     return <> 
                 <div className="card-horizontal" id={styles.cardhorizontal}>
