@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import LittersProfileButton from '../../UI/LittersProfileButton';
 import ProfileStyles from './ProfileStyles.module.css';
 
@@ -37,7 +38,10 @@ const Profile = () => {
 
       <div className='ms-3'>
         <h3 className='mb-3'>John Doe</h3>
+        <Link to="/editProfile">
         <LittersProfileButton>Editar perfil</LittersProfileButton>
+        
+        </Link>
       </div>
     </div>
   );
