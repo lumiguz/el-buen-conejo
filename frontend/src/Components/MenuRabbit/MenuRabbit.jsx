@@ -1,26 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
+import { useHttp } from "../../hooks/useHttp";
+import { useLoaderData, useLocation } from "react-router-dom";
 import MenuRabbitPerfil from "./MenuRabbitPerfil";
 import styles from "../MenuRabbit/menuRabbit.module.css";
-import MenuRabbitCamada from "./MenuRabbitCamada";
-import MenuRabbitNotes from "./MenuRabbitNotes";
+import MenuRabbitNotes from "../MenuRabbit/MenuRabbitNotes"
+import { apiUrls } from "../../utils/links"
 
 function PaginatedView({ currentPage, onPageChange }) {
   const pages = [
     { id: "perfil", label: "Perfil" },
-    { id: "camadas", label: "Camadas" },
-    { id: "notas", label: "Notas" },
+    { id: "notes", label: "Notas" },
   ];
 
   return (
     <div>
-      {/* Paginación personalizada */}
       <ul className="pagination">
         {pages.map((page) => (
           <li
             key={page.id}
             className={`page-item ${page.id === currentPage ? "active" : ""}`}
             onClick={(e) => {
-              e.preventDefault(); // Previene el comportamiento predeterminado del enlace
+              e.preventDefault();
               onPageChange(page.id);
             }}
           >
@@ -36,56 +36,75 @@ function PaginatedView({ currentPage, onPageChange }) {
 
 const MenuRabbit = () => {
   const [currentPage, setCurrentPage] = useState("perfil");
+  const [perfilActive, setPerfilActive] = useState(true);
+  const [notasActive, setNotasActive] = useState(false);
 
-  const handlePageChange = (pageId) => {
-    // Actualiza la página actual cuando se hace clic en la paginación personalizada
-    setCurrentPage(pageId);
+  const rabbitId = useLocation().pathname.split("/").pop();
+  const { isLoading, error, data, sendRequest } = useHttp();
+
+  useEffect(() => {
+    sendRequest(`${apiUrls.urlRabbits}${rabbitId}/`);
+  }, [sendRequest, rabbitId]);
+
+  if (isLoading) {
+    return <h2 className="text-muted text-center m-5 p-5">Cargando...</h2>;
+  }
+
+  const dataInfoRabbit = () => {
+    if (!isLoading && data) {
+      return {
+        nombre: data.tag,
+        raza: data.breed,
+        genero: data.genre,
+        fechaNacimiento: data.birthday,
+        edad: data.age,
+        peso: data.weight,
+        precio: data.price,
+      };
+    }
+    return {};
   };
 
-  let content;
   if (currentPage === "perfil") {
-    const rabbitData = {
-      estado: "Vivo",
-      peso: "8 kg",
-      raza: "California",
-      edad: "8 meses",
-      color: "Blanco",
-      genotipo: "-",
-      criasVivas: "4",
-      totalDeCrias: "14",
-    };
-    content = (
+    return (
       <div>
-        <MenuRabbitPerfil rabbitData={rabbitData} />
+        <PaginatedView
+          currentPage={currentPage}
+          onPageChange={(pageId) => {
+            setCurrentPage(pageId);
+            if (pageId === "perfil") {
+              setPerfilActive(true);
+              setNotasActive(false);
+            } else if (pageId === "notes") {
+              setPerfilActive(false);
+              setNotasActive(true);
+            }
+          }}
+        />
+        <MenuRabbitPerfil rabbitData={ dataInfoRabbit() } />
+        {notasActive && <MenuRabbitNotes />}
       </div>
     );
-  } else if (currentPage === "camadas") {
-    content = (
+  } else if (currentPage === "notes") {
+    return (
       <div>
-        <MenuRabbitCamada />
-      </div>
-    );
-  } else if (currentPage === "notas") {
-    content = (
-      <div>
+        <PaginatedView
+          currentPage={currentPage}
+          onPageChange={(pageId) => {
+            setCurrentPage(pageId);
+            if (pageId === "perfil") {
+              setPerfilActive(true);
+              setNotasActive(false);
+            } else if (pageId === "notes") {
+              setPerfilActive(false);
+              setNotasActive(true);
+            }
+          }}
+        />
         <MenuRabbitNotes />
       </div>
     );
   }
-
-  return (
-    <>
-      <div>
-        <div>
-          <PaginatedView
-            currentPage={currentPage}
-            onPageChange={handlePageChange}
-          />
-        </div>
-        {content}
-      </div>
-    </>
-  );
 };
 
 export default MenuRabbit;

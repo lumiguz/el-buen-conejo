@@ -1,6 +1,11 @@
 import PropTypes from "prop-types";
 
 const MenuRabbitPerfil = ({ rabbitData }) => {
+
+  if (!rabbitData) {
+    return "No hay datos"; // O puedes mostrar un mensaje de "No hay datos disponibles" u otra lógica según tus necesidades
+  }
+
   return (
     <>
       <h5> Datos del conejo: </h5>
@@ -26,7 +31,7 @@ const MenuRabbitPerfil = ({ rabbitData }) => {
         </tbody>
       </table>
     </>
-  );
+  )
 };
 
 MenuRabbitPerfil.propTypes = {
