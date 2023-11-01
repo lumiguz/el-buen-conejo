@@ -39,17 +39,20 @@ const index = () => {
     
     const handleSubmit = (e) => {
         e.preventDefault()
-        setFormSubmited(true)
-
+        setFormSubmited(false)
+        
         setTimeout(() => {
-            setFormSubmited(false)
-        }, 1000);
+            setFormSubmited(true)
+        }, 100);
     };
 
     if (data) {
         Cookies.set('authToken', data.token)
-        localStorage.setItem('logedAccount', JSON.stringify(data.user?.username))
-        navigate('/')
+        Cookies.set('userId', data.id)
+        localStorage.setItem('logedAccount', JSON.stringify(data.user))
+        setTimeout(() => {
+            navigate('/')
+        }, 1000);
     }
     
     return (
@@ -69,9 +72,10 @@ const index = () => {
                 onChange={handleInputChange}
                 value={formData.password}
             />
-            {isntOk && <p className="text-danger"> {isntOk.error} </p>}
+            {!data && isntOk && <p className="text-danger"> {isntOk.error} </p>}
+            {data && <p className="text-success"> {data.message} </p>}
             <Button type="submit" className="btn-success w-100 my-3">
-                {isLoading ? "..." : "Ingresar"}
+                {isLoading ? "Cargando..." : "Ingresar"}
             </Button>
             <AppLink href="/forgot" className="form-check-label" htmlFor="forgotPass">
                 ¿Olvidaste la contraseña?
