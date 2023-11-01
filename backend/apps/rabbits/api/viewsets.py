@@ -129,8 +129,8 @@ class RabbitViewSet(viewsets.ModelViewSet):
                     "genre": "Macho",
                     "birthday": "2023-10-31",
                     "tag": "AB123",
-                    "price": "-",
-                    "weight": "-1",
+                    "price": "500",
+                    "weight": "6",
                     "cage_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
                 },
             )
