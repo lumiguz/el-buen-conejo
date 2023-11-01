@@ -1,7 +1,17 @@
+import { Link } from 'react-router-dom';
 import LittersProfileButton from '../../UI/LittersProfileButton';
 import ProfileStyles from './ProfileStyles.module.css';
 
-const Profile = () => {
+const Profile = ({name}) => {
+
+  if (name == null ) {
+  
+   name = "Nombre"
+  } 
+  else {
+    console.log(name)
+  }
+  // console.log("nameis:",name)
   return (
     <div className={`${ProfileStyles.containerSize }  d-flex align-items-center sm-m-auto `}>
       <svg
@@ -26,6 +36,10 @@ const Profile = () => {
               transform='translate(0 -0.227273) scale(0.0030303)'
             />
           </pattern>
+          {/* <div className='d-flex justify-content-center align-items-center mx-auto overflow-hidden rounded-circle'>
+            <img src="https://github.com/antoniPrz.png" alt="headshot" className='img-fluid' style={{width: '100px', height: '100px', borderRadius: '50%'}} />
+        </div> */}
+     
           <image
             id='image0_318_42424'
             width='330'
@@ -36,8 +50,11 @@ const Profile = () => {
       </svg>
 
       <div className='ms-3'>
-        <h3 className='mb-3'>John Doe</h3>
+        <h3 className='mb-3'>{name}</h3>
+        <Link to="/editProfile">
         <LittersProfileButton>Editar perfil</LittersProfileButton>
+        
+        </Link>
       </div>
     </div>
   );
