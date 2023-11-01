@@ -1,15 +1,21 @@
 import FarmCard from '../../Components/FarmCard/Index';
 import FarmForm from '../../Components/FarmForm';
 import FarmBanner from '../../UI/FarmBanner/index';
-
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useHttp } from "../../hooks/useHttp";
 
 const Farms = () => {
   const { isLoading, data, error, sendRequest } = useHttp();
+  const [farmData, setfarmData] = useState([])
   useEffect(() => {
     sendRequest(`https://apiebc.online/api/farms`);
   }, [sendRequest]);
+
+  useEffect(() => {
+    if (data) {
+      setfarmData(data)
+    }
+  }, [data])
   
   return (
     <div>
@@ -18,7 +24,7 @@ const Farms = () => {
 
         <h4 className='mt-4'>Nuestras Granjas</h4>
 
-        <p className='text-center'>
+        <p className='text-center text-wrap'>
           Las granjas de conejos son instalaciones donde se crían conejos en un
           entorno controlado. Los conejos se alimentan con una dieta
           equilibrada, reciben atención veterinaria y se reproducen para
@@ -30,7 +36,7 @@ const Farms = () => {
       <section className='d-flex flex-wrap justify-content-center align-items-center row row-cols-lg-3 row-cols-sm-1 row-cols-md-2'>
         {/* for each id will use a farm card */}
 
-        {data && data.map((farm) => (
+        {farmData && farmData.map((farm) => (
           <FarmCard
             key={farm.id}
             name={farm.name}
@@ -50,7 +56,8 @@ const Farms = () => {
           hacerlo a continuación. Solo debes llenar el formulario con la
           información de tu granja.
         </p>
-        <FarmForm />
+        {/* send farmData to the form */}
+        <FarmForm addFarm={setfarmData}/>
       </section>
     </div>
   );

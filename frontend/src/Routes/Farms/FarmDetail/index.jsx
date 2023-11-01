@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import { useHttp } from '../../../hooks/useHttp';
 import useHttpGetWithPagination from "../../../hooks/useHttpGetWithPagination";
@@ -9,26 +9,30 @@ import styles from './styles.module.css';
 const FarmDetail = () => {
   const navigate = useNavigate();
   const farmId = useLoaderData();
+
   const { isLoading, data, error, sendRequest } = useHttp();
   const { isLoading: isLoadingCages, data: dataCages, error: errorCages, sendRequest: sendRequestCages } = useHttpGetWithPagination()
   
-    
-    useEffect(() => {
-      sendRequestCages(`${apiUrls.urlCages}?${farmId}`)
-      sendRequest(`${apiUrls.urlFarms}${farmId}`);
-    }, [sendRequest, farmId, sendRequestCages]);
+  useEffect(() => {
+    sendRequestCages(`${apiUrls.urlCages}`)
+    // sendRequestCages(`${apiUrls.urlCages}?${farmId}/`)
+    sendRequest(`${apiUrls.urlFarms}${farmId}`);
+  }, [sendRequest, farmId, sendRequestCages]);
+
+  const [cages, setCages] = useState([dataCages]);
+
   return (
     <div>
       {data && (
       <div className='d-flex flex-column'>
         <h2 className='mt-5 d-flex justify-content-center align-items-center '>
-          Detalles de la granja {farmId}
+          {data.name}
         </h2>
 
         <img
             src={data.photo}
             alt='farmProfile'
-            width={'350'}
+            width={'720'}
             className='img-fluid rounded mx-auto d-block mt-4 '
           />
           
@@ -36,15 +40,16 @@ const FarmDetail = () => {
           <p className='mb-4 fst-italic'>{data.address}</p>
         </div>
 
-        <h4 className='my-3 title d-flex flex-column justify-content-center align-items-center'>{data.name}</h4>
-        <p className='text-break lh-sm text-center'>{data.description}</p>
+        {/* <h4 className='my-3 title d-flex flex-column justify-content-center align-items-center'>{data.name}</h4> */}
+        <p className='text-break lh-sm text-center fs-5'>{data.description}</p>
         <section>
 
           {dataCages && (
             <div className='d-flex flex-column justify-content-center align-items-center'>
               <h4 className='mt-5'>Jaulas de {data.name}</h4>
               <div className='d-flex flex-wrap justify-content-center align-items-center'>
-                {dataCages.map((cage) => (
+                {/* map the cages only matched with farmId */}
+                {dataCages.filter(cage => cage.farm_id === farmId).map((cage) => (
                   <div
                     key={cage.id}
                     className={`card d-inline-flex flex-column border border-2 border-success-subtle rounded mx-5 mt-4 shadow bg-body-tertiary rounded align-self-center ${styles.maxSize}`}
@@ -74,6 +79,12 @@ const FarmDetail = () => {
       </div>
       )}
 
+      {cages.length === 0 && (
+        <h2 className='text-muted text-center m-5 p-5'>
+          No hay jaulas disponibles
+        </h2>
+      )}
+
       {isLoading && (
         <h2 className='text-muted text-center m-5 p-5'>Cargando...</h2>
       )}
@@ -84,9 +95,21 @@ const FarmDetail = () => {
         </h2>
       )}
 
-      {!isLoading && !error && !data && (
+      {isLoadingCages && (
+        <h2 className='text-muted text-center m-5 p-5'>Cargando...</h2>
+      )}
+
+      {errorCages && (
+        <h2 className='text-danger text-center m-5 p-5'>
+          {/* if the error is 404 show "no hay jaulas disponibles en esta granja ):" */}
+            No hay jaulas disponibles en esta granja ):
+            {console.log(errorCages)}
+        </h2>
+      )}
+
+      {!isLoadingCages && !errorCages && !dataCages && (
         <h2 className='text-muted text-center m-5 p-5'>
-          No hay granjas disponibles
+          No hay jaulas disponibles
         </h2>
       )}
     </div>

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import useCloudinaryUpload from "../../hooks/useCloudinaryUpload";
+// import useCloudinaryUpload from "../../hooks/useCloudinaryUpload";
 import FarmFormStyles from "./FarmFormStyles.module.css";
 import { useHttp } from "../../hooks/useHttp";
 import { apiUrls } from "../../utils/links";
+import PropTypes from 'prop-types';
 
 const FarmForm = () => {
   const [farmImage, setFarmImage] = useState(
@@ -10,34 +11,36 @@ const FarmForm = () => {
   );
   const [formSubmited, setFormSubmited] = useState(false);
   const [farmData, setFarmData] = useState({
-    is_active: true,
-    photo: "",
+    // is_active: true,
+    // photo: "",
     name: "",
     address: "",
     description: "",
   });
-  const { sendRequest, isntOk } = useHttp();
-  const { uploadToCloudinary, imageUrl } = useCloudinaryUpload(
-    "El_buen_conejo",
-    "dduzvqh2o"
-  );
-  
-  useEffect(() => {
-    if (imageUrl) {
-      setFarmData((prevFarmData) => ({
-        ...prevFarmData,
-        photo: imageUrl,
-      }));
-    }
-  }, [imageUrl]);
 
-  const handleImageUpload = async (event) => {
-    const { files } = event.target;
-    if (files && files[0]) {
-      setFarmImage(URL.createObjectURL(event.target.files[0]));
-      await uploadToCloudinary(files[0]);
-    }
-  };
+  const { sendRequest, isntOk} = useHttp();
+
+  // const { uploadToCloudinary, imageUrl } = useCloudinaryUpload(
+  //   "El_buen_conejo",
+  //   "dduzvqh2o"
+  // );
+  
+  // useEffect(() => {
+  //   if (imageUrl) {
+  //     setFarmData((prevFarmData) => ({
+  //       ...prevFarmData,
+  //       photo: imageUrl,
+  //     }));
+  //   }
+  // }, [imageUrl]);
+
+  // const handleImageUpload = async (event) => {
+  //   const { files } = event.target;
+  //   if (files && files[0]) {
+  //     setFarmImage(URL.createObjectURL(event.target.files[0]));
+  //     await uploadToCloudinary(files[0]);
+  //   }
+  // };
 
   const handleInputChange = (event) => {
     const { id, value } = event.target;
@@ -51,6 +54,10 @@ const FarmForm = () => {
     e.preventDefault();
     sendRequest(`${apiUrls.urlFarms}`, "POST", farmData);
     setFormSubmited(true);
+    //reload the page to show the new farm
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
   };
 
   return (
@@ -79,7 +86,7 @@ const FarmForm = () => {
             name="photo"
             id="formFile"
             className={`ms-1  ${FarmFormStyles.inputFileC} form-control-file`}
-            onChange={handleImageUpload}
+            // onChange={handleImageUpload}
           />
         </div>
       </label>
@@ -150,3 +157,8 @@ const FarmForm = () => {
 };
 
 export default FarmForm;
+
+
+FarmForm.propTypes = {
+  addFarm: PropTypes.func,
+}
