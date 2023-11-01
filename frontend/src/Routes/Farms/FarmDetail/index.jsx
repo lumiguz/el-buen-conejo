@@ -49,7 +49,7 @@ const FarmDetail = () => {
               <h4 className='mt-4'>Jaulas de {data.name}</h4>
               <div className='d-flex flex-wrap justify-content-center align-items-center'>
                 {/* map the cages only matched with farmId */}
-                {dataCages.filter(cage => cage.farm_id === farmId).map((cage) => (
+                {dataCages.filter(cages => cages.farm_id === farmId).map((cage) => (
                   <div
                     key={cage.id}
                     className={`card d-inline-flex flex-column border border-2 border-success-subtle rounded mx-5 mt-4 shadow bg-body-tertiary rounded align-self-center ${styles.maxSize}`}
@@ -62,13 +62,13 @@ const FarmDetail = () => {
                       className={`card-img-top img-fluid ${styles.imageSize}`}
                     />
                     <div className='card-body'>
-                      <h5 className='card-title'>Jaula Numero {
+                      <h5 className='card-title'>Jaula número {
                         dataCages.indexOf(cage) + 1
                       }</h5>
                       <p className='card-text'>Numero de conejos en la jaula: <span className='fw-medium'>{cage.count_rabbits}</span></p>
                       <p className='card-text'>Precio de la Jaula: <span className='fw-medium'>${cage.price} MXN</span></p>
                       <p className='card-text'>Peso total: <span className='fw-medium'>{cage.total_weight} Kg</span></p>
-                      <span>{cage.id}</span>
+                      {/* <span>{cage.id}</span> */}
                     </div>
                   </div>
                 ))}

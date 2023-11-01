@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import FarmFormStyles from "./FarmFormStyles.module.css";
 import { useHttp } from "../../hooks/useHttp";
 import { apiUrls } from "../../utils/links";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+import Cookies from "js-cookie";
 
 const FarmForm = () => {
   const [farmImage, setFarmImage] = useState(
@@ -13,18 +14,26 @@ const FarmForm = () => {
   const [farmData, setFarmData] = useState({
     // is_active: true,
     // photo: "",
+    profile_id: "",
     name: "",
     address: "",
     description: "",
   });
-
-  const { sendRequest, isntOk} = useHttp();
+  const headers = {
+    "Content-Type": "application/json",
+    Accept: "application/json",
+    Authorization: Cookies.get("authToken")
+      ? `Bearer ${Cookies.get("authToken")}`
+      : null,
+  };
+  const userId = Cookies.get("userId");
+  const { sendRequest, isntOk } = useHttp();
 
   // const { uploadToCloudinary, imageUrl } = useCloudinaryUpload(
   //   "El_buen_conejo",
   //   "dduzvqh2o"
   // );
-  
+
   // useEffect(() => {
   //   if (imageUrl) {
   //     setFarmData((prevFarmData) => ({
@@ -50,6 +59,26 @@ const FarmForm = () => {
     });
   };
 
+  useEffect(() => {
+    if (userId) {
+      searchProfileId();
+    }
+  }, [userId]);
+
+  const searchProfileId = async () => {
+    if (userId) {
+      const res = await fetch(`${apiUrls.urlProfiles}?user_id=${userId}`, {
+        headers,
+      });
+      const data = await res.json();
+      const profileId = data.results[0].id;
+      setFarmData((prevState) => ({
+        ...prevState,
+        profile_id: profileId,
+      }));
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     sendRequest(`${apiUrls.urlFarms}`, "POST", farmData);
@@ -68,7 +97,7 @@ const FarmForm = () => {
     >
       <h4>Agregar nueva granja</h4>
       <h6 className="fw-normal">Añade los datos de la granja</h6>
-      <label htmlFor="formFile">
+      <label htmlFor="formFile" className="d-none">
         <h6>Foto de la granja</h6>
         {/* after upload the image render on component */}
         {/* and convert the image to the size 72x72*/}
@@ -158,7 +187,6 @@ const FarmForm = () => {
 
 export default FarmForm;
 
-
 FarmForm.propTypes = {
   addFarm: PropTypes.func,
-}
+};

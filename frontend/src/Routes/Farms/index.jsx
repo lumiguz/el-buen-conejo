@@ -1,13 +1,13 @@
-import FarmCard from '../../Components/FarmCard/Index';
-import FarmForm from '../../Components/FarmForm';
-import FarmBanner from '../../UI/FarmBanner/index';
-import { useEffect, useState } from 'react';
-import  useHttpGetWithPagination  from "../../hooks/useHttpGetWithPagination";
+import FarmCard from "../../Components/FarmCard/Index";
+import FarmForm from "../../Components/FarmForm";
+import FarmBanner from "../../UI/FarmBanner/index";
+import { useEffect, useState } from "react";
+import useHttpGetWithPagination from "../../hooks/useHttpGetWithPagination";
 
 const Farms = () => {
   const { isLoading, data, error, sendRequest } = useHttpGetWithPagination();
 
-  const [farmData, setfarmData] = useState([])
+  const [farmData, setfarmData] = useState([]);
   useEffect(() => {
     sendRequest(`https://apiebc.online/api/farms/`);
   }, [sendRequest]);
@@ -16,7 +16,7 @@ const Farms = () => {
     if (data) {
       setfarmData(data);
     }
-  }, [data])
+  }, [data]);
 
   return (
     <div>
@@ -37,7 +37,7 @@ const Farms = () => {
       <section className="d-flex flex-wrap justify-content-center align-items-center row row-cols-lg-3 row-cols-sm-1 row-cols-md-2">
         {/* for each id will use a farm card */}
         {farmData.length > 0 &&
-          farmData.results.map((farm) => (
+          farmData.map((farm) => (
             <FarmCard
               key={farm.id}
               name={farm.name}

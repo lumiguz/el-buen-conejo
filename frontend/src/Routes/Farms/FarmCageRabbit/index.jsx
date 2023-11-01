@@ -6,7 +6,6 @@ import styles from './styles.module.css';
 
 const Index = () => {
   const id = useLoaderData();
-  console.log(id);
 
   const { isLoading, data, error, sendRequest } = useHttpGetWithPagination();
   useEffect(() => {
@@ -15,7 +14,7 @@ const Index = () => {
 
   return (
     <div>
-      <h3 className='text-center mt-2'>Conejos detro de la jaula: {id.cageId}</h3>
+      <h3 className='text-center mt-2'>Conejos detro de la jaula</h3>
 
       <p className='text-center text-wrap'>Los conejos en las granjas son cuidados de manera meticulosa para garantizar su bienestar. Los agricultores proporcionan un ambiente limpio y seguro, asegurando que tengan acceso a una dieta equilibrada y agua fresca en todo momento. Además, se les brinda refugio adecuado para protegerlos de condiciones climáticas extremas y depredadores. Se monitorea de cerca su salud y se les brinda atención veterinaria cuando es necesario. En resumen, en las granjas, los conejos reciben un cuidado constante y dedicado para asegurar su salud y comodidad.</p>
 
