@@ -1,4 +1,5 @@
 export const links = [
+  { name: "Nosotros", href: "/about", className: "text-danger" },
   { name: "Mercado", href: "/market" },
   { name: "Granjas", href: "/farms" },
   { name: "Conejos", href: "/rabbits", className: "text-danger" },

@@ -50,13 +50,17 @@ const index = () => {
             console.log('Datos a enviar:', formData)
             setFormSubmited(true)
             setWarning(false)
+
+            setTimeout(() => {
+                setFormSubmited(false)
+            }, 1000);
         }
     };
 
     if (data) {
         setTimeout(() => {
             navigate('/login')
-        }, 2000);
+        }, 1000);
     }
     
     return (
@@ -64,7 +68,7 @@ const index = () => {
             <FormSection 
                 type="text"
                 id="username"
-                placeholder="Granjero12"
+                placeholder="Nombre de usuario"
                 label="Username"
                 className="w-100"
                 onChange={handleInputChange}
@@ -92,8 +96,9 @@ const index = () => {
                 onChange={handleInputChange}
             />
             {warning && <p className="text-danger"> La contraseña debe tener más de 8 caracteres </p>}
-            {isntOk && <p className="text-danger"> {Object.values(Object.values(isntOk)[1])[0][0]} </p>}
-            <Button type="submit" className="btn-success w-100">{isLoading ? "..." : "Crear cuenta"}</Button>
+            {!data && isntOk && <p className="text-danger"> {Object.values(Object.values(isntOk)[1])[0][0]} </p>}
+            {data && <p className="text-success"> {data.message} </p>}
+            <Button type="submit" className="btn-success w-100">{isLoading ? "Cargando..." : "Crear cuenta"}</Button>
         </form>
     )
 }
