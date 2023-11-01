@@ -1,9 +1,10 @@
 export const links = [
-  { name: "Nosotros", href: "/about", className: "text-danger" },
   { name: "Mercado", href: "/market" },
   { name: "Granjas", href: "/farms" },
   { name: "Conejos", href: "/rabbits", className: "text-danger" },
   { name: "Jaulas", href: "/cage", className: "text-danger" },
+  { name: "Perfil", href: "/profile", className: "text-danger" },
+  { name: "Nosotros", href: "/about" },
 ];
 
 export const authPaths = ["/login", "/register", "/forgot", "/changepass"];

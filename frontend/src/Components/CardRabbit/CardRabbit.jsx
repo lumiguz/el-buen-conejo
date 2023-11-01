@@ -3,9 +3,8 @@ import { useEffect } from "react";
 import { useHttp } from "../../hooks/useHttp";
 import { useLocation } from "react-router-dom";
 import { apiUrls } from "../../utils/links";
-import styles from "../CardRabbit/CardRabbit.module.css"
-const CardRabbit = () =>{
-
+import styles from "../CardRabbit/CardRabbit.module.css";
+const CardRabbit = () => {
   const rabbitId = useLocation().pathname.split("/").pop();
   const { isLoading, error, data, sendRequest } = useHttp();
 
@@ -13,15 +12,13 @@ const CardRabbit = () =>{
     sendRequest(`${apiUrls.urlRabbits}${rabbitId}/`);
   }, [sendRequest, rabbitId]);
 
-  console.log(rabbitId.pathname)
-
   if (isLoading) {
     return <h2 className="text-muted text-center m-5 p-5">Cargando...</h2>;
   }
 
   const imagesCard = data?.photo.split(",");
 
-    const dataInfoRabbit = () => {
+  const dataInfoRabbit = () => {
     if (!isLoading && data) {
       return {
         nombre: data.tag,
@@ -36,21 +33,33 @@ const CardRabbit = () =>{
     return {};
   };
 
-    return <> 
-                <div className="card-horizontal" id={styles.cardhorizontal}>
-      <img className="image" src={imagesCard} id={styles.imagerabbit} />
-      <div className="card-container" id={styles.cardcontainerrabbit}>
-        <div className="card-title" id={styles.cardtittlerabbit}>
-          <div className="sub" id={styles.subrabbit}><div className="text-wrapper" id={styles.textwrapper}>ID: {rabbitId}</div></div>
-          <div className="nombre-del-conejo" id={styles.namerabbit}>{data.tag}</div>
+  return (
+    <>
+      {!isLoading && data && (
+        <div className="card-horizontal" id={styles.cardhorizontal}>
+          <img className="image" src={imagesCard} id={styles.imagerabbit} />
+          <div className="card-container" id={styles.cardcontainerrabbit}>
+            <div className="card-title" id={styles.cardtittlerabbit}>
+              <div className="sub" id={styles.subrabbit}>
+                <div className="text-wrapper" id={styles.textwrapper}>
+                  ID: {rabbitId}
+                </div>
+              </div>
+              <div className="nombre-del-conejo" id={styles.namerabbit}>
+                {data.tag}
+              </div>
+            </div>
+            <div className="card-info" id={styles.cardinforabbit}>
+              <div className="div" id={styles.divmacho}>
+                {data.genre}
+              </div>
+              <div className="text-wrapper-2">{data.weight}K</div>
+            </div>
+          </div>
         </div>
-        <div className="card-info" id={styles.cardinforabbit}>
-          <div className="div" id={styles.divmacho}>{data.genre}</div>
-          <div className="text-wrapper-2" >{data.weight}K</div>
-        </div>
-      </div>
-    </div>
+      )}
     </>
-}
+  );
+};
 
-export default CardRabbit
+export default CardRabbit;
