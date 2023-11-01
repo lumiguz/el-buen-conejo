@@ -48,6 +48,7 @@ class FarmFilterSet(rest_framework.FilterSet):
     class Meta:
         model = Farm
         fields = (
+            "profile_id",
             "name",
             "address",
             "description",
