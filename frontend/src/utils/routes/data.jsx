@@ -38,14 +38,13 @@ import FarmCageRabbit from "../../Routes/Farms/FarmCageRabbit";
 //#endregion
 //#region import litters
 import Litters from "../../Routes/Litters";
-
 //#endregion
-
 //#region import profile
 import ProfileHome from "../../Routes/ProfileHome";
 import EditProfile from "../../Routes/EditProfile";
 //#endregion
 import AboutUs from '../../Components/AboutUs';
+import UpdateImage from "../../Routes/UpdateImage";
 
 //implement routes with react-router-dom
 export const routes = createBrowserRouter([
@@ -256,6 +255,17 @@ export const routes = createBrowserRouter([
   {
     path: "/editProfile",
     element: <EditProfile />,
+  },  
+  //#endregion
+  //#region routes for UpdateImage
+  {
+    path: "/updateimage/:id",
+    element: (
+      <Layout>
+        <UpdateImage />
+      </Layout>
+    ),
+    loader: ({ params }) => params.id,
   },
   //#endregion
   //#region routes for litters: stop implementing

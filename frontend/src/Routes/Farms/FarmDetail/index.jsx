@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { useLoaderData, useLocation } from "react-router-dom";
 import { useHttp } from "../../../hooks/useHttp";
 import useHttpGetWithPagination from "../../../hooks/useHttpGetWithPagination";
 import { apiUrls } from "../../../utils/links";
@@ -8,9 +8,8 @@ import AppLink from "../../../UI/AppLink";
 import Button from "../../../UI/Button";
 
 const FarmDetail = () => {
-  const navigate = useNavigate();
   const farmId = useLoaderData();
-  
+  const location = useLocation();
   const { isLoading, data, error, sendRequest } = useHttp();
   const {
     isLoading: isLoadingCages,
@@ -20,18 +19,16 @@ const FarmDetail = () => {
   } = useHttpGetWithPagination();
 
   const handleCreateCage = () => {
-    sendRequest(`${apiUrls.urlCages}`, 'POST', {farm_id: farmId})
-    window.location.reload()
-  }
+    sendRequest(`${apiUrls.urlCages}`, "POST", { farm_id: farmId });
+    window.location.reload();
+  };
 
   useEffect(() => {
     sendRequestCages(`${apiUrls.urlCages}`);
-    // sendRequestCages(`${apiUrls.urlCages}?${farmId}/`)
     sendRequest(`${apiUrls.urlFarms}${farmId}`);
   }, [sendRequest, farmId, sendRequestCages]);
-  
+
   const [cages, setCages] = useState([dataCages]);
-  
 
   return (
     <div>
@@ -39,7 +36,11 @@ const FarmDetail = () => {
         <div
           className={`d-flex flex-column ${styles.backG} rounded justify-content-end`}
         >
-          <Button type="button" onClick={handleCreateCage} className="btn btn-success w-25 align-self-end m-3">
+          <Button
+            type="button"
+            onClick={handleCreateCage}
+            className="btn btn-success w-25 align-self-end m-3"
+          >
             Crear nueva jaula
           </Button>
 
@@ -58,7 +59,6 @@ const FarmDetail = () => {
             <p className="mb-4 fst-italic">{data.address}</p>
           </div>
 
-          {/* <h4 className='my-3 title d-flex flex-column justify-content-center align-items-center'>{data.name}</h4> */}
           <p className="text-break lh-sm text-center fs-5">
             {data.description}
           </p>
@@ -74,16 +74,18 @@ const FarmDetail = () => {
                       <div
                         key={cage.id}
                         className={`card d-inline-flex flex-column border border-2 border-success-subtle rounded mx-5 mt-4 shadow bg-body-tertiary rounded align-self-center ${styles.maxSize}`}
-                        //redirect to cage detail page when clicking on card
-                        onClick={() =>
-                          navigate(`/farms/${farmId}/cages/${cage.id}`)
-                        }
                       >
-                        <img
-                          src={cage.photo}
-                          alt="cageProfile"
-                          className={`card-img-top img-fluid ${styles.imageSize}`}
-                        />
+                        <AppLink
+                          href={`/updateimage/${cage.id}?apiurl=${apiUrls.urlCages}&beforeurl=${location.pathname}`}
+                        >
+                          <img
+                            src={cage.photo}
+                            title="Actualizar imagen"
+                            alt="cageProfile"
+                            className={`card-img-top img-fluid ${styles.imageSize}`}
+                          />
+                        </AppLink>
+
                         <div className="card-body">
                           <h5 className="card-title">
                             Jaula número {index + 1}
@@ -104,8 +106,13 @@ const FarmDetail = () => {
                               {cage.total_weight} Kg
                             </span>
                           </p>
-                          {/* <span>{cage.id}</span> */}
                         </div>
+                        <AppLink
+                          href={`/farms/${farmId}/cages/${cage.id}`}
+                          className="btn btn-primary w-50 m-3"
+                        >
+                          Ver jaula
+                        </AppLink>
                       </div>
                     ))}
                 </div>

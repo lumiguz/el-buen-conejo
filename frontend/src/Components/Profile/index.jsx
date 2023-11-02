@@ -3,12 +3,9 @@ import LittersProfileButton from "../../UI/LittersProfileButton";
 import ProfileStyles from "./ProfileStyles.module.css";
 import photoProfile from "../../assets/perfil.svg";
 
-const Profile = ({ name }) => {
-  if (name == null) {
-    name = JSON.parse(localStorage.getItem("logedAccount"));
-  } else {
-    console.log(name);
-  }
+const Profile = () => {
+  const name = JSON.parse(localStorage.getItem("logedAccount"));
+
   return (
     <div
       className={`${ProfileStyles.containerSize}  d-flex align-items-center sm-m-auto `}

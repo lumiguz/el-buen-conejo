@@ -7,13 +7,8 @@ import PropTypes from "prop-types";
 import Cookies from "js-cookie";
 
 const FarmForm = () => {
-  const [farmImage, setFarmImage] = useState(
-    "/static/images/littersPlaceHolder.svg"
-  );
   const [formSubmited, setFormSubmited] = useState(false);
   const [farmData, setFarmData] = useState({
-    // is_active: true,
-    // photo: "",
     profile_id: "",
     name: "",
     address: "",
@@ -28,28 +23,6 @@ const FarmForm = () => {
   };
   const userId = Cookies.get("userId");
   const { sendRequest, isntOk } = useHttp();
-
-  // const { uploadToCloudinary, imageUrl } = useCloudinaryUpload(
-  //   "El_buen_conejo",
-  //   "dduzvqh2o"
-  // );
-
-  // useEffect(() => {
-  //   if (imageUrl) {
-  //     setFarmData((prevFarmData) => ({
-  //       ...prevFarmData,
-  //       photo: imageUrl,
-  //     }));
-  //   }
-  // }, [imageUrl]);
-
-  // const handleImageUpload = async (event) => {
-  //   const { files } = event.target;
-  //   if (files && files[0]) {
-  //     setFarmImage(URL.createObjectURL(event.target.files[0]));
-  //     await uploadToCloudinary(files[0]);
-  //   }
-  // };
 
   const handleInputChange = (event) => {
     const { id, value } = event.target;
@@ -97,28 +70,6 @@ const FarmForm = () => {
     >
       <h4>Agregar nueva granja</h4>
       <h6 className="fw-normal">Añade los datos de la granja</h6>
-      <label htmlFor="formFile" className="d-none">
-        <h6>Foto de la granja</h6>
-        {/* after upload the image render on component */}
-        {/* and convert the image to the size 72x72*/}
-        <div className="d-flex align-items-center">
-          <img
-            src={farmImage}
-            alt="camadaExample"
-            className="rounded-circle w-auto"
-            width="72"
-            height="72"
-          />
-          {/* if a image is uploaded in the input change the state of the image */}
-          <input
-            type="file"
-            name="photo"
-            id="formFile"
-            className={`ms-1  ${FarmFormStyles.inputFileC} form-control-file`}
-            // onChange={handleImageUpload}
-          />
-        </div>
-      </label>
 
       <div className="mt-2">
         <div className="d-flex form-row">

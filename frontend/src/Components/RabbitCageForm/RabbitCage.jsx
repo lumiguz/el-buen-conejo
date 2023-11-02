@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useHttp } from "../../hooks/useHttp";
 import { apiUrls } from "../../utils/links";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { useLoaderData, useSearchParams } from "react-router-dom";
 import FormSection from "../../UI/FormSection";
 import Button from "../../UI/Button";
 import FormSelect from "../../UI/FormSelect";
@@ -9,8 +9,9 @@ import { BREED_CHOICE, GENRE } from "../../utils/breeds";
 
 const RabbitCage = () => {
   const id = useLoaderData();
-  const navigate = useNavigate();
-  const { sendRequest } = useHttp();
+  const { data, error, isLoading, sendRequest } = useHttp();
+  const [searchParams] = useSearchParams();
+  const pathCageFarm = decodeURIComponent(searchParams.get("pathcagefarm"));
 
   const [formData, setFormData] = useState({
     breed: "",
@@ -47,7 +48,9 @@ const RabbitCage = () => {
       return;
     }
     sendRequest(apiUrls.urlRabbits, "POST", formData);
-    navigate(-1);
+    if (!isLoading && data) {
+      window.location.href = pathCageFarm;
+    }
   };
 
   return (

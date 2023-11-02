@@ -37,3 +37,27 @@ const useCloudinaryUpload = (uploadPreset, cloudName) => {
 };
 
 export default useCloudinaryUpload;
+
+//how to use:
+
+//   const onChangeImageUpload = async (event) => {
+//     const { files } = event.target;
+//     if (files && files[0]) {
+//       setFarmImage(URL.createObjectURL(event.target.files[0]));
+//       await uploadToCloudinary(files[0]);
+//     }
+//   };
+
+// const { uploadToCloudinary, imageUrl } = useCloudinaryUpload(
+//   "El_buen_conejo",
+//   "dduzvqh2o"
+// );
+
+// useEffect(() => {
+//   if (imageUrl) {
+//     setFarmData((prevFarmData) => ({
+//       ...prevFarmData,
+//       photo: imageUrl,
+//     }));
+//   }
+// }, [imageUrl]);

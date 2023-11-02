@@ -7,20 +7,19 @@ import Cookies from "js-cookie";
 import AppLink from "../../UI/AppLink";
 
 const Avatar = ({ imageUrl }) => {
-
   imageUrl = imageUrl || avatarImage;
 
-  const navigate = useNavigate()
-  const cuenta = JSON.parse(localStorage.getItem('logedAccount'))
+  const navigate = useNavigate();
+  const cuenta = JSON.parse(localStorage.getItem("logedAccount"));
 
   const handleLogout = () => {
-    localStorage.removeItem('logedAccount')
-    Cookies.remove('authToken')
+    localStorage.removeItem("logedAccount");
+    Cookies.remove("authToken");
     setTimeout(() => {
-      navigate('/')
-      location.reload()
+      navigate("/");
+      location.reload();
     }, 500);
-  }
+  };
 
   return (
     <div className="dropdown ms-2 btn cursor-pointer">
@@ -31,7 +30,10 @@ const Avatar = ({ imageUrl }) => {
         data-bs-toggle="dropdown"
         alt="avatar"
       />
-      <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="avatarDropdown">
+      <ul
+        className="dropdown-menu dropdown-menu-end"
+        aria-labelledby="avatarDropdown"
+      >
         <li>
           <p className="dropdown-item text-primary">{cuenta}</p>
           <AppLink className="dropdown-item" href="/profile">

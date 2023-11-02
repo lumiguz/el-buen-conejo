@@ -1,14 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import MenuProfileJaulas from "./MenuProfileJaulas";
 import styles from "../MenuProfile/menuProfile.module.css";
-// import MenuRabbitCamada from "./MenuRabbitCamada"
-// import MenuRabbitNotes from "./MenuRabbitNotes";
 
 function PaginatedView({ currentPage, onPageChange }) {
   const pages = [
     { id: "misJaulas", label: "Mis Jaulas" },
-    // { id: "camadas", label: "Camadas" }, Por implementar
-    // { id: "informes", label: "Informes" }, Por implementar
     { id: "misVideos", label: "Mis videos" },
     { id: "enElMercado", label: "En el mercado" },
   ];
@@ -26,7 +22,7 @@ function PaginatedView({ currentPage, onPageChange }) {
               onPageChange(page.id);
             }}
           >
-            <a className="page-link" href="#" id={styles.linkPaginationProfile }>
+            <a className="page-link" href="#" id={styles.linkPaginationProfile}>
               {page.label}
             </a>
           </li>
@@ -49,18 +45,6 @@ const MenuProfile = () => {
     content = (
       <div className={styles.containerCages}>
         <MenuProfileJaulas />
-      </div>
-    );
-  } else if (currentPage === "camadas") {
-    content = (
-      <div>
-        <h1>Camadas</h1>
-      </div>
-    );
-  } else if (currentPage === "informes") {
-    content = (
-      <div>
-        <h1>Informes</h1>
       </div>
     );
   } else if (currentPage === "misVideos") {
