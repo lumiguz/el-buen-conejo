@@ -7,24 +7,25 @@ import { apiUrls } from "../../utils/links";
 import Cookies from "js-cookie";
 
 const Profile = ({ marketProfileId }) => {
-  const [nameMarketProfile, setNameMarketProfile] = useState("");
+  const [nameMarketProfile, setNameMarketProfile] =
+    useState("Usuario Registrado");
   const userId = Cookies.get("userId");
 
-  useEffect(() => {
-    fetch(`${apiUrls.urlProfiles}?user_id=${userId}`, {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${Cookies.get("authToken")}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((profile) => {
-        setNameMarketProfile(
-          `${profile.results[0].first_name} ${profile.results[0].last_name}`
-        );
-      });
-  }, [marketProfileId]);
+  // useEffect(() => {
+  //   fetch(`${apiUrls.urlProfiles}?user_id=${userId}`, {
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Accept: "application/json",
+  //       Authorization: `Bearer ${Cookies.get("authToken")}`,
+  //     },
+  //   })
+  //     .then((response) => response.json())
+  //     .then((profile) => {
+  //       setNameMarketProfile(
+  //         `${profile.results[0].first_name} ${profile.results[0].last_name}`
+  //       );
+  //     });
+  // }, [marketProfileId]);
 
   useEffect(() => {
     if (marketProfileId) {
