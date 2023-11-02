@@ -3,6 +3,7 @@ import { useLoaderData } from 'react-router-dom';
 import useHttpGetWithPagination from '../../../hooks/useHttpGetWithPagination';
 import { apiUrls } from '../../../utils/links';
 import styles from './styles.module.css';
+import AppLink from '../../../UI/AppLink';
 
 const Index = () => {
   const id = useLoaderData();
@@ -14,6 +15,7 @@ const Index = () => {
 
   return (
     <div>
+      <AppLink href={`/cage/step2/addrabbit/${id.cageId}`} className="btn btn-success w-25 my-3"> Añadir nuevo conejo </AppLink>
       <h3 className='text-center mt-2'>Conejos detro de la jaula</h3>
 
       <p className='text-center text-wrap'>Los conejos en las granjas son cuidados de manera meticulosa para garantizar su bienestar. Los agricultores proporcionan un ambiente limpio y seguro, asegurando que tengan acceso a una dieta equilibrada y agua fresca en todo momento. Además, se les brinda refugio adecuado para protegerlos de condiciones climáticas extremas y depredadores. Se monitorea de cerca su salud y se les brinda atención veterinaria cuando es necesario. En resumen, en las granjas, los conejos reciben un cuidado constante y dedicado para asegurar su salud y comodidad.</p>

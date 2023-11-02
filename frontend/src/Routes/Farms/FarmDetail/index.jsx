@@ -5,11 +5,12 @@ import useHttpGetWithPagination from "../../../hooks/useHttpGetWithPagination";
 import { apiUrls } from "../../../utils/links";
 import styles from "./styles.module.css";
 import AppLink from "../../../UI/AppLink";
+import Button from "../../../UI/Button";
 
 const FarmDetail = () => {
   const navigate = useNavigate();
   const farmId = useLoaderData();
-
+  
   const { isLoading, data, error, sendRequest } = useHttp();
   const {
     isLoading: isLoadingCages,
@@ -18,13 +19,19 @@ const FarmDetail = () => {
     sendRequest: sendRequestCages,
   } = useHttpGetWithPagination();
 
+  const handleCreateCage = () => {
+    sendRequest(`${apiUrls.urlCages}`, 'POST', {farm_id: farmId})
+    window.location.reload()
+  }
+
   useEffect(() => {
     sendRequestCages(`${apiUrls.urlCages}`);
     // sendRequestCages(`${apiUrls.urlCages}?${farmId}/`)
     sendRequest(`${apiUrls.urlFarms}${farmId}`);
   }, [sendRequest, farmId, sendRequestCages]);
-
+  
   const [cages, setCages] = useState([dataCages]);
+  
 
   return (
     <div>
@@ -32,9 +39,9 @@ const FarmDetail = () => {
         <div
           className={`d-flex flex-column ${styles.backG} rounded justify-content-end`}
         >
-          <AppLink href="/cage" className="btn btn-success w-25 align-self-end m-3">
+          <Button type="button" onClick={handleCreateCage} className="btn btn-success w-25 align-self-end m-3">
             Crear nueva jaula
-          </AppLink>
+          </Button>
 
           <h2 className="mt-3 d-flex justify-content-center align-items-center ">
             {data.name}

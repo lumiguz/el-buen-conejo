@@ -178,12 +178,13 @@ export const routes = createBrowserRouter([
     ),
   },
   {
-    path: "/cage/step2/addrabbit",
+    path: "/cage/step2/addrabbit/:cageId",
     element: (
       <Layout>
         <ViewFormTwo />
       </Layout>
     ),
+    loader: ({ params }) => params.cageId,
   },
   {
     path: "/cage/step3",

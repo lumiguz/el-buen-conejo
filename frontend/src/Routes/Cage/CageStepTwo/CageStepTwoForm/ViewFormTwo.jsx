@@ -1,19 +1,18 @@
-import RabbitCageForm from "../../../../Components/RabbitCageForm/RabbitCage";
+import RabbitCage from "../../../../Components/RabbitCageForm/RabbitCage";
 /* import RabbitForm from "../../../../Components/RabbitForm/RabbitForm"; */
 import styles from "../CageStepTwoForm/ViewFormTwo.module.css";
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate, useLoaderData } from "react-router-dom";
 
 const ViewFormTwo = () => {
 
     const navigate = useNavigate();
+    const cageId= useLoaderData();  // el id: #....
 
     return (
         <>
             <section className={styles.flexContainerForm}>
                 <div className={styles.flexContainerFormDiv1}>
-                    <RabbitCageForm/>
-                    <button onClick={() => navigate('/cage/step3')} className={styles.buttonFormRabbit}> Continuar </button>
+                    <RabbitCage />
                 </div>
 
                 

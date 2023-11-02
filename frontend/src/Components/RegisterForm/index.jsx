@@ -92,6 +92,7 @@ const index = () => {
             />
             <FormSelect 
                 id="is_producer"
+                label="Selecciona tu rol"
                 value={formData.is_producer}
                 list={roles} 
                 onChange={handleInputChange}

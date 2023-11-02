@@ -38,6 +38,10 @@ const ViewFormOne = () => {
             // Handle errors in API request
             console.error('Error posting data to the API:', error);
         }
+
+        setTimeout(() => {
+            navigate('/cage/step2')
+        }, 2000);
     };
 
 
@@ -60,7 +64,7 @@ const ViewFormOne = () => {
                             value={formData.title}
                             onChange={handleInputChange}
                             className={styles.inputForm}
-                            placeholder="002"
+                            placeholder="Título"
                         />
 
                         <label className={styles.labelForm}>
@@ -91,7 +95,7 @@ const ViewFormOne = () => {
                     <h6 className={styles.Caption}>Mantenlo en privado si no quieres que otros vean los conejos de esta jaula</h6>
 
                     <button onClick={handleSubmit} className={styles.buttonFormCage}> Crear jaula </button>
-                    <button onClick={() => navigate('/cage/step2')} className={styles.buttonFormCage2}> Continuar </button>
+                    {/* <button onClick={() => navigate('/cage/step2')} className={styles.buttonFormCage2}> Continuar </button> */}
                 </div>
 
                 

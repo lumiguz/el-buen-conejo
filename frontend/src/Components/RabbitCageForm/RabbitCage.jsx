@@ -1,217 +1,103 @@
 import { useState } from "react";
 import { useHttp } from "../../hooks/useHttp";
 import { apiUrls } from "../../utils/links";
+import { useLoaderData } from "react-router-dom";
+import FormSection from '../../UI/FormSection';
+import Button from '../../UI/Button';
+import AppLink from '../../UI/AppLink';
+import FormSelect from '../../UI/FormSelect'
+import {BREED_CHOICE, GENRE} from "../../utils/breeds";
 
-const RabbitForm = () => {
+const RabbitCage = () => {
 
+    const id = useLoaderData();
+    const { sendRequest } = useHttp();
     const [littersImage, setLittersImage] = useState(
         '/static/images/littersPlaceHolder.svg'
     );
 
     const [formData, setFormData] = useState({
-        image: '',
-        name: '',
-        /* id: '', */
-        color: '',
-        weight: '',
-        sex: '',
-        cage: '108eeddb-d4e2-41b7-b40d-f79cacda0ce3',
-        father: '',
-        mother: '',
-        birthDate: '',
-        breed: '',
-        /* genotype: '', */
+        breed: "",
+        genre: "",
+        birthday: "",
+        tag: "",
+        price: "",
+        weight: "",
+        cage_id: id
     });
 
-    const { sendRequest } = useHttp();
-
-    const saveRabbit = async (event) => {
-        event.preventDefault();
-        // get the data of the new rabbit
+    const handleInputChange = (e) => {
+        const { id, value } = e.target;
         setFormData({
-            image: event.target.image.value,
-            name: event.target.name.value,
-            /* id: event.target.id.value, */
-            color: event.target.color.value,
-            weight: event.target.weight.value,
-            gender: event.target.gender.value,
-            cage: event.target.cage.value,
-            father: event.target.father.value,
-            mother: event.target.mother.value,
-            birthDate: event.target.birthDate.value,
-            breed: event.target.breed.value,
-            /* genotype: event.target.genotype.value, */
+        ...formData,
+        [id]: value,
         });
-        console.log(formData);
-
-        // Send the rabbit data to the API for adding a new rabbit
-        try {
-            const response = await sendRequest(apiUrls.urlRabbits, 'POST', formData);
-            console.log("Rabbit added successfully:", response);
-        } catch (error) {
-            console.error("Error adding rabbit:", error);
-        }
     };
 
-    
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log(formData)
+    }
 
-
-    return <>
-        <form
-            className='form-litters border rounded px-3 py-4'
-            onSubmit={saveRabbit}
-        >
-            <h3>Agregar conejo</h3>
-            <h6 className='fw-normal'>Añadir los datos del conejo que forma parte de esta jaula</h6>
-            <label htmlFor='formFile' className="mt-3">
-                <h6>Imagen del conejo</h6>
-                <h6 className='fw-normal'>Agrega fotos de su conejo</h6>
-            </label>
-            {/* after upload the image render on component */}
-            {/* and convert the image to the size 72x72*/}
-            <div className='d-flex align-items-center'>
-                <img
-                    src={littersImage}
-                    alt='camadaExample'
-                    className='rounded-circle w-auto'
-                    width='72'
-                    height='72'
-                />
-                {/* if a image is uploaded in the input change the state of the image */}
-                <input
-                    type='file'
-                    name='image'
-                    id='formFile'
-                    className='ms-1'
-                    onChange={(event) => {
-                        setLittersImage(URL.createObjectURL(event.target.files[0]));
-                    }}
-                />
-                {/* <input type='file' name='image' id='formFile' className='ms-1' /> */}
-            </div>
-
-            <div className='mt-2'>
-                <div className='d-flex'>
-                    <div className='form-group'>
-                        <label className='form-label'>Nombre</label>
-                        <input type="text" className="form-control" id="name" aria-describedby="emailHelp" name="name" />
-                    </div>
-
-                    {/* <div className='form-group ms-2'>
-            <label className='form-label'>ID</label>
-            <input type="number" className="form-control" id="cage_id" aria-describedby="emailHelp" name="id" />
-          </div> */}
+    return (
+        <>
+            <h1 className="my-4"> Añade un conejo nuevo a la Jaula </h1>
+            <form onSubmit={handleSubmit}>
+                <div className="d-flex gap-2">
+                    <FormSelect 
+                        id="genre"
+                        label="Género"
+                        value={formData.genre}
+                        list={GENRE} 
+                        onChange={handleInputChange}
+                        />
+                    <FormSelect 
+                        id="breed"
+                        label="Raza"
+                        value={formData.breed}
+                        list={BREED_CHOICE} 
+                        onChange={handleInputChange}
+                    />
                 </div>
-            </div>
-
-            <div className='mt-2'>
-                <div className='d-flex'>
-                    <div className='form-group'>
-                        <label className='form-label'>Color</label>
-                        <input type="text" className="form-control" id="color" aria-describedby="emailHelp" name="color" />
-                    </div>
-
-                    <div className='form-group ms-2'>
-                        <label className='form-label'>Peso (en kg)</label>
-                        <input type="number" className="form-control" id="weight" aria-describedby="emailHelp" name="weight" />
-                    </div>
+                <FormSection  
+                    id="birthday"
+                    label="Fecha de nacimiento"
+                    onChange={handleInputChange}
+                    type="date"
+                    value={formData.password}
+                    />
+                    <FormSection  
+                        id="tag"
+                        type="text"
+                        label="Nombre"
+                        placeholder="Conejo 1"
+                        onChange={handleInputChange}
+                        value={formData.password}
+                    />
+                <div className="d-flex gap-2">
+                    <FormSection  
+                        id="weight"
+                        type="text"
+                        label="Peso (Kg)"
+                        placeholder="$"
+                        onChange={handleInputChange}
+                        value={formData.password}
+                    />
+                    <FormSection  
+                        id="price"
+                        label="Precio (MXP)"
+                        type="text"
+                        placeholder="$"
+                        onChange={handleInputChange}
+                        value={formData.password}
+                        />
                 </div>
-            </div>
-
-            <div className='mt-2'>
-                <div className='d-flex'>
-                    <div className="form-check d-flex flex-column">
-                        {/* select if the rabbit is male or female with checkbox*/}
-                        <label htmlFor="" className="form-radio">Sexo</label>
-                        <div>
-                            <div className="">
-                                <input type="radio" value='male' name="gender" /><span className="ps-1">Male</span>
-                            </div>
-                            <div>
-                                <input type="radio" value='female' name="gender" /><span className="ps-1">Female</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className='form-group ms-5 w-50'>
-                        <label className='form-label'>Jaula</label>
-                        {/* choose breed from options input */}
-                        <select className='form-select' name='cage'>
-                            <option value='1'>108eeddb-d4e2-41b7-b40d-f79cacda0ce3</option>
-                            <option value='2'>002</option>
-                            <option value='3'>003</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div className="border-top my-3"></div>
-
-            <label htmlFor='formFile' className="mt-3">
-                <h6>Historia y linaje</h6>
-                <h6 className='fw-normal'>Agrega informacion mas detallada del conejo</h6>
-            </label>
-            <br />
-
-            <div className='mt-2'>
-                <div className='d-flex'>
-                    <div className='form-group w-100'>
-                        <label className='form-label mt-2'>Padre</label>
-                        {/* choose breed from options input */}
-                        <select className='form-select' name='father'>
-                            <option value='1'>Pepito</option>
-                            <option value='2'>Elegir</option>
-                            <option value='3'>Elegir</option>
-                        </select>
-                    </div>
-
-                    <div className='form-group ms-2 w-100'>
-                        <label className='form-label mt-2'>Madre</label>
-                        {/* choose breed from options input */}
-                        <select className='form-select' name='mother'>
-                            <option value='1'>Pepita</option>
-                            <option value='2'>Elegir</option>
-                            <option value='3'>Elegir</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <label className='form-label mt-2'>Fecha de nacimiento</label>
-            <input type='date' className='form-control' name='birthDate' />
-
-            <div className='form-group ms-2 w-100'>
-                <label className='form-label mt-2'>Raza</label>
-                {/* choose breed from options input */}
-                <select className='form-select' name='breed'>
-                    <option value='1'>Azteca</option>
-                    <option value='2'>Elegir</option>
-                    <option value='3'>Elegir</option>
-                </select>
-
-            </div>
-            <br/>
-
-            {/* <div className='form-group ms-2 w-100'>
-                <label className='form-label mt-2'>Genotipo</label>
-                
-                <select className='form-select' name='genotype'>
-                    <option value='1'>Elegir</option>
-                    <option value='2'>Elegir</option>
-                    <option value='3'>Elegir</option>
-                </select>
-            </div> */}
-
-            <div className='mt-2'>
-
-                {/* add and save button */}
-                <button className='btn btn-primary me-3' type='submit'>
-                    Guardar
-                </button>
-
-            </div>
-        </form>
-    </>
+                <Button type="submit" className="btn-success w-100 my-3">
+                    Continuar
+                </Button>
+            </form>
+        </>
+    )
 }
 
-export default RabbitForm;
+export default RabbitCage;
