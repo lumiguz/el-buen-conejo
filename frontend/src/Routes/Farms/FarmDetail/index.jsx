@@ -70,7 +70,7 @@ const FarmDetail = () => {
                   {/* map the cages only matched with farmId */}
                   {dataCages
                     .filter((cages) => cages.farm_id === farmId)
-                    .map((cage) => (
+                    .map((cage, index) => (
                       <div
                         key={cage.id}
                         className={`card d-inline-flex flex-column border border-2 border-success-subtle rounded mx-5 mt-4 shadow bg-body-tertiary rounded align-self-center ${styles.maxSize}`}
@@ -86,7 +86,7 @@ const FarmDetail = () => {
                         />
                         <div className="card-body">
                           <h5 className="card-title">
-                            Jaula número {dataCages.indexOf(cage) + 1}
+                            Jaula número {index + 1}
                           </h5>
                           <p className="card-text">
                             Numero de conejos en la jaula:{" "}

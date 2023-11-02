@@ -1,9 +1,9 @@
 export const links = [
   { name: "Mercado", href: "/market" },
   { name: "Granjas", href: "/farms" },
-  { name: "Conejos", href: "/rabbits", className: "text-danger" },
-  { name: "Jaulas", href: "/cage", className: "text-danger" },
-  { name: "Perfil", href: "/profile", className: "text-danger" },
+  { name: "Conejos", href: "/rabbits" },
+  // { name: "Jaulas", href: "/cage", className: "text-danger" },
+  // { name: "Perfil", href: "/profile", className: "text-danger" },
   { name: "Nosotros", href: "/about" },
 ];
 
