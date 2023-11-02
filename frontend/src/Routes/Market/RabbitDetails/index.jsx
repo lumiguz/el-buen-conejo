@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useHttp } from "../../../hooks/useHttp";
 import { useLoaderData, useSearchParams } from "react-router-dom";
 import Carousel from "../../../Components/Carousel/Carousel";
@@ -7,17 +7,36 @@ import CardIcon from "../../../Components/CardIcon";
 import { apiUrls } from "../../../utils/links";
 import ChatContainer from "../../../Components/chat/ChatContainer";
 import Modal from "../../../Components/Modal";
+import Cookies from "js-cookie";
 
 const RabbitDetails = () => {
   const rabbitId = useLoaderData();
   const [searchParams] = useSearchParams();
   const farmName = decodeURIComponent(searchParams.get("farmName"));
   const farmAddress = decodeURIComponent(searchParams.get("farmAddress"));
+  const farmProfileId = decodeURIComponent(searchParams.get("farmProfileId"));
   const { isLoading, error, data, sendRequest } = useHttp();
+  const [nameProfile, setNameProfile] = useState(null);
 
   useEffect(() => {
     sendRequest(`${apiUrls.urlRabbits}${rabbitId}/`);
   }, [sendRequest, rabbitId]);
+
+  useEffect(() => {
+    if (data && farmProfileId) {
+      fetch(`${apiUrls.urlProfiles}${farmProfileId}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${Cookies.get("authToken")}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((profile) => {
+          setNameProfile(`${profile.first_name} ${profile.last_name}`);
+        });
+    }
+  });
 
   if (isLoading) {
     return <h2 className="text-muted text-center m-5 p-5">Cargando...</h2>;
@@ -77,7 +96,7 @@ const RabbitDetails = () => {
                     button={button}
                   />
                 </div>
-                <Modal id="exampleModal" title="Jhon Doe" chat={true}>
+                <Modal id="exampleModal" title={nameProfile} chat={true}>
                   <ChatContainer />
                 </Modal>
                 <div className="col-12 mt-3 w-75 mx-auto">
@@ -85,9 +104,9 @@ const RabbitDetails = () => {
                   <CardIcon
                     className="bg-light"
                     icon="bi bi-person-circle"
-                    title="Jhon Doe"
+                    title={nameProfile}
                     link={{
-                      url: "/profile",
+                      url: "/profile?profileid=" + farmProfileId,
                       text: "Ver perfil",
                       className: "btn btn-outline-success",
                     }}

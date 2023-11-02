@@ -30,6 +30,7 @@ const useFetchRabbitsWithFarmData = (isLoading, data, sendRequest, breedSelected
                                     ...rabbit,
                                     farmName: farmData.name,
                                     farmAddress: farmData.address,
+                                    farmProfileId: farmData.profile_id,
                                 }))
                         )
                 )

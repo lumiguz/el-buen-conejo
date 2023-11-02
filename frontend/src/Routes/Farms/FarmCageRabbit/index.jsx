@@ -8,7 +8,6 @@ import AppLink from "../../../UI/AppLink";
 const Index = () => {
   const id = useLoaderData();
   const location = useLocation();
-  // localStorage.setItem("pathCageFromFarm", location.pathname);
   const { isLoading, data, error, sendRequest } = useHttpGetWithPagination();
   useEffect(() => {
     sendRequest(`${apiUrls.urlRabbits}?cage_id=${id.cageId}`);

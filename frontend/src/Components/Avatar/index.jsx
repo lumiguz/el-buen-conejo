@@ -15,6 +15,7 @@ const Avatar = ({ imageUrl }) => {
   const handleLogout = () => {
     localStorage.removeItem("logedAccount");
     Cookies.remove("authToken");
+    Cookies.remove("userId");
     setTimeout(() => {
       navigate("/");
       location.reload();

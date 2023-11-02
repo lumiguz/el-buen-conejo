@@ -49,7 +49,7 @@ const BreedInventory = () => {
                 className="my-2 col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center"
               >
                 <AppLink
-                  href={`/market/rabbit/${rabbit.id}?farmName=${rabbit.farmName}&farmAddress=${rabbit.farmAddress}`}
+                  href={`/market/rabbit/${rabbit.id}?farmName=${rabbit.farmName}&farmAddress=${rabbit.farmAddress}&farmProfileId=${rabbit.farmProfileId}`}
                 >
                   <CardImage
                     image={rabbit.photo}

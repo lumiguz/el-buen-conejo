@@ -93,7 +93,7 @@ const RabbitCage = () => {
             id="weight"
             type="text"
             label="Peso (Kg)"
-            placeholder="$"
+            placeholder=""
             onChange={handleInputChange}
             value={formData.weight}
           />

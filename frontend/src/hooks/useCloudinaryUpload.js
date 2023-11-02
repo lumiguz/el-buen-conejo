@@ -50,7 +50,7 @@ export default useCloudinaryUpload;
 
 // const { uploadToCloudinary, imageUrl } = useCloudinaryUpload(
 //   "El_buen_conejo",
-//   "dduzvqh2o"
+//   "cloudNamexxx"
 // );
 
 // useEffect(() => {

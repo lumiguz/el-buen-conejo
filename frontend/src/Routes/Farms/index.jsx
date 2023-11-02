@@ -3,13 +3,27 @@ import FarmForm from "../../Components/FarmForm";
 import FarmBanner from "../../UI/FarmBanner/index";
 import { useEffect, useState } from "react";
 import useHttpGetWithPagination from "../../hooks/useHttpGetWithPagination";
+import { apiUrls } from "../../utils/links";
+import Cookies from "js-cookie";
 
 const Farms = () => {
   const { isLoading, data, error, sendRequest } = useHttpGetWithPagination();
-
   const [farmData, setfarmData] = useState([]);
+  let profileId;
+
   useEffect(() => {
-    sendRequest(`https://apiebc.online/api/farms/`);
+    fetch(`${apiUrls.urlProfiles}?user_id=${Cookies.get("userId")}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${Cookies.get("authToken")}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((profile) => {
+        profileId = profile.results[0].id;
+        sendRequest(`${apiUrls.urlFarms}?profile_id=${profileId}`);
+      });
   }, [sendRequest]);
 
   useEffect(() => {
