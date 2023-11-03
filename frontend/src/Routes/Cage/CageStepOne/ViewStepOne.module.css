@@ -1,0 +1,87 @@
+.flexContainerOne{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: stretch;
+    align-content: stretch;
+    flex-direction: row;
+    margin-top: 50px;
+    margin-bottom: 200px;
+    margin-left: 80px;
+    margin-right: 80px;
+}
+
+.flexContainerOneDiv1 {
+    margin-right: 12px;
+    width: 628px;
+    height: 381px;
+    align-items: center;
+    justify-content: center;
+}
+
+.flexContainerOneDiv1 h6{
+    margin-bottom: 24px;
+    margin-top: 100px;
+    font-family: Manrope;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 120%; /* 19.2px */
+    color: var(--primary-primary-400, #7989B6);
+}
+
+.flexContainerOneDiv1 h1{
+    margin-bottom: 24px;
+    font-family: Manrope;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 120%; /* 43.2px */
+    color: var(--neutral-neutral-700, #333);
+}
+
+.flexContainerOneDiv1 p{
+    margin-bottom: 24px;
+    font-family: Manrope;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%; /* 21.6px */
+    color: var(--neutral-neutral-600, #4D4D4D);
+}
+
+.instructionsTextOne {
+    font-family: Manrope;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%; /* 19.2px */
+    color: var(--neutral-neutral-600, #4D4D4D);
+     
+}
+
+.flexContainerOneDiv2 {
+    margin-left: 12px;
+    width: 628px;
+    height: 381px;
+}
+
+.buttonComenzar {
+    background-color: #68763D;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    display: flex;
+    padding: 0px 24px;
+    justify-content: center;
+    align-items: center;
+    /* gap: 24px; */
+    font-size: 18px;
+    /* width: 89px; */
+    height: 48px;
+}
+
+.imagenOne {
+    width: 600px;
+    height: 600px;
+}
