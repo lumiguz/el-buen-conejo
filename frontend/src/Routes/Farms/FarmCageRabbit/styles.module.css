@@ -1,0 +1,32 @@
+.cardSize {
+    max-width: 300px;
+    min-width: 300px;
+    max-height: 500px;
+    min-height: 300px;
+}
+
+.imgSize{
+    width: 300px !important;
+    height: 200px !important;
+}
+
+
+.backColor {
+    background-color: #407C7A !important;
+    color: white !important;
+}
+
+.backColor:hover {
+    background-color: #62a19f !important;
+    color: white !important;
+}
+
+.backColorF {
+    background-color: #91529E !important;
+    color: white !important;
+}
+
+.backColorF:hover {
+    background-color: #b17dbf !important;
+    color: white !important;
+}

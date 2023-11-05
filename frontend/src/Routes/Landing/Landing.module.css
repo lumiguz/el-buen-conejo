@@ -1,0 +1,12 @@
+/* i use bootstrap variables: https://getbootstrap.com/docs/5.2/utilities/colors/ */
+.text_purple {
+    color: var(--bs-purple);
+}
+
+.text_yellow {
+    color: var(--bs-yellow);
+}
+
+.text_orange {
+    color: var(--bs-orange);
+}
