@@ -28,6 +28,8 @@ Don't forget to check ✅ `Add python.exe to PATH`
 
 ## API
 
+### Deploy
+[El buen conejo](https://apiebc.online/api/schema/swagger-ui/)
 
 
 ### Profiles Schema
@@ -44,7 +46,7 @@ Don't forget to check ✅ `Add python.exe to PATH`
 |`is_active`|bool|not|
 |`created`|timestamp|not|
 |`opdated`|timestamp|not|
-|`user_id_id`|timestamp|yes|
+|`user_id`|timestamp|yes|
 
 ### Users Schema
 
@@ -66,6 +68,7 @@ Don't forget to check ✅ `Add python.exe to PATH`
 |`name`|string|yes|
 |`address`|string|yes|
 |`is_active`|bool|not|
+|`profile_id`|bool|not|
 |`created`|timestamp|not|
 |`updated`|timestamp|not|
 
@@ -75,11 +78,11 @@ Don't forget to check ✅ `Add python.exe to PATH`
 |-|-|-|
 |`id`|string|not|
 |`photo`|string|not|
-|`count_rabbits`|int|yes|
+|`count_rabbits`|int|nt|
 |`price`|float|yes|
 |`is_public`|bool|not|
 |`is_active`|bool|not|
-|`farm_id_id`|string|yes|
+|`farm_id`|string|yes|
 |`created`|timestamp|not|
 |`updated`|timestamp|not|
 
@@ -97,7 +100,7 @@ Don't forget to check ✅ `Add python.exe to PATH`
 |`is_active`|float|yes|
 |`created`|timestamp|not|
 |`updated`|timestamp|not|
-|`cage_id_id`|string|yes|
+|`cage_id`|string|yes|
 
 
 
